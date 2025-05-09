@@ -1,3 +1,4 @@
+using NutriNyan.Views.Auth;
 using NutriNyan.Views.Dashboard;
 
 namespace NutriNyan
@@ -13,7 +14,7 @@ namespace NutriNyan
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new DashboardMainForm());
+            Application.Run(new AuthMainForm());
         }
     }
 }
