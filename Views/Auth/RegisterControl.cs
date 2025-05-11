@@ -16,13 +16,11 @@ namespace NutriNyan.Views.Auth
 {
     public partial class RegisterControl : UserControl
     {
-        private AppDbContext _context;
-
+        DbContextOptionsBuilder<AppDbContext> _optionsBuilder; 
         public RegisterControl()
         {
             InitializeComponent();
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            _context = new AppDbContext(optionsBuilder.Options);
+            _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
         }
 
         private void linkToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -41,7 +39,7 @@ namespace NutriNyan.Views.Auth
             }
             if (Logic.IsValidPwd(Pwd_TextBox.Text) &&
                 Nama_TextBox.Text != "" &&
-                !Logic.IsUsernameExist(Nama_TextBox.Text, _context) &&
+                !Logic.IsUsernameExist(Nama_TextBox.Text, _optionsBuilder) &&
                 TB_TextBox.Text != "" &&
                 BB_TextBox.Text != "" &&
                 !backgroundWorker1.IsBusy &&
@@ -61,16 +59,18 @@ namespace NutriNyan.Views.Auth
         private void RegisterControl_Load(object sender, EventArgs e)
         {
             aktivitasBox.DataSource = Enum.GetValues(typeof(ActivityLevel));
+            using (var dbContext = new AppDbContext(_optionsBuilder.Options)){
 
-            jkBox.DataSource = _context.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
+            jkBox.DataSource = dbContext.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
             jkBox.DisplayMember = "Type";
             jkBox.ValueMember = "Id";
 
-            var purposes = _context.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
+            var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
 
             targetBox.DataSource = purposes;
             targetBox.DisplayMember = "Title";
             targetBox.ValueMember = "Id";
+            }
         }
         /// <summary>
         /// This method won't allow TextBox to have alpha, means text must be alphabet and only allow one dot (assuming float number)
@@ -95,21 +95,26 @@ namespace NutriNyan.Views.Auth
         {
             try
             {
-                _context.Add(new User
+                int TargetWater = (int)AKG.CalAKG(Logic.GetAge(dateTimePicker1.Value), (int)jkBox.SelectedIndex).Last();
+                string activLevel = Logic.GetTAktifitasValue((ActivityLevel)aktivitasBox.SelectedValue);
+                string pwdHashed = Logic.Get_PWDHash(Pwd_TextBox.Text);
+                using (var dbContext = new AppDbContext(_optionsBuilder.Options)){
+                dbContext.Add(new User
                 {
                     Username = Nama_TextBox.Text,
-                    Password = Logic.Get_PWDHash(Pwd_TextBox.Text),
+                    Password = pwdHashed,
                     GenderId = (int)jkBox.SelectedValue,
                     DateBirth = dateTimePicker1.Value.ToUniversalTime(),
                     Tb = Single.Parse(TB_TextBox.Text),
                     Bb = Single.Parse(BB_TextBox.Text),
-                    DefaultTargetWater = (int)AKG.CalAKG(Logic.GetAge(dateTimePicker1.Value)).Last(),
-                    TingkatAktivitas = Logic.GetTAktifitasValue((ActivityLevel)aktivitasBox.SelectedValue),
+                    DefaultTargetWater = TargetWater,
+                    TingkatAktivitas = activLevel,
                     PurposeId = (int)targetBox.SelectedValue,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 });
-                _context.SaveChanges();
+                dbContext.SaveChanges();
+                }
                 MessageBox.Show("Success saving", "Information", MessageBoxButtons.OK);
                 return true;
             }

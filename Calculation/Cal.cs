@@ -38,54 +38,51 @@ public static class AKG{
     /// </summary>
     /// <param name="age">Umur</param>
     /// <returns>List<float></returns>
-    public static List<float> CalAKG(float age){
-            if (age<=0){
-                Console.WriteLine("Cant have negative number");
-                return [-1];
-            } else {
-                if (age <= AKGT_Child.Last()[0]){
-                    int startIndex = 0;
-                    while(startIndex<AKGT_Child.Count-1){
-                        if (age <= AKGT_Child[startIndex][0]){
-                            break;
-                        }else{
-                            startIndex++;
-                        }
+    public static List<float> CalAKG(float age, int gender){
+        if (age<=0){
+            Console.WriteLine("Cant have negative number");
+            return [-1];
+        } else {
+            if (age <= AKGT_Child.Last()[0]){
+                int startIndex = 0;
+                while(startIndex<AKGT_Child.Count-1){
+                    if (age <= AKGT_Child[startIndex][0]){
+                        break;
+                    }else{
+                        startIndex++;
                     }
-                    return AKGT_Child[startIndex];
-                }else{
-                    while(true){
-                        int startIndex = 0;
-                        Console.Write("Masukkan jenis kelamin\n1. Laki-Laki\n2. Perempuan\nTulis angka saja: ");
-                        string genderChoice = Console.ReadLine() ?? "-1";
-                        switch (genderChoice){
-                            case "1":
-                                while(startIndex < AKGT_Man.Count-1){
-                                    if (age <= AKGT_Man[startIndex][0]){
-                                        break;
-                                    }else{
-                                        startIndex++;
-                                    }
+                }
+                return AKGT_Child[startIndex];
+            }else{
+                while(true){
+                    int startIndex = 0;
+                    switch (gender){
+                        case 0:
+                            while(startIndex < AKGT_Man.Count-1){
+                                if (age <= AKGT_Man[startIndex][0]){
+                                    break;
+                                }else{
+                                    startIndex++;
                                 }
-                                return AKGT_Man[startIndex];
-                            case "2":
-                                while(startIndex < AKGT_Woman.Count-1){
-                                    if (age <= AKGT_Woman[startIndex][0]){
-                                        break;
-                                    }else{
-                                        startIndex++;
-                                    }
+                            }return AKGT_Man[startIndex];
+                        case 1:
+                            while(startIndex < AKGT_Woman.Count-1){
+                                if (age <= AKGT_Woman[startIndex][0]){
+                                    break;
+                                }else{
+                                    startIndex++;
                                 }
-                                return AKGT_Woman[startIndex];
-                            default:
-                                Console.WriteLine("Inputan Tidak Valid!");
-                                break;
+                            }
+                            return AKGT_Woman[startIndex];
+                        default:
+                            return [-1];
                         }
                     }
                 }
             }
         }
     }
+
 // Class of IMT (Indeks Massa Tubuh)
 public static class IMT{
     static List<string> IMT_Condition = ["Berat Badan Kurang", "Berat Badan Ideal", "Berat Badan Lebih", "Gemuk", "Sangat Gemuk"];
@@ -219,7 +216,8 @@ public static class Logic{
     /// <param name="Username"></param>
     /// <param name="db"></param>
     /// <returns></returns>
-    public static bool IsUsernameExist(string Username, AppDbContext db){
+    public static bool IsUsernameExist(string Username,  DbContextOptionsBuilder<AppDbContext> optionsBuilder){
+        var db = new AppDbContext(optionsBuilder.Options);
         var UsernameList = db.Users.Select(b => b.Username).ToList();
         foreach (string name in UsernameList){
             if (name == Username){
