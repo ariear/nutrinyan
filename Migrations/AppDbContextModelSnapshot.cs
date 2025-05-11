@@ -250,7 +250,8 @@ namespace NutriNyan.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Username");
 
                     b.Property<string>("Password")
                         .HasColumnType("text");

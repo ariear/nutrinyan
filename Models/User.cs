@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NutriNyan.Models.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace NutriNyan.Models
 {
     public class User
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string? Username { get; set; }
         public string? Password { get; set; }
 
         public Gender Jk { get; set; }

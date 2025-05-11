@@ -107,5 +107,10 @@ namespace NutriNyan.Models
                 .Property(c => c.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
+        // Build data type, avoiding error dbcontext type ''
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(ConnectionString.connectionString); // Assuming that you are using Postgresql
+        }
     }
 }
