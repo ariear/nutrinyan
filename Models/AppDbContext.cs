@@ -15,9 +15,11 @@ namespace NutriNyan.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Purpose> Purposes { get; set; }
+        public DbSet<Gender> Genders { get; set; }
         public DbSet<Water> Waters { get; set; } = null!;
         public DbSet<WaterEntry> WaterEntries { get; set; } = null!;
         public DbSet<Food> Foods { get; set; } = null!;
+        public DbSet<Unit> Units { get; set; } = null!;
         public DbSet<NutritionLog> NutritionLogs { get; set; } = null!;
         public DbSet<Meal> Meals { get; set; } = null!;
         public DbSet<MealItem> MealItems { get; set; } = null!;
@@ -26,10 +28,6 @@ namespace NutriNyan.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .Property(u => u.Jk)
-                .HasConversion<string>();
-
-            modelBuilder.Entity<User>()
                 .Property(u => u.TingkatAktivitas)
                 .HasConversion<string>();
 
@@ -37,6 +35,12 @@ namespace NutriNyan.Models
                 .HasOne(u => u.Purpose)
                 .WithMany(p => p.Users)
                 .HasForeignKey(u => u.PurposeId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Gender)
+                .WithMany(p => p.Users)
+                .HasForeignKey(u => u.GenderId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<User>()
@@ -62,6 +66,12 @@ namespace NutriNyan.Models
             modelBuilder.Entity<WaterEntry>()
                 .Property(we => we.UpdatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            modelBuilder.Entity<Food>()
+                .HasOne(u => u.Unit)
+                .WithMany(p => p.Foods)
+                .HasForeignKey(u => u.UnitId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Food>()
                 .Property(f => f.CreatedAt)

@@ -15,10 +15,11 @@ namespace NutriNyan.Models
         public float Protein { get; set; }
         public float Lemak { get; set; }
         public float Serat { get; set; }
-        public string Unit { get; set; } = null!;
+        public int UnitId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        public User User { get; set; } = null!;
+        public User? User { get; set; }
+        public Unit? Unit { get; set; }
     }
 }
