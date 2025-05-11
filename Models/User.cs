@@ -10,16 +10,15 @@ namespace NutriNyan.Models
     public class User
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string? Username { get; set; }
         public string? Password { get; set; }
-
-        public Gender Jk { get; set; }
+        public int GenderId { get; set; }
+        public Gender? Gender { get; set; }
         public DateTime DateBirth { get; set; }
         public float Tb { get; set; }
         public float Bb { get; set; }
         public int DefaultTargetWater { get; set; }
         public ActivityLevel TingkatAktivitas { get; set; }
-
         public int PurposeId { get; set; }
         public Purpose? Purpose { get; set; }
 
