@@ -48,6 +48,7 @@
             label10 = new Label();
             aktivitasBox = new ComboBox();
             targetBox = new ComboBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             SuspendLayout();
             // 
             // linkToRegister
@@ -186,7 +187,6 @@
             BB_TextBox.Name = "BB_TextBox";
             BB_TextBox.Size = new Size(276, 41);
             BB_TextBox.TabIndex = 26;
-            TB_TextBox.TextChanged += TextMustNum;
             // 
             // label3
             // 
@@ -212,14 +212,14 @@
             // 
             // dateTimePicker1
             // 
+            dateTimePicker1.CustomFormat = "dd MMMM yyyy";
             dateTimePicker1.Font = new Font("Segoe UI", 13F);
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.Location = new Point(342, 481);
             dateTimePicker1.Margin = new Padding(3, 4, 3, 4);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(276, 36);
             dateTimePicker1.TabIndex = 32;
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "dd MMMM yyyy";
             // 
             // jkBox
             // 
@@ -276,6 +276,12 @@
             targetBox.Size = new Size(276, 38);
             targetBox.TabIndex = 39;
             // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            // 
             // RegisterControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -331,5 +337,6 @@
         private Label label10;
         private ComboBox aktivitasBox;
         private ComboBox targetBox;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

@@ -121,7 +121,7 @@ public static class Logic{
         var encoder = System.Security.Cryptography.SHA256.Create();
         byte[] myText = System.Text.Encoding.ASCII.GetBytes(pwd);
         byte[] hashValue = encoder.ComputeHash(myText);
-        result = new string(hashValue.Select(b => (char)b).ToArray());
+        result = BitConverter.ToString(hashValue).Replace("-", "");
         return result;
         }
     public static bool AuthCheck(string username, string pwd){
@@ -226,6 +226,13 @@ public static class Logic{
                 return true;
             }
         }return false;
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public static bool IsNotTodayFuture(DateTime date){
+        return !(date.ToString("MM-dd-yyyy") == DateTime.Now.ToString("MM-dd-yyyy")) && !(DateTime.Now < date);
     }
 }
 }
