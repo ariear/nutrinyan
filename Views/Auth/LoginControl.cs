@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NutriNyan.Views.Auth;
 using static System.Windows.Forms.DataFormats;
+using Calculation;
 
 namespace NutriNyan.Views.Auth
 {
@@ -17,6 +18,7 @@ namespace NutriNyan.Views.Auth
         public LoginControl()
         {
             InitializeComponent();
+            WrongLogin.Hide();
         }
 
         private void linkToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -31,6 +33,14 @@ namespace NutriNyan.Views.Auth
         private void LoginControl_Load(object sender, EventArgs e)
         {
             
+        }
+        private void Button1_Clicked(object sender, EventArgs e){
+            if (Logic.AuthCheck(username: textBox1.Text, pwd: textBox2.Text)){
+                WrongLogin.Hide();
+            }else{
+                textBox1.Text = ""; textBox2.Text = "";
+                WrongLogin.Show();
+            };
         }
     }
 }

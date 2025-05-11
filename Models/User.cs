@@ -20,7 +20,7 @@ namespace NutriNyan.Models
         public float Tb { get; set; }
         public float Bb { get; set; }
         public int DefaultTargetWater { get; set; }
-        public ActivityLevel TingkatAktivitas { get; set; }
+        public string TingkatAktivitas { get; set; }
         public int PurposeId { get; set; }
         public Purpose? Purpose { get; set; }
 

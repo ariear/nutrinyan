@@ -8,7 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NutriNyan.Views.Dashboard;
+using Calculation;
 
 namespace NutriNyan.Views.Auth
 {
@@ -46,5 +49,6 @@ namespace NutriNyan.Views.Auth
         {
             get { return panelAuth; }
         }
+        
     }
 }

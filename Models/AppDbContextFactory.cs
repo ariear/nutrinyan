@@ -9,9 +9,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace NutriNyan.Models
 {
-    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
-    {
-        public static class ConnectionString
+    /// <summary>
+    /// Store the connection string, ensure that it is a stand alone class
+    /// in the namespace
+    /// </summary>
+    public static class ConnectionString
         {
             public static readonly string connectionString = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -19,6 +21,8 @@ namespace NutriNyan.Models
                 .Build().GetConnectionString("DefaultConnection") // Get deafultconnection from appsettings.json
                 ?? "Host=localhost;Port=5432;User Id=postgres;Password=password;Database=nutrinyan"; // Default connection string
         }
+    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    {
 
         public AppDbContext CreateDbContext(string[] args)
         {
