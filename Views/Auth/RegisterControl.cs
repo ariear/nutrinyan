@@ -17,17 +17,19 @@ namespace NutriNyan.Views.Auth
     public partial class RegisterControl : UserControl
     {
         DbContextOptionsBuilder<AppDbContext> _optionsBuilder; 
-        public RegisterControl()
+        AuthMainForm pMainAuth;
+        public RegisterControl(AuthMainForm pMainAuth)
         {
             InitializeComponent();
             _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            this.pMainAuth = pMainAuth;
         }
 
         private void linkToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             AuthMainForm authMainForm = (AuthMainForm)Application.OpenForms["AuthMainForm"];
             authMainForm.PanelAuth.Controls.Clear();
-            LoginControl login = new LoginControl();
+            LoginControl login = new LoginControl(pMainAuth);
             login.Dock = DockStyle.Fill;
             authMainForm.PanelAuth.Controls.Add(login);
         }
@@ -129,6 +131,10 @@ namespace NutriNyan.Views.Auth
         {
             if (AddUser()){
                 MessageBox.Show("Success saving to the database", "Information", MessageBoxButtons.OK);
+                Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm(Nama_TextBox.Text);
+                pMainAuth.Hide();
+                dashboard.ShowDialog();// need adjustment
+                pMainAuth.Dispose();   // need adjustment
             }else {
                 MessageBox.Show("Failed to saving", "Information", MessageBoxButtons.OK);
             };

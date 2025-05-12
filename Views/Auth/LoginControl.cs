@@ -15,28 +15,32 @@ namespace NutriNyan.Views.Auth
 {
     public partial class LoginControl : UserControl
     {
-        public LoginControl()
+        AuthMainForm pMainAuth;
+        public LoginControl(AuthMainForm pMainAuth)
         {
             InitializeComponent();
             WrongLogin.Hide();
+            this.pMainAuth = pMainAuth;
         }
 
         private void linkToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             AuthMainForm authMainForm= (AuthMainForm)Application.OpenForms["AuthMainForm"];
             authMainForm.PanelAuth.Controls.Clear();
-            RegisterControl register = new RegisterControl();
+            RegisterControl register = new RegisterControl(pMainAuth);
             register.Dock = DockStyle.Fill;
             authMainForm.PanelAuth.Controls.Add(register);
         }
 
         private void LoginControl_Load(object sender, EventArgs e)
         {
-            
         }
         private void Button1_Clicked(object sender, EventArgs e){
             if (Logic.AuthCheck(username: textBox1.Text, pwd: textBox2.Text)){
-                WrongLogin.Hide();
+                Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm(textBox1.Text);
+                pMainAuth.Hide();
+                dashboard.ShowDialog();// need adjustment
+                pMainAuth.Dispose();   // need adjustment
             }else{
                 textBox1.Text = ""; textBox2.Text = "";
                 WrongLogin.Show();

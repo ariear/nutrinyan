@@ -12,9 +12,12 @@ namespace NutriNyan.Views.Dashboard
 {
     public partial class DashboardControl : UserControl
     {
-        public DashboardControl()
+        string Username;
+        public DashboardControl(string Username)
         {
             InitializeComponent();
+            this.Username = Username;
+            label1.Text = $"Halo {Username}\nSemoga Harimu Menyenangkan";
         }
     }
 }

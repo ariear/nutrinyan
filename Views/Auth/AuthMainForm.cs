@@ -21,7 +21,7 @@ namespace NutriNyan.Views.Auth
         {
             InitializeComponent();
 
-            LoginControl login = new LoginControl();
+            LoginControl login = new LoginControl(this);
             panelAuth.Controls.Clear();
             login.Dock = DockStyle.Fill;
             panelAuth.Controls.Add(login);
