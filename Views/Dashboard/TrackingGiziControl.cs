@@ -16,5 +16,48 @@ namespace NutriNyan.Views.Dashboard
         {
             InitializeComponent();
         }
+
+        private void TrackingGiziControl_Load(object sender, EventArgs e)
+        {
+            sarapanGridView.Columns.Add("makanan", "Makanan");
+            sarapanGridView.Columns.Add("satuan", "Satuan");
+            sarapanGridView.Columns.Add("lemak", "Lemak");
+            sarapanGridView.Columns.Add("karbo", "Karbo");
+            sarapanGridView.Columns.Add("protein", "Protein");
+            sarapanGridView.Columns.Add("serat", "Serat");
+            sarapanGridView.Columns.Add("gula", "Gula");
+            sarapanGridView.Columns.Add("kalori", "Kalori");
+            sarapanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
+
+            makanSiangGridView.Columns.Add("makanan", "Makanan");
+            makanSiangGridView.Columns.Add("satuan", "Satuan");
+            makanSiangGridView.Columns.Add("lemak", "Lemak");
+            makanSiangGridView.Columns.Add("karbo", "Karbo");
+            makanSiangGridView.Columns.Add("protein", "Protein");
+            makanSiangGridView.Columns.Add("serat", "Serat");
+            makanSiangGridView.Columns.Add("gula", "Gula");
+            makanSiangGridView.Columns.Add("kalori", "Kalori");
+            makanSiangGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
+
+            makanMalamGridView.Columns.Add("makanan", "Makanan");
+            makanMalamGridView.Columns.Add("satuan", "Satuan");
+            makanMalamGridView.Columns.Add("lemak", "Lemak");
+            makanMalamGridView.Columns.Add("karbo", "Karbo");
+            makanMalamGridView.Columns.Add("protein", "Protein");
+            makanMalamGridView.Columns.Add("serat", "Serat");
+            makanMalamGridView.Columns.Add("gula", "Gula");
+            makanMalamGridView.Columns.Add("kalori", "Kalori");
+            makanMalamGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
+
+            jajanGridView.Columns.Add("makanan", "Makanan");
+            jajanGridView.Columns.Add("satuan", "Satuan");
+            jajanGridView.Columns.Add("lemak", "Lemak");
+            jajanGridView.Columns.Add("karbo", "Karbo");
+            jajanGridView.Columns.Add("protein", "Protein");
+            jajanGridView.Columns.Add("serat", "Serat");
+            jajanGridView.Columns.Add("gula", "Gula");
+            jajanGridView.Columns.Add("kalori", "Kalori");
+            jajanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
+        }
     }
 }
