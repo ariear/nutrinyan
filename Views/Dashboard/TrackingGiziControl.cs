@@ -28,6 +28,18 @@ namespace NutriNyan.Views.Dashboard
             sarapanGridView.Columns.Add("serat", "Serat");
             sarapanGridView.Columns.Add("gula", "Gula");
             sarapanGridView.Columns.Add("kalori", "Kalori");
+            sarapanGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Edit",
+                UseColumnTextForButtonValue = true,
+                Text = "Edit"
+            });
+            sarapanGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Hapus",
+                UseColumnTextForButtonValue = true,
+                Text = "Hapus"
+            });
             sarapanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
 
             makanSiangGridView.Columns.Add("makanan", "Makanan");
@@ -38,6 +50,18 @@ namespace NutriNyan.Views.Dashboard
             makanSiangGridView.Columns.Add("serat", "Serat");
             makanSiangGridView.Columns.Add("gula", "Gula");
             makanSiangGridView.Columns.Add("kalori", "Kalori");
+            makanSiangGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Edit",
+                UseColumnTextForButtonValue = true,
+                Text = "Edit"
+            });
+            makanSiangGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Hapus",
+                UseColumnTextForButtonValue = true,
+                Text = "Hapus"
+            });
             makanSiangGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
 
             makanMalamGridView.Columns.Add("makanan", "Makanan");
@@ -48,6 +72,18 @@ namespace NutriNyan.Views.Dashboard
             makanMalamGridView.Columns.Add("serat", "Serat");
             makanMalamGridView.Columns.Add("gula", "Gula");
             makanMalamGridView.Columns.Add("kalori", "Kalori");
+            makanMalamGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Edit",
+                UseColumnTextForButtonValue = true,
+                Text = "Edit"
+            });
+            makanMalamGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Hapus",
+                UseColumnTextForButtonValue = true,
+                Text = "Hapus"
+            });
             makanMalamGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
 
             jajanGridView.Columns.Add("makanan", "Makanan");
@@ -58,6 +94,18 @@ namespace NutriNyan.Views.Dashboard
             jajanGridView.Columns.Add("serat", "Serat");
             jajanGridView.Columns.Add("gula", "Gula");
             jajanGridView.Columns.Add("kalori", "Kalori");
+            jajanGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Edit",
+                UseColumnTextForButtonValue = true,
+                Text = "Edit"
+            });
+            jajanGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Hapus",
+                UseColumnTextForButtonValue = true,
+                Text = "Hapus"
+            });
             jajanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
         }
 
