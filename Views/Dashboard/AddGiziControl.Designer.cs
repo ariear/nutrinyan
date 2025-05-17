@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             searchFoodButton = new FontAwesome.Sharp.IconButton();
-            label1 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            label2 = new Label();
+            title = new Label();
             foodNameBox = new TextBox();
             label3 = new Label();
             label4 = new Label();
@@ -51,6 +49,7 @@
             label11 = new Label();
             textBox7 = new TextBox();
             button1 = new Button();
+            periode = new Label();
             SuspendLayout();
             // 
             // searchFoodButton
@@ -76,36 +75,17 @@
             searchFoodButton.UseVisualStyleBackColor = false;
             searchFoodButton.Click += searchFoodButton_Click;
             // 
-            // label1
+            // title
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ControlLight;
-            label1.Location = new Point(33, 34);
-            label1.Name = "label1";
-            label1.Size = new Size(490, 37);
-            label1.TabIndex = 1;
-            label1.Text = "Tambah Makanan yang Dikonsumsi";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Font = new Font("Segoe UI", 14F);
-            dateTimePicker1.Location = new Point(602, 142);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 32);
-            dateTimePicker1.TabIndex = 2;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label2.ForeColor = SystemColors.ControlLightLight;
-            label2.Location = new Point(602, 109);
-            label2.Name = "label2";
-            label2.Size = new Size(110, 21);
-            label2.TabIndex = 3;
-            label2.Text = "Pilih Tanggal";
+            title.AutoSize = true;
+            title.BackColor = Color.Transparent;
+            title.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            title.ForeColor = SystemColors.ControlLight;
+            title.Location = new Point(33, 34);
+            title.Name = "title";
+            title.Size = new Size(490, 37);
+            title.TabIndex = 1;
+            title.Text = "Tambah Makanan yang Dikonsumsi";
             // 
             // foodNameBox
             // 
@@ -293,11 +273,23 @@
             button1.Text = "Tambah";
             button1.UseVisualStyleBackColor = false;
             // 
+            // periode
+            // 
+            periode.AutoSize = true;
+            periode.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            periode.ForeColor = SystemColors.ControlLightLight;
+            periode.Location = new Point(506, 137);
+            periode.Name = "periode";
+            periode.Size = new Size(154, 25);
+            periode.TabIndex = 24;
+            periode.Text = "Periode Makan : ";
+            // 
             // AddGiziControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 30, 29);
+            Controls.Add(periode);
             Controls.Add(button1);
             Controls.Add(label9);
             Controls.Add(textBox5);
@@ -317,12 +309,11 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(foodNameBox);
-            Controls.Add(label2);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(label1);
+            Controls.Add(title);
             Controls.Add(searchFoodButton);
             Name = "AddGiziControl";
             Size = new Size(961, 614);
+            Load += AddGiziControl_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -330,9 +321,7 @@
         #endregion
 
         private FontAwesome.Sharp.IconButton searchFoodButton;
-        private Label label1;
-        private DateTimePicker dateTimePicker1;
-        private Label label2;
+        private Label title;
         private TextBox foodNameBox;
         private Label label3;
         private Label label4;
@@ -352,5 +341,6 @@
         private Label label11;
         private TextBox textBox7;
         private Button button1;
+        private Label periode;
     }
 }

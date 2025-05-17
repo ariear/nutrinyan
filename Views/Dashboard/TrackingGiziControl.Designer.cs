@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             label1 = new Label();
             sarapanGridView = new DataGridView();
             label2 = new Label();
@@ -53,7 +53,7 @@
             label12 = new Label();
             label13 = new Label();
             jajanGridView = new DataGridView();
-            dateTimePicker1 = new DateTimePicker();
+            trackingDateTimePicker = new DateTimePicker();
             label14 = new Label();
             label15 = new Label();
             label16 = new Label();
@@ -68,6 +68,9 @@
             label25 = new Label();
             groupBox1 = new GroupBox();
             makanButton = new FontAwesome.Sharp.IconButton();
+            iconButton1 = new FontAwesome.Sharp.IconButton();
+            iconButton2 = new FontAwesome.Sharp.IconButton();
+            iconButton3 = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)sarapanGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox2).BeginInit();
@@ -100,20 +103,21 @@
             sarapanGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             sarapanGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             sarapanGridView.BackgroundColor = Color.FromArgb(1, 54, 63);
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new Padding(10);
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            sarapanGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.Padding = new Padding(10);
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            sarapanGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             sarapanGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             sarapanGridView.Location = new Point(33, 279);
             sarapanGridView.Name = "sarapanGridView";
-            sarapanGridView.Size = new Size(770, 294);
+            sarapanGridView.Size = new Size(757, 294);
             sarapanGridView.TabIndex = 1;
+            sarapanGridView.RowPostPaint += sarapanGridView_RowPostPaint;
             // 
             // label2
             // 
@@ -132,7 +136,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(728, 217);
+            label3.Location = new Point(715, 217);
             label3.Name = "label3";
             label3.Size = new Size(50, 20);
             label3.TabIndex = 3;
@@ -144,7 +148,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14F);
             label4.ForeColor = SystemColors.ControlLightLight;
-            label4.Location = new Point(736, 243);
+            label4.Location = new Point(723, 243);
             label4.Name = "label4";
             label4.Size = new Size(42, 25);
             label4.TabIndex = 4;
@@ -182,7 +186,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14F);
             label5.ForeColor = SystemColors.ControlLightLight;
-            label5.Location = new Point(740, 612);
+            label5.Location = new Point(727, 612);
             label5.Name = "label5";
             label5.Size = new Size(42, 25);
             label5.TabIndex = 9;
@@ -194,7 +198,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(732, 586);
+            label6.Location = new Point(719, 586);
             label6.Name = "label6";
             label6.Size = new Size(50, 20);
             label6.TabIndex = 8;
@@ -220,20 +224,21 @@
             makanSiangGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             makanSiangGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             makanSiangGridView.BackgroundColor = Color.FromArgb(1, 54, 63);
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new Padding(10);
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            makanSiangGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = SystemColors.Control;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle10.Padding = new Padding(10);
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            makanSiangGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             makanSiangGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             makanSiangGridView.Location = new Point(33, 648);
             makanSiangGridView.Name = "makanSiangGridView";
-            makanSiangGridView.Size = new Size(770, 284);
+            makanSiangGridView.Size = new Size(757, 284);
             makanSiangGridView.TabIndex = 6;
+            makanSiangGridView.RowPostPaint += makanSiangGridView_RowPostPaint;
             // 
             // iconPictureBox3
             // 
@@ -254,7 +259,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 14F);
             label8.ForeColor = SystemColors.ControlLightLight;
-            label8.Location = new Point(740, 973);
+            label8.Location = new Point(727, 973);
             label8.Name = "label8";
             label8.Size = new Size(42, 25);
             label8.TabIndex = 14;
@@ -266,7 +271,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             label9.ForeColor = SystemColors.ControlLightLight;
-            label9.Location = new Point(732, 947);
+            label9.Location = new Point(719, 947);
             label9.Name = "label9";
             label9.Size = new Size(50, 20);
             label9.TabIndex = 13;
@@ -292,20 +297,21 @@
             makanMalamGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             makanMalamGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             makanMalamGridView.BackgroundColor = Color.FromArgb(1, 54, 63);
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new Padding(10);
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            makanMalamGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = SystemColors.Control;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.Padding = new Padding(10);
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            makanMalamGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             makanMalamGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             makanMalamGridView.Location = new Point(33, 1007);
             makanMalamGridView.Name = "makanMalamGridView";
-            makanMalamGridView.Size = new Size(775, 245);
+            makanMalamGridView.Size = new Size(762, 245);
             makanMalamGridView.TabIndex = 11;
+            makanMalamGridView.RowPostPaint += makanMalamGridView_RowPostPaint;
             // 
             // iconPictureBox4
             // 
@@ -326,7 +332,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 14F);
             label11.ForeColor = SystemColors.ControlLightLight;
-            label11.Location = new Point(740, 1298);
+            label11.Location = new Point(727, 1298);
             label11.Name = "label11";
             label11.Size = new Size(42, 25);
             label11.TabIndex = 19;
@@ -338,7 +344,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             label12.ForeColor = SystemColors.ControlLightLight;
-            label12.Location = new Point(732, 1272);
+            label12.Location = new Point(719, 1272);
             label12.Name = "label12";
             label12.Size = new Size(50, 20);
             label12.TabIndex = 18;
@@ -364,30 +370,31 @@
             jajanGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             jajanGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             jajanGridView.BackgroundColor = Color.FromArgb(1, 54, 63);
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.Padding = new Padding(10);
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            jajanGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = SystemColors.Control;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle12.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle12.Padding = new Padding(10);
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            jajanGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             jajanGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             jajanGridView.Location = new Point(33, 1332);
             jajanGridView.Name = "jajanGridView";
-            jajanGridView.Size = new Size(775, 245);
+            jajanGridView.Size = new Size(762, 245);
             jajanGridView.TabIndex = 16;
+            jajanGridView.RowPostPaint += jajanGridView_RowPostPaint;
             // 
-            // dateTimePicker1
+            // trackingDateTimePicker
             // 
-            dateTimePicker1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            dateTimePicker1.CalendarFont = new Font("Segoe UI", 12F);
-            dateTimePicker1.Font = new Font("Segoe UI", 16F);
-            dateTimePicker1.Location = new Point(483, 34);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(199, 36);
-            dateTimePicker1.TabIndex = 21;
+            trackingDateTimePicker.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            trackingDateTimePicker.CalendarFont = new Font("Segoe UI", 12F);
+            trackingDateTimePicker.Font = new Font("Segoe UI", 14F);
+            trackingDateTimePicker.Location = new Point(591, 39);
+            trackingDateTimePicker.Name = "trackingDateTimePicker";
+            trackingDateTimePicker.Size = new Size(199, 32);
+            trackingDateTimePicker.TabIndex = 21;
             // 
             // label14
             // 
@@ -568,13 +575,68 @@
             makanButton.IconChar = FontAwesome.Sharp.IconChar.None;
             makanButton.IconColor = Color.Black;
             makanButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            makanButton.Location = new Point(707, 34);
+            makanButton.Location = new Point(596, 224);
             makanButton.Name = "makanButton";
             makanButton.Size = new Size(84, 39);
             makanButton.TabIndex = 35;
+            makanButton.Tag = "Sarapan";
             makanButton.Text = "Makan";
             makanButton.UseVisualStyleBackColor = false;
             makanButton.Click += makanButton_Click;
+            // 
+            // iconButton1
+            // 
+            iconButton1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            iconButton1.BackColor = Color.FromArgb(0, 221, 220);
+            iconButton1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            iconButton1.ForeColor = Color.FromArgb(1, 54, 63);
+            iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
+            iconButton1.IconColor = Color.Black;
+            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton1.Location = new Point(596, 593);
+            iconButton1.Name = "iconButton1";
+            iconButton1.Size = new Size(84, 39);
+            iconButton1.TabIndex = 36;
+            iconButton1.Tag = "Makan Siang";
+            iconButton1.Text = "Makan";
+            iconButton1.UseVisualStyleBackColor = false;
+            iconButton1.Click += makanButton_Click;
+            // 
+            // iconButton2
+            // 
+            iconButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            iconButton2.BackColor = Color.FromArgb(0, 221, 220);
+            iconButton2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            iconButton2.ForeColor = Color.FromArgb(1, 54, 63);
+            iconButton2.IconChar = FontAwesome.Sharp.IconChar.None;
+            iconButton2.IconColor = Color.Black;
+            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton2.Location = new Point(596, 952);
+            iconButton2.Name = "iconButton2";
+            iconButton2.Size = new Size(84, 39);
+            iconButton2.TabIndex = 37;
+            iconButton2.Tag = "Makan Malam";
+            iconButton2.Text = "Makan";
+            iconButton2.UseVisualStyleBackColor = false;
+            iconButton2.Click += makanButton_Click;
+            // 
+            // iconButton3
+            // 
+            iconButton3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            iconButton3.BackColor = Color.FromArgb(0, 221, 220);
+            iconButton3.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            iconButton3.ForeColor = Color.FromArgb(1, 54, 63);
+            iconButton3.IconChar = FontAwesome.Sharp.IconChar.None;
+            iconButton3.IconColor = Color.Black;
+            iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton3.Location = new Point(596, 1277);
+            iconButton3.Name = "iconButton3";
+            iconButton3.Size = new Size(84, 39);
+            iconButton3.TabIndex = 38;
+            iconButton3.Tag = "Jajan";
+            iconButton3.Text = "Makan";
+            iconButton3.UseVisualStyleBackColor = false;
+            iconButton3.Click += makanButton_Click;
             // 
             // TrackingGiziControl
             // 
@@ -582,8 +644,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(17, 30, 29);
+            Controls.Add(iconButton3);
+            Controls.Add(iconButton2);
+            Controls.Add(iconButton1);
             Controls.Add(makanButton);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(trackingDateTimePicker);
             Controls.Add(iconPictureBox4);
             Controls.Add(label11);
             Controls.Add(label12);
@@ -607,7 +672,7 @@
             Controls.Add(label1);
             Controls.Add(groupBox1);
             Name = "TrackingGiziControl";
-            Size = new Size(829, 1453);
+            Size = new Size(816, 1453);
             Load += TrackingGiziControl_Load;
             ((System.ComponentModel.ISupportInitialize)sarapanGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
@@ -646,7 +711,7 @@
         private Label label12;
         private Label label13;
         private DataGridView jajanGridView;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker trackingDateTimePicker;
         private Label label14;
         private Label label15;
         private Label label16;
@@ -661,5 +726,8 @@
         private Label label25;
         private GroupBox groupBox1;
         private FontAwesome.Sharp.IconButton makanButton;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton iconButton3;
     }
 }

@@ -41,6 +41,7 @@ namespace NutriNyan.Views.Dashboard
                 Text = "Hapus"
             });
             sarapanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
+            sarapanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
 
             makanSiangGridView.Columns.Add("makanan", "Makanan");
             makanSiangGridView.Columns.Add("satuan", "Satuan");
@@ -111,11 +112,110 @@ namespace NutriNyan.Views.Dashboard
 
         private void makanButton_Click(object sender, EventArgs e)
         {
+            Button tombolClick = sender as Button;
+            string tipeMakan = tombolClick.Tag.ToString();
+
             DashboardMainForm dashboardMainForm = (DashboardMainForm)Application.OpenForms["DashboardMainForm"];
             dashboardMainForm.PanelContent.Controls.Clear();
-            AddGiziControl addGizi= new AddGiziControl();
+            AddGiziControl addGizi = new AddGiziControl(tipeMakan, trackingDateTimePicker.Value.ToUniversalTime());
             addGizi.Dock = DockStyle.Fill;
             dashboardMainForm.PanelContent.Controls.Add(addGizi);
+        }
+
+        private void sarapanGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            string rowNumber = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            Rectangle headerBounds = new Rectangle(
+                e.RowBounds.Left,
+                e.RowBounds.Top,
+                grid.RowHeadersWidth,
+                e.RowBounds.Height);
+
+            e.Graphics.DrawString(rowNumber,
+                                  this.Font,
+                                  SystemBrushes.ControlText,
+                                  headerBounds,
+                                  centerFormat);
+        }
+
+        private void makanSiangGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            string rowNumber = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            Rectangle headerBounds = new Rectangle(
+                e.RowBounds.Left,
+                e.RowBounds.Top,
+                grid.RowHeadersWidth,
+                e.RowBounds.Height);
+
+            e.Graphics.DrawString(rowNumber,
+                                  this.Font,
+                                  SystemBrushes.ControlText,
+                                  headerBounds,
+                                  centerFormat);
+        }
+
+        private void makanMalamGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            string rowNumber = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            Rectangle headerBounds = new Rectangle(
+                e.RowBounds.Left,
+                e.RowBounds.Top,
+                grid.RowHeadersWidth,
+                e.RowBounds.Height);
+
+            e.Graphics.DrawString(rowNumber,
+                                  this.Font,
+                                  SystemBrushes.ControlText,
+                                  headerBounds,
+                                  centerFormat);
+        }
+
+        private void jajanGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            string rowNumber = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            Rectangle headerBounds = new Rectangle(
+                e.RowBounds.Left,
+                e.RowBounds.Top,
+                grid.RowHeadersWidth,
+                e.RowBounds.Height);
+
+            e.Graphics.DrawString(rowNumber,
+                                  this.Font,
+                                  SystemBrushes.ControlText,
+                                  headerBounds,
+                                  centerFormat);
         }
     }
 }
