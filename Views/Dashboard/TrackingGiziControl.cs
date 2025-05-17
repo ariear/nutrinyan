@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NutriNyan.Views.Auth;
 
 namespace NutriNyan.Views.Dashboard
 {
@@ -58,6 +59,15 @@ namespace NutriNyan.Views.Dashboard
             jajanGridView.Columns.Add("gula", "Gula");
             jajanGridView.Columns.Add("kalori", "Kalori");
             jajanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
+        }
+
+        private void makanButton_Click(object sender, EventArgs e)
+        {
+            DashboardMainForm dashboardMainForm = (DashboardMainForm)Application.OpenForms["DashboardMainForm"];
+            dashboardMainForm.PanelContent.Controls.Clear();
+            AddGiziControl addGizi= new AddGiziControl();
+            addGizi.Dock = DockStyle.Fill;
+            dashboardMainForm.PanelContent.Controls.Add(addGizi);
         }
     }
 }

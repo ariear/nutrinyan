@@ -79,5 +79,11 @@ namespace NutriNyan.Views.Dashboard
             SetActiveButton((IconButton)sender);
             LoadDashboard();
         }
+
+        // Expose panelcontent
+        public Panel PanelContent
+        {
+            get { return panelContent; }
+        }
     }
 }

@@ -67,7 +67,7 @@
             label24 = new Label();
             label25 = new Label();
             groupBox1 = new GroupBox();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
+            makanButton = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)sarapanGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox2).BeginInit();
@@ -112,7 +112,7 @@
             sarapanGridView.Location = new Point(33, 279);
             sarapanGridView.Name = "sarapanGridView";
             sarapanGridView.ReadOnly = true;
-            sarapanGridView.Size = new Size(811, 294);
+            sarapanGridView.Size = new Size(760, 294);
             sarapanGridView.TabIndex = 1;
             // 
             // label2
@@ -132,7 +132,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(769, 217);
+            label3.Location = new Point(718, 217);
             label3.Name = "label3";
             label3.Size = new Size(50, 20);
             label3.TabIndex = 3;
@@ -144,7 +144,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14F);
             label4.ForeColor = SystemColors.ControlLightLight;
-            label4.Location = new Point(777, 243);
+            label4.Location = new Point(726, 243);
             label4.Name = "label4";
             label4.Size = new Size(42, 25);
             label4.TabIndex = 4;
@@ -182,7 +182,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14F);
             label5.ForeColor = SystemColors.ControlLightLight;
-            label5.Location = new Point(781, 612);
+            label5.Location = new Point(730, 612);
             label5.Name = "label5";
             label5.Size = new Size(42, 25);
             label5.TabIndex = 9;
@@ -194,7 +194,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(773, 586);
+            label6.Location = new Point(722, 586);
             label6.Name = "label6";
             label6.Size = new Size(50, 20);
             label6.TabIndex = 8;
@@ -232,7 +232,7 @@
             makanSiangGridView.Location = new Point(33, 648);
             makanSiangGridView.Name = "makanSiangGridView";
             makanSiangGridView.ReadOnly = true;
-            makanSiangGridView.Size = new Size(811, 284);
+            makanSiangGridView.Size = new Size(760, 284);
             makanSiangGridView.TabIndex = 6;
             // 
             // iconPictureBox3
@@ -254,7 +254,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 14F);
             label8.ForeColor = SystemColors.ControlLightLight;
-            label8.Location = new Point(781, 973);
+            label8.Location = new Point(730, 973);
             label8.Name = "label8";
             label8.Size = new Size(42, 25);
             label8.TabIndex = 14;
@@ -266,7 +266,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             label9.ForeColor = SystemColors.ControlLightLight;
-            label9.Location = new Point(773, 947);
+            label9.Location = new Point(722, 947);
             label9.Name = "label9";
             label9.Size = new Size(50, 20);
             label9.TabIndex = 13;
@@ -304,7 +304,7 @@
             makanMalamGridView.Location = new Point(33, 1007);
             makanMalamGridView.Name = "makanMalamGridView";
             makanMalamGridView.ReadOnly = true;
-            makanMalamGridView.Size = new Size(816, 245);
+            makanMalamGridView.Size = new Size(765, 245);
             makanMalamGridView.TabIndex = 11;
             // 
             // iconPictureBox4
@@ -326,7 +326,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 14F);
             label11.ForeColor = SystemColors.ControlLightLight;
-            label11.Location = new Point(781, 1298);
+            label11.Location = new Point(730, 1298);
             label11.Name = "label11";
             label11.Size = new Size(42, 25);
             label11.TabIndex = 19;
@@ -338,7 +338,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             label12.ForeColor = SystemColors.ControlLightLight;
-            label12.Location = new Point(773, 1272);
+            label12.Location = new Point(722, 1272);
             label12.Name = "label12";
             label12.Size = new Size(50, 20);
             label12.TabIndex = 18;
@@ -376,17 +376,17 @@
             jajanGridView.Location = new Point(33, 1332);
             jajanGridView.Name = "jajanGridView";
             jajanGridView.ReadOnly = true;
-            jajanGridView.Size = new Size(816, 245);
+            jajanGridView.Size = new Size(765, 245);
             jajanGridView.TabIndex = 16;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dateTimePicker1.CalendarFont = new Font("Segoe UI", 12F);
-            dateTimePicker1.Font = new Font("Segoe UI", 11F);
-            dateTimePicker1.Location = new Point(575, 46);
+            dateTimePicker1.Font = new Font("Segoe UI", 16F);
+            dateTimePicker1.Location = new Point(473, 34);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(150, 27);
+            dateTimePicker1.Size = new Size(199, 36);
             dateTimePicker1.TabIndex = 21;
             // 
             // label14
@@ -554,26 +554,27 @@
             groupBox1.ForeColor = SystemColors.ControlLightLight;
             groupBox1.Location = new Point(33, 88);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(799, 110);
+            groupBox1.Size = new Size(775, 110);
             groupBox1.TabIndex = 34;
             groupBox1.TabStop = false;
             groupBox1.Text = "Total Kandungan GIzi";
             // 
-            // iconButton1
+            // makanButton
             // 
-            iconButton1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            iconButton1.BackColor = Color.FromArgb(0, 221, 220);
-            iconButton1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            iconButton1.ForeColor = Color.FromArgb(1, 54, 63);
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            iconButton1.IconColor = Color.Black;
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.Location = new Point(748, 34);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Size = new Size(84, 39);
-            iconButton1.TabIndex = 35;
-            iconButton1.Text = "Makan";
-            iconButton1.UseVisualStyleBackColor = false;
+            makanButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            makanButton.BackColor = Color.FromArgb(0, 221, 220);
+            makanButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            makanButton.ForeColor = Color.FromArgb(1, 54, 63);
+            makanButton.IconChar = FontAwesome.Sharp.IconChar.None;
+            makanButton.IconColor = Color.Black;
+            makanButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            makanButton.Location = new Point(697, 34);
+            makanButton.Name = "makanButton";
+            makanButton.Size = new Size(84, 39);
+            makanButton.TabIndex = 35;
+            makanButton.Text = "Makan";
+            makanButton.UseVisualStyleBackColor = false;
+            makanButton.Click += makanButton_Click;
             // 
             // TrackingGiziControl
             // 
@@ -581,7 +582,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.FromArgb(17, 30, 29);
-            Controls.Add(iconButton1);
+            Controls.Add(makanButton);
             Controls.Add(dateTimePicker1);
             Controls.Add(iconPictureBox4);
             Controls.Add(label11);
@@ -606,7 +607,7 @@
             Controls.Add(label1);
             Controls.Add(groupBox1);
             Name = "TrackingGiziControl";
-            Size = new Size(870, 1453);
+            Size = new Size(819, 1453);
             Load += TrackingGiziControl_Load;
             ((System.ComponentModel.ISupportInitialize)sarapanGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
@@ -659,6 +660,6 @@
         private Label label24;
         private Label label25;
         private GroupBox groupBox1;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton makanButton;
     }
 }
