@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NutriNyan.Models;
 
 namespace NutriNyan.Views.Dashboard
 {
     public partial class SearchFoodForm : Form
     {
-        public SearchFoodForm()
+        private Dictionary<string, string> sumDict = new Dictionary<string, string>();
+        private FlowLayoutPanel SearchflowLayoutPanel;
+        private Dictionary<string, float> pselectedFood;
+        private string[] pfoodName;
+        public SearchFoodForm(Dictionary<string, float> selectedFood, string[] foodName)
         {
             InitializeComponent();
+            this.pselectedFood = selectedFood;
+            this.pfoodName = foodName;
         }
 
         private void SearchFoodForm_Load(object sender, EventArgs e)
@@ -26,7 +34,7 @@ namespace NutriNyan.Views.Dashboard
         // contoh ajah
         private void LoadDataRekomendasiMakanan()
         {
-            string[] items = { "Mie ayam", "Bakso Mercon", "Seblak", "Donat spesial lobang", "Roti O Lempuyungan" }; 
+            string[] items = { "Mie ayam", "Bakso Mercon", "Seblak", "Donat spesial lobang"};
 
             FlowLayoutPanel cardContainer = new FlowLayoutPanel();
             cardContainer.Dock = DockStyle.Fill;
@@ -75,7 +83,8 @@ namespace NutriNyan.Views.Dashboard
         // contoh ajah
         private void LoadDataCariMakan()
         {
-            string[] items = { "Mie ayam", "Bakso Mercon", "Seblak", "Donat spesial lobang", "Roti O Lempuyungan" }; // contoh ajah
+            // 4 aja, soalnya ku setting 4 juga
+            string[] items = { "Mie ayam", "Bakso Mercon", "Seblak", "Donat spesial lobang"}; // contoh ajah
 
             FlowLayoutPanel cardContainer = new FlowLayoutPanel();
             cardContainer.Dock = DockStyle.Fill;
@@ -118,9 +127,58 @@ namespace NutriNyan.Views.Dashboard
                 btn.ForeColor = Color.FromArgb(1, 54, 63);
                 btn.Font = new Font("Segoe UI", 9);
                 btn.TextAlign = ContentAlignment.MiddleCenter;
+                btn.Name = item;
+                btn.Click += foodButtonClicked;
                 card.Controls.Add(btn);
 
                 cardContainer.Controls.Add(card);
+            }
+            this.SearchflowLayoutPanel = cardContainer;
+        }
+        private async void foodButtonClicked(object sender, EventArgs e)
+        {
+            Dictionary<string, float>? result = await Api.GetReq(http_string: Api.fatsecretLinkFormat + ((Button)sender).Name);
+            if (result != null && result.Count != 0)
+            {
+                this.pselectedFood.Clear();
+                foreach (var kv in result)
+                {
+                    pselectedFood.Add(kv.Key, kv.Value);
+                }
+                this.pfoodName[0] = Logic.FoodNameTitleCase(((Button)sender).Name);
+                this.pfoodName[1] = sumDict[((Button)sender).Name];
+                this.Hide();
+                this.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("Terjadi kesalahan", "Information", MessageBoxButtons.OK);
+            }
+        }
+        private async void searchButtonClicked(object sender, EventArgs e)
+        {
+            string foodName = Logic.GetFoodName(searchTextBox.Text);
+            if (foodName != null)
+            {
+                List<List<string>>? result = await Api.GetRecomendation(foodName);
+                if (result != null)
+                {
+                    int count = -1;
+                    this.sumDict.Clear();
+                    for (int i = 0; i < result.Count; i++)
+                    {
+                        ((Label)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[0]).Text = Logic.FoodNameTitleCase(result[i][0]);
+                        ((Label)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[1]).Text = result[i][1];
+                        this.sumDict.Add(result[i][0], result[i][1]);
+                        ((Button)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[2]).Name = result[i][0];
+                        ((Panel)this.SearchflowLayoutPanel.Controls[i]).Show();
+                        count = i;
+                    }
+                    for (int i = count; count < 3; count++)
+                    {
+                        ((Panel)this.SearchflowLayoutPanel.Controls[i]).Hide();
+                    }
+                }
             }
         }
     }

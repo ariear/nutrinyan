@@ -13,12 +13,10 @@ namespace NutriNyan.Views.Dashboard
 {
     public partial class DashboardMainForm : Form
     {
-        string Username;
         private IconButton? currentActiveButton;
 
-        public DashboardMainForm(string Username)
+        public DashboardMainForm()
         {
-            this.Username = Username;
             InitializeComponent();
 
             this.WindowState = FormWindowState.Maximized;
@@ -42,7 +40,7 @@ namespace NutriNyan.Views.Dashboard
         // Load control method
         private void LoadDashboard()
         {
-            LoadUserControl(new DashboardControl(Username));
+            LoadUserControl(new DashboardControl());
         }
 
         private void LoadTrackingGizi()

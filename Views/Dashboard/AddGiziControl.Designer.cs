@@ -31,24 +31,24 @@
             searchFoodButton = new FontAwesome.Sharp.IconButton();
             title = new Label();
             foodNameBox = new TextBox();
-            label3 = new Label();
-            label4 = new Label();
-            unitSizeBox = new ComboBox();
+            foodNameLab = new Label();
+            UnitLab = new Label();
+            unitSizeComboBox = new ComboBox();
             label5 = new Label();
-            textBox1 = new TextBox();
+            UnitValueBox = new TextBox();
             label6 = new Label();
-            textBox2 = new TextBox();
+            LemakTextBox = new TextBox();
             label7 = new Label();
-            textBox3 = new TextBox();
+            ProtTextBox = new TextBox();
             label8 = new Label();
-            textBox4 = new TextBox();
+            KarbTextBox = new TextBox();
             label9 = new Label();
-            textBox5 = new TextBox();
+            KaloriTextBox = new TextBox();
             label10 = new Label();
-            textBox6 = new TextBox();
+            GulaTextBox = new TextBox();
             label11 = new Label();
-            textBox7 = new TextBox();
-            button1 = new Button();
+            SeratTextBox = new TextBox();
+            SaveFoodButton = new Button();
             periode = new Label();
             SuspendLayout();
             // 
@@ -64,11 +64,12 @@
             searchFoodButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             searchFoodButton.IconSize = 40;
             searchFoodButton.ImageAlign = ContentAlignment.MiddleRight;
-            searchFoodButton.Location = new Point(33, 126);
+            searchFoodButton.Location = new Point(38, 168);
+            searchFoodButton.Margin = new Padding(3, 4, 3, 4);
             searchFoodButton.Name = "searchFoodButton";
-            searchFoodButton.Padding = new Padding(5, 0, 5, 0);
+            searchFoodButton.Padding = new Padding(6, 0, 6, 0);
             searchFoodButton.RightToLeft = RightToLeft.Yes;
-            searchFoodButton.Size = new Size(179, 48);
+            searchFoodButton.Size = new Size(205, 64);
             searchFoodButton.TabIndex = 0;
             searchFoodButton.Text = "Cari Makanan";
             searchFoodButton.TextAlign = ContentAlignment.MiddleLeft;
@@ -81,238 +82,250 @@
             title.BackColor = Color.Transparent;
             title.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             title.ForeColor = SystemColors.ControlLight;
-            title.Location = new Point(33, 34);
+            title.Location = new Point(38, 45);
             title.Name = "title";
-            title.Size = new Size(490, 37);
+            title.Size = new Size(611, 46);
             title.TabIndex = 1;
             title.Text = "Tambah Makanan yang Dikonsumsi";
             // 
             // foodNameBox
             // 
             foodNameBox.Font = new Font("Segoe UI", 14F);
-            foodNameBox.Location = new Point(33, 240);
+            foodNameBox.Location = new Point(38, 320);
+            foodNameBox.Margin = new Padding(3, 4, 3, 4);
             foodNameBox.Name = "foodNameBox";
-            foodNameBox.Size = new Size(334, 32);
+            foodNameBox.Size = new Size(381, 39);
             foodNameBox.TabIndex = 4;
             // 
-            // label3
+            // foodNameLab
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(33, 210);
-            label3.Name = "label3";
-            label3.Size = new Size(131, 21);
-            label3.TabIndex = 5;
-            label3.Text = "Nama Makanan";
+            foodNameLab.AutoSize = true;
+            foodNameLab.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            foodNameLab.ForeColor = SystemColors.ControlLightLight;
+            foodNameLab.Location = new Point(38, 280);
+            foodNameLab.Name = "foodNameLab";
+            foodNameLab.Size = new Size(161, 28);
+            foodNameLab.TabIndex = 5;
+            foodNameLab.Text = "Nama Makanan";
             // 
-            // label4
+            // UnitLab
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label4.ForeColor = SystemColors.ControlLightLight;
-            label4.Location = new Point(403, 210);
-            label4.Name = "label4";
-            label4.Size = new Size(143, 21);
-            label4.TabIndex = 7;
-            label4.Text = "Satuan Penyajian";
+            UnitLab.AutoSize = true;
+            UnitLab.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            UnitLab.ForeColor = SystemColors.ControlLightLight;
+            UnitLab.Location = new Point(461, 280);
+            UnitLab.Name = "UnitLab";
+            UnitLab.Size = new Size(174, 28);
+            UnitLab.TabIndex = 7;
+            UnitLab.Text = "Satuan Penyajian";
             // 
-            // unitSizeBox
+            // unitSizeComboBox
             // 
-            unitSizeBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            unitSizeBox.Font = new Font("Segoe UI", 13F);
-            unitSizeBox.FormattingEnabled = true;
-            unitSizeBox.Location = new Point(403, 241);
-            unitSizeBox.Name = "unitSizeBox";
-            unitSizeBox.Size = new Size(193, 31);
-            unitSizeBox.TabIndex = 8;
+            unitSizeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            unitSizeComboBox.Font = new Font("Segoe UI", 13F);
+            unitSizeComboBox.FormattingEnabled = true;
+            unitSizeComboBox.Location = new Point(461, 321);
+            unitSizeComboBox.Margin = new Padding(3, 4, 3, 4);
+            unitSizeComboBox.Name = "unitSizeComboBox";
+            unitSizeComboBox.Size = new Size(220, 38);
+            unitSizeComboBox.TabIndex = 8;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label5.ForeColor = SystemColors.ControlLightLight;
-            label5.Location = new Point(627, 208);
+            label5.Location = new Point(717, 277);
             label5.Name = "label5";
-            label5.Size = new Size(146, 21);
+            label5.Size = new Size(177, 28);
             label5.TabIndex = 9;
             label5.Text = "Ukuran Penyajian";
             // 
-            // textBox1
+            // UnitValueBox
             // 
-            textBox1.Font = new Font("Segoe UI", 14F);
-            textBox1.Location = new Point(629, 239);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(173, 32);
-            textBox1.TabIndex = 10;
+            UnitValueBox.Font = new Font("Segoe UI", 14F);
+            UnitValueBox.Location = new Point(719, 319);
+            UnitValueBox.Margin = new Padding(3, 4, 3, 4);
+            UnitValueBox.Name = "UnitValueBox";
+            UnitValueBox.Size = new Size(197, 39);
+            UnitValueBox.TabIndex = 10;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(33, 299);
+            label6.Location = new Point(38, 399);
             label6.Name = "label6";
-            label6.Size = new Size(116, 21);
+            label6.Size = new Size(142, 28);
             label6.TabIndex = 12;
             label6.Text = "Lemak (gram)";
             // 
-            // textBox2
+            // LemakTextBox
             // 
-            textBox2.Font = new Font("Segoe UI", 14F);
-            textBox2.Location = new Point(33, 329);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(239, 32);
-            textBox2.TabIndex = 11;
+            LemakTextBox.Font = new Font("Segoe UI", 14F);
+            LemakTextBox.Location = new Point(38, 439);
+            LemakTextBox.Margin = new Padding(3, 4, 3, 4);
+            LemakTextBox.Name = "LemakTextBox";
+            LemakTextBox.Size = new Size(273, 39);
+            LemakTextBox.TabIndex = 11;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label7.ForeColor = SystemColors.ControlLightLight;
-            label7.Location = new Point(299, 299);
+            label7.Location = new Point(342, 399);
             label7.Name = "label7";
-            label7.Size = new Size(122, 21);
+            label7.Size = new Size(150, 28);
             label7.TabIndex = 14;
             label7.Text = "Protein (gram)";
             // 
-            // textBox3
+            // ProtTextBox
             // 
-            textBox3.Font = new Font("Segoe UI", 14F);
-            textBox3.Location = new Point(299, 329);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(239, 32);
-            textBox3.TabIndex = 13;
+            ProtTextBox.Font = new Font("Segoe UI", 14F);
+            ProtTextBox.Location = new Point(342, 439);
+            ProtTextBox.Margin = new Padding(3, 4, 3, 4);
+            ProtTextBox.Name = "ProtTextBox";
+            ProtTextBox.Size = new Size(273, 39);
+            ProtTextBox.TabIndex = 13;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label8.ForeColor = SystemColors.ControlLightLight;
-            label8.Location = new Point(563, 299);
+            label8.Location = new Point(643, 399);
             label8.Name = "label8";
-            label8.Size = new Size(157, 21);
+            label8.Size = new Size(194, 28);
             label8.TabIndex = 16;
             label8.Text = "Karbohidrat (gram)";
             // 
-            // textBox4
+            // KarbTextBox
             // 
-            textBox4.Font = new Font("Segoe UI", 14F);
-            textBox4.Location = new Point(563, 329);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(239, 32);
-            textBox4.TabIndex = 15;
+            KarbTextBox.Font = new Font("Segoe UI", 14F);
+            KarbTextBox.Location = new Point(643, 439);
+            KarbTextBox.Margin = new Padding(3, 4, 3, 4);
+            KarbTextBox.Name = "KarbTextBox";
+            KarbTextBox.Size = new Size(273, 39);
+            KarbTextBox.TabIndex = 15;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label9.ForeColor = SystemColors.ControlLightLight;
-            label9.Location = new Point(563, 382);
+            label9.Location = new Point(643, 509);
             label9.Name = "label9";
-            label9.Size = new Size(59, 21);
+            label9.Size = new Size(74, 28);
             label9.TabIndex = 22;
             label9.Text = "Kalori ";
             // 
-            // textBox5
+            // KaloriTextBox
             // 
-            textBox5.Font = new Font("Segoe UI", 14F);
-            textBox5.Location = new Point(563, 412);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(239, 32);
-            textBox5.TabIndex = 21;
+            KaloriTextBox.Font = new Font("Segoe UI", 14F);
+            KaloriTextBox.Location = new Point(643, 549);
+            KaloriTextBox.Margin = new Padding(3, 4, 3, 4);
+            KaloriTextBox.Name = "KaloriTextBox";
+            KaloriTextBox.Size = new Size(273, 39);
+            KaloriTextBox.TabIndex = 21;
             // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label10.ForeColor = SystemColors.ControlLightLight;
-            label10.Location = new Point(299, 382);
+            label10.Location = new Point(342, 509);
             label10.Name = "label10";
-            label10.Size = new Size(101, 21);
+            label10.Size = new Size(124, 28);
             label10.TabIndex = 20;
             label10.Text = "Gula (gram)";
             // 
-            // textBox6
+            // GulaTextBox
             // 
-            textBox6.Font = new Font("Segoe UI", 14F);
-            textBox6.Location = new Point(299, 412);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(239, 32);
-            textBox6.TabIndex = 19;
+            GulaTextBox.Font = new Font("Segoe UI", 14F);
+            GulaTextBox.Location = new Point(342, 549);
+            GulaTextBox.Margin = new Padding(3, 4, 3, 4);
+            GulaTextBox.Name = "GulaTextBox";
+            GulaTextBox.Size = new Size(273, 39);
+            GulaTextBox.TabIndex = 19;
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label11.ForeColor = SystemColors.ControlLightLight;
-            label11.Location = new Point(33, 382);
+            label11.Location = new Point(38, 509);
             label11.Name = "label11";
-            label11.Size = new Size(105, 21);
+            label11.Size = new Size(130, 28);
             label11.TabIndex = 18;
             label11.Text = "Serat (gram)";
             // 
-            // textBox7
+            // SeratTextBox
             // 
-            textBox7.Font = new Font("Segoe UI", 14F);
-            textBox7.Location = new Point(33, 412);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(239, 32);
-            textBox7.TabIndex = 17;
+            SeratTextBox.Font = new Font("Segoe UI", 14F);
+            SeratTextBox.Location = new Point(38, 549);
+            SeratTextBox.Margin = new Padding(3, 4, 3, 4);
+            SeratTextBox.Name = "SeratTextBox";
+            SeratTextBox.Size = new Size(273, 39);
+            SeratTextBox.TabIndex = 17;
             // 
-            // button1
+            // SaveFoodButton
             // 
-            button1.BackColor = Color.FromArgb(0, 221, 220);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            button1.ForeColor = Color.FromArgb(1, 54, 63);
-            button1.Location = new Point(33, 478);
-            button1.Name = "button1";
-            button1.Size = new Size(769, 42);
-            button1.TabIndex = 23;
-            button1.Text = "Tambah";
-            button1.UseVisualStyleBackColor = false;
+            SaveFoodButton.BackColor = Color.FromArgb(0, 221, 220);
+            SaveFoodButton.FlatStyle = FlatStyle.Flat;
+            SaveFoodButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            SaveFoodButton.ForeColor = Color.FromArgb(1, 54, 63);
+            SaveFoodButton.Location = new Point(38, 637);
+            SaveFoodButton.Margin = new Padding(3, 4, 3, 4);
+            SaveFoodButton.Name = "SaveFoodButton";
+            SaveFoodButton.Size = new Size(879, 56);
+            SaveFoodButton.TabIndex = 23;
+            SaveFoodButton.Text = "Tambah";
+            SaveFoodButton.UseVisualStyleBackColor = false;
+            SaveFoodButton.Click += SaveFoodButtonClicked;
             // 
             // periode
             // 
             periode.AutoSize = true;
             periode.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             periode.ForeColor = SystemColors.ControlLightLight;
-            periode.Location = new Point(506, 137);
+            periode.Location = new Point(578, 183);
             periode.Name = "periode";
-            periode.Size = new Size(154, 25);
+            periode.Size = new Size(186, 30);
             periode.TabIndex = 24;
             periode.Text = "Periode Makan : ";
             // 
             // AddGiziControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 30, 29);
             Controls.Add(periode);
-            Controls.Add(button1);
+            Controls.Add(SaveFoodButton);
             Controls.Add(label9);
-            Controls.Add(textBox5);
+            Controls.Add(KaloriTextBox);
             Controls.Add(label10);
-            Controls.Add(textBox6);
+            Controls.Add(GulaTextBox);
             Controls.Add(label11);
-            Controls.Add(textBox7);
+            Controls.Add(SeratTextBox);
             Controls.Add(label8);
-            Controls.Add(textBox4);
+            Controls.Add(KarbTextBox);
             Controls.Add(label7);
-            Controls.Add(textBox3);
+            Controls.Add(ProtTextBox);
             Controls.Add(label6);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(LemakTextBox);
+            Controls.Add(UnitValueBox);
             Controls.Add(label5);
-            Controls.Add(unitSizeBox);
-            Controls.Add(label4);
-            Controls.Add(label3);
+            Controls.Add(unitSizeComboBox);
+            Controls.Add(UnitLab);
+            Controls.Add(foodNameLab);
             Controls.Add(foodNameBox);
             Controls.Add(title);
             Controls.Add(searchFoodButton);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AddGiziControl";
-            Size = new Size(961, 614);
+            Size = new Size(1098, 819);
             Load += AddGiziControl_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -323,24 +336,24 @@
         private FontAwesome.Sharp.IconButton searchFoodButton;
         private Label title;
         private TextBox foodNameBox;
-        private Label label3;
-        private Label label4;
-        private ComboBox unitSizeBox;
+        private Label foodNameLab;
+        private Label UnitLab;
+        private ComboBox unitSizeComboBox;
         private Label label5;
-        private TextBox textBox1;
+        private TextBox UnitValueBox;
         private Label label6;
-        private TextBox textBox2;
+        private TextBox LemakTextBox;
         private Label label7;
-        private TextBox textBox3;
+        private TextBox ProtTextBox;
         private Label label8;
-        private TextBox textBox4;
+        private TextBox KarbTextBox;
         private Label label9;
-        private TextBox textBox5;
+        private TextBox KaloriTextBox;
         private Label label10;
-        private TextBox textBox6;
+        private TextBox GulaTextBox;
         private Label label11;
-        private TextBox textBox7;
-        private Button button1;
+        private TextBox SeratTextBox;
+        private Button SaveFoodButton;
         private Label periode;
     }
 }

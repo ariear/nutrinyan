@@ -31,8 +31,8 @@
             cariMakananTabControl = new TabControl();
             cariMakanTabPage = new TabPage();
             label2 = new Label();
-            button1 = new Button();
-            textBox1 = new TextBox();
+            searchButton = new Button();
+            searchTextBox = new TextBox();
             panel1 = new Panel();
             rekomenFoodTabPage = new TabPage();
             label1 = new Label();
@@ -57,8 +57,8 @@
             // 
             cariMakanTabPage.BackColor = Color.FromArgb(17, 30, 29);
             cariMakanTabPage.Controls.Add(label2);
-            cariMakanTabPage.Controls.Add(button1);
-            cariMakanTabPage.Controls.Add(textBox1);
+            cariMakanTabPage.Controls.Add(searchButton);
+            cariMakanTabPage.Controls.Add(searchTextBox);
             cariMakanTabPage.Controls.Add(panel1);
             cariMakanTabPage.Location = new Point(4, 30);
             cariMakanTabPage.Name = "cariMakanTabPage";
@@ -79,25 +79,26 @@
             label2.TabIndex = 2;
             label2.Text = "Masukkan nama makanan";
             // 
-            // button1
+            // searchButton
             // 
-            button1.BackColor = Color.FromArgb(0, 221, 220);
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            button1.ForeColor = Color.FromArgb(1, 54, 63);
-            button1.Location = new Point(680, 55);
-            button1.Name = "button1";
-            button1.Size = new Size(114, 36);
-            button1.TabIndex = 1;
-            button1.Text = "Cari";
-            button1.UseVisualStyleBackColor = false;
+            searchButton.BackColor = Color.FromArgb(0, 221, 220);
+            searchButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            searchButton.ForeColor = Color.FromArgb(1, 54, 63);
+            searchButton.Location = new Point(680, 55);
+            searchButton.Name = "searchButton";
+            searchButton.Size = new Size(114, 36);
+            searchButton.TabIndex = 1;
+            searchButton.Text = "Cari";
+            searchButton.UseVisualStyleBackColor = false;
+            searchButton.Click += searchButtonClicked;
             // 
-            // textBox1
+            // searchTextBox
             // 
-            textBox1.Font = new Font("Segoe UI", 16F);
-            textBox1.Location = new Point(22, 55);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(637, 36);
-            textBox1.TabIndex = 0;
+            searchTextBox.Font = new Font("Segoe UI", 16F);
+            searchTextBox.Location = new Point(22, 55);
+            searchTextBox.Name = "searchTextBox";
+            searchTextBox.Size = new Size(637, 36);
+            searchTextBox.TabIndex = 0;
             // 
             // panel1
             // 
@@ -157,8 +158,8 @@
         private TabPage cariMakanTabPage;
         private TabPage rekomenFoodTabPage;
         private Label label1;
-        private Button button1;
-        private TextBox textBox1;
+        private Button searchButton;
+        private TextBox searchTextBox;
         private Label label2;
         private Panel panel1;
     }

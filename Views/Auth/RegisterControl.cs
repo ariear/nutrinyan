@@ -16,12 +16,10 @@ namespace NutriNyan.Views.Auth
 {
     public partial class RegisterControl : UserControl
     {
-        DbContextOptionsBuilder<AppDbContext> _optionsBuilder; 
         AuthMainForm pMainAuth;
         public RegisterControl(AuthMainForm pMainAuth)
         {
             InitializeComponent();
-            _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             this.pMainAuth = pMainAuth;
         }
 
@@ -36,12 +34,12 @@ namespace NutriNyan.Views.Auth
 
         private async void buttonRegister_Click(object sender, EventArgs e)
         {
-            if (backgroundWorker1.IsBusy){
+            if (backgroundWorker1.IsBusy) {
                 MessageBox.Show("Thread Busy", "Information", MessageBoxButtons.OK);
             }
             if (Logic.IsValidPwd(Pwd_TextBox.Text) &&
                 Nama_TextBox.Text != "" &&
-                !Logic.IsUsernameExist(Nama_TextBox.Text, _optionsBuilder) &&
+                Database.GetUserIfExist(Nama_TextBox.Text) != null &&
                 TB_TextBox.Text != "" &&
                 BB_TextBox.Text != "" &&
                 !backgroundWorker1.IsBusy &&
@@ -50,6 +48,7 @@ namespace NutriNyan.Views.Auth
             {
                 // Add here
                 backgroundWorker1.RunWorkerAsync(); // change this
+                
                 MessageBox.Show("Success", "Information", MessageBoxButtons.OK);
             }
             else
@@ -61,17 +60,19 @@ namespace NutriNyan.Views.Auth
         private void RegisterControl_Load(object sender, EventArgs e)
         {
             aktivitasBox.DataSource = Enum.GetValues(typeof(ActivityLevel));
-            using (var dbContext = new AppDbContext(_optionsBuilder.Options)){
+            var _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            using (var dbContext = new AppDbContext(_optionsBuilder.Options))
+            {
 
-            jkBox.DataSource = dbContext.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
-            jkBox.DisplayMember = "Type";
-            jkBox.ValueMember = "Id";
+                jkBox.DataSource = dbContext.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
+                jkBox.DisplayMember = "Type";
+                jkBox.ValueMember = "Id";
 
-            var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
+                var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
 
-            targetBox.DataSource = purposes;
-            targetBox.DisplayMember = "Title";
-            targetBox.ValueMember = "Id";
+                targetBox.DataSource = purposes;
+                targetBox.DisplayMember = "Title";
+                targetBox.ValueMember = "Id";
             }
         }
         /// <summary>
@@ -89,53 +90,27 @@ namespace NutriNyan.Views.Auth
                 Compt.AppendText(Sub); // Append/restore text value but throw unaccepted character
             }
         }
-        /// <summary>
-        /// Adding a User into the database and save the changes. Return true if success and false if there is an error.
-        /// </summary>
-        /// <returns>bool</returns>
-        private bool AddUser()
-        {
-            try
-            {
-                int TargetWater = (int)AKG.CalAKG(Logic.GetAge(dateTimePicker1.Value), (int)jkBox.SelectedIndex).Last();
-                string activLevel = Logic.GetTAktifitasValue((ActivityLevel)aktivitasBox.SelectedValue);
-                string pwdHashed = Logic.Get_PWDHash(Pwd_TextBox.Text);
-                using (var dbContext = new AppDbContext(_optionsBuilder.Options)){
-                dbContext.Add(new User
-                {
-                    Username = Nama_TextBox.Text,
-                    Password = pwdHashed,
-                    GenderId = (int)jkBox.SelectedValue,
-                    DateBirth = dateTimePicker1.Value.ToUniversalTime(),
-                    Tb = Single.Parse(TB_TextBox.Text),
-                    Bb = Single.Parse(BB_TextBox.Text),
-                    DefaultTargetWater = TargetWater,
-                    TingkatAktivitas = activLevel,
-                    PurposeId = (int)targetBox.SelectedValue,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                });
-                dbContext.SaveChanges();
-                }
-                MessageBox.Show("Success saving", "Information", MessageBoxButtons.OK);
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK);
-                return false;
-            }
-        }
-
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (AddUser()){
+            bool result = false;
+            this.Invoke(new MethodInvoker(() => result = Database.AddUser(
+                username: Nama_TextBox.Text,
+                password: Pwd_TextBox.Text,
+                genderId: (int)jkBox.SelectedValue,
+                genderIndex: jkBox.SelectedIndex,
+                dateBirth: dateTimePicker1.Value,
+                tb: Single.Parse(TB_TextBox.Text),
+                bb: Single.Parse(BB_TextBox.Text),
+                aktivitasLev: (ActivityLevel)aktivitasBox.SelectedValue,
+                purposeId: (int)targetBox.SelectedValue
+            ))); // Need to be async
+            if (result) {
                 MessageBox.Show("Success saving to the database", "Information", MessageBoxButtons.OK);
-                Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm(Nama_TextBox.Text);
-                pMainAuth.Hide();
+                Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm();
+                pMainAuth.Invoke(new MethodInvoker(() => pMainAuth.Hide()));
                 dashboard.ShowDialog();// need adjustment
-                pMainAuth.Dispose();   // need adjustment
-            }else {
+                pMainAuth.Invoke(new MethodInvoker(() => pMainAuth.Dispose()));   // need adjustment
+            } else {
                 MessageBox.Show("Failed to saving", "Information", MessageBoxButtons.OK);
             };
         }
