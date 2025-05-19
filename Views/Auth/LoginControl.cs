@@ -37,7 +37,7 @@ namespace NutriNyan.Views.Auth
         }
         private void Button1_Clicked(object sender, EventArgs e){
             if (Logic.AuthCheck(username: textBox1.Text, pwd: textBox2.Text)){
-                Database.SetUsername(username: textBox1.Text);
+                Database.SetUserId(userId: Database.GetUserIfExist(textBox1.Text)!.Id);
                 Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm();
                 pMainAuth.Hide();
                 dashboard.ShowDialog();// need adjustment

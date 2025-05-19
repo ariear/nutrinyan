@@ -14,6 +14,13 @@ namespace NutriNyan.Models
         public float Qty { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public float Karbohidrat { get; set; }
+        public float Protein { get; set; }
+        public float Lemak { get; set; }
+        public float Serat { get; set; }
+        public float Gula { get; set; }
+        public int UnitId { get; set; }
+        public Unit Unit { get; set; }
 
         public Meal Meal { get; set; } = null!;
         public Food Food { get; set; } = null!;

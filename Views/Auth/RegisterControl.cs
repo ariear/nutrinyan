@@ -107,6 +107,7 @@ namespace NutriNyan.Views.Auth
                 MessageBox.Show("Success saving to the database", "Information", MessageBoxButtons.OK);
                 Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm();
                 pMainAuth.Invoke(new MethodInvoker(() => pMainAuth.Hide()));
+                pMainAuth.Invoke(new MethodInvoker(() => Database.SetUserId(Database.GetUserIfExist(Nama_TextBox.Text).Id)));
                 dashboard.ShowDialog();// need adjustment
                 pMainAuth.Invoke(new MethodInvoker(() => pMainAuth.Dispose()));   // need adjustment
             } else {

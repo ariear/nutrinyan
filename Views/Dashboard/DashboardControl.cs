@@ -19,7 +19,7 @@ namespace NutriNyan.Views.Dashboard
         public DashboardControl()
         {
             InitializeComponent();
-            label1.Text = $"Halo {Database.Username}. Semoga Harimu Menyenangkan";
+            label1.Text = $"Halo {Database.UserId}. Semoga Harimu Menyenangkan";
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -50,6 +50,7 @@ namespace NutriNyan.Views.Dashboard
                                 resultText += $"\n{item.Key}: {item.Value}";
                             }
                             ResultLab.Text = resultText;
+                            // Adding food in meal
                             // Database.AddFood(
                             //     user: Database.GetUserIfExist(Username),
                             //     foodName: Logic.FoodNameTitleCase(foodNameProc),

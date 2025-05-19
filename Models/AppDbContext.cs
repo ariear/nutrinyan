@@ -67,9 +67,9 @@ namespace NutriNyan.Models
                 .Property(we => we.UpdatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            modelBuilder.Entity<Food>()
+            modelBuilder.Entity<MealItem>()
                 .HasOne(u => u.Unit)
-                .WithMany(p => p.Foods)
+                .WithMany(p => p.MealItems)
                 .HasForeignKey(u => u.UnitId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -94,7 +94,7 @@ namespace NutriNyan.Models
                 .HasConversion<string>();
 
             modelBuilder.Entity<Meal>()
-                .Property(m => m.CreatedAt)
+                .Property(m => m.Date)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<Meal>()

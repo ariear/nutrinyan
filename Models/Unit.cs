@@ -11,6 +11,6 @@ namespace NutriNyan.Models
         public int Id { get; set; }
         public string UnitType { get; set; }
         public float Weight { get; set; }
-        public ICollection<Food>? Foods { get; set; }
+        public ICollection<MealItem>? MealItems { get; set; }
     }
 }

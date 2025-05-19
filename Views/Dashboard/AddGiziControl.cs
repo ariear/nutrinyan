@@ -40,10 +40,13 @@ namespace NutriNyan.Views.Dashboard
                 Unit unit = Database.GetUnitIfExist("1 Porsi " + this.foodNameNSum[0]);
                 if (unit == null)
                 {
-                    Database.AddUnit(
-                        unitType: "1 Porsi" + " " + this.foodNameNSum[0],
-                        weight: selectedFood["1 Porsi"]
-                    );
+                    if (selectedFood["1 Porsi"] != 0)
+                    {
+                        Database.AddUnit(
+                            unitType: "1 Porsi" + " " + this.foodNameNSum[0],
+                            weight: selectedFood["1 Porsi"]
+                        );
+                    }
                 }
                 try
                 {
@@ -52,7 +55,7 @@ namespace NutriNyan.Views.Dashboard
                     if (selectedFood["1 Porsi"] != 0)
                     {
                         unitSizeComboBox.DataSource = (List<string>)["1 Porsi"];
-                        multiply = selectedFood["1 Porsi"] / 100;
+                        multiply = selectedFood["1 Porsi"] / 100; // Here
                     }
                     UnitValueBox.Text = $"{selectedFood["1 Porsi"] * multiply}";
                     LemakTextBox.Text = $"{selectedFood["Lemak"] * multiply}";
@@ -82,20 +85,18 @@ namespace NutriNyan.Views.Dashboard
         }
         private void SaveFoodButtonClicked(object sender, EventArgs e)
         {
-            User user = Database.GetUserIfExist(username: Database.Username);
             Unit unit = Database.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0]);
-            if (user != null && unit != null)
+            if (unit != null)
             {
                 MessageBox.Show("Waiting", "Information", MessageBoxButtons.OK);
                 bool result = Database.AddFood(
-                    userId: user.Id,
+                    userId: Database.UserId,
                     foodName: this.foodNameNSum[0],
                     karbohidrat: selectedFood["Karbohidrat"],
                     protein: selectedFood["Protein"],
                     lemak: selectedFood["Lemak"],
                     serat: selectedFood["Serat"],
                     gula: selectedFood["Gula"],
-                    unitId: unit.Id,
                     summary: this.foodNameNSum[1]
                 );
                 if (result)

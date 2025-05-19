@@ -4,10 +4,10 @@ using NutriNyan.Models.Enums;
 
 public static class Database
 {
-    public static string Username { get; private set; }
-    public static void SetUsername(string username)
+    public static int UserId { get; private set; }
+    public static void SetUserId(int userId)
     {
-        Username = username;
+        UserId = userId;
     }
     /// <summary>
     /// Adding a User into the database and save the changes. Return true if success and false if there is an error.
@@ -97,7 +97,7 @@ public static class Database
         }
     }
     /// <summary>
-    /// Get Unit by unitType/unitName if exist. If Unit with UnitType/Name is not exist or if error, return null
+    /// Get Unit by unitType/unitName if exist. If Unit with UnitType/Name is not exist or if error, return null.
     /// </summary>
     /// <param name="unitName"></param>
     /// <returns></returns>
@@ -123,6 +123,32 @@ public static class Database
         }
     }
     /// <summary>
+    /// Try to get unit data with id kay. Return null if error or didn't exist
+    /// </summary>
+    /// <param name="unitId"></param>
+    /// <returns></returns>
+    public static Unit? GetUnitIfExist(int unitId)
+    {
+        try
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            var dbContext = new AppDbContext(optionsBuilder.Options);
+            var result = dbContext.Units.SingleOrDefault(b => b.Id == unitId);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    /// <summary>
     /// Saving the food data in the data base. True if success and false if error/unsuccess. Use title case for the name of the food
     /// </summary>
     /// <param name="user"></param>
@@ -132,9 +158,8 @@ public static class Database
     /// <param name="lemak"></param>
     /// <param name="serat"></param>
     /// <param name="gula"></param>
-    /// <param name="unitId"></param>
     /// <returns></returns>
-    public static bool AddFood(int userId, string foodName, float karbohidrat, float protein, float lemak, float serat, float gula, int unitId, string summary)
+    public static bool AddFood(int userId, string foodName, float karbohidrat, float protein, float lemak, float serat, float gula, string summary)
     {
         try
         {
@@ -150,7 +175,6 @@ public static class Database
                     Lemak = lemak,
                     Serat = serat,
                     Gula = gula,
-                    UnitId = unitId,
                     Summary = summary,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
@@ -177,6 +201,95 @@ public static class Database
                 {
                     UnitType = unitType,
                     Weight = weight
+                }
+                );
+                dbContext.SaveChanges();
+            }
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public static bool AddMealItem()
+    {
+        try
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            using (var dbContext = new AppDbContext(optionsBuilder.Options))
+            {
+                dbContext.Add(new MealItem
+                {
+                    
+                }
+                );
+                dbContext.SaveChanges();
+            }
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public static bool AddMeal(int logId, MealType mealType, DateTime date)
+    {
+        try
+        {
+            string? mealTypeText = Logic.GetMealTypeValue(mealType);
+            if (mealTypeText != null)
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                using (var dbContext = new AppDbContext(optionsBuilder.Options))
+                {
+                    dbContext.Add(new Meal
+                    {
+                        LogId = logId,
+                        MealType = mealTypeText,
+                        Date = date,
+                        UpdatedAt = DateTime.UtcNow,
+                    }
+                    );
+                    dbContext.SaveChanges();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public static bool AddNutritionLog(int userId, string note)
+    {
+        try
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            using (var dbContext = new AppDbContext(optionsBuilder.Options))
+            {
+                dbContext.Add(new NutritionLog
+                {
+                    UserId = userId,
+                    Note = note,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
                 }
                 );
                 dbContext.SaveChanges();

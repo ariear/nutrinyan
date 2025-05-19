@@ -137,22 +137,42 @@ namespace NutriNyan.Views.Dashboard
         }
         private async void foodButtonClicked(object sender, EventArgs e)
         {
-            Dictionary<string, float>? result = await Api.GetReq(http_string: Api.fatsecretLinkFormat + ((Button)sender).Name);
-            if (result != null && result.Count != 0)
-            {
-                this.pselectedFood.Clear();
-                foreach (var kv in result)
+            Food? food = Database.GetFoodIfExist(foodName: Logic.FoodNameTitleCase(((Button)sender).Name));
+            if (food == null) {
+                Dictionary<string, float>? result = await Api.GetReq(http_string: Api.fatsecretLinkFormat + ((Button)sender).Name);
+                if (result != null && result.Count != 0)
                 {
-                    pselectedFood.Add(kv.Key, kv.Value);
+                    this.pselectedFood.Clear();
+                    foreach (var kv in result)
+                    {
+                        pselectedFood.Add(kv.Key, kv.Value);
+                    }
+                    this.pfoodName[0] = Logic.FoodNameTitleCase(((Button)sender).Name);
+                    this.pfoodName[1] = sumDict[((Button)sender).Name];
+                    this.Hide();
+                    this.Dispose();
                 }
-                this.pfoodName[0] = Logic.FoodNameTitleCase(((Button)sender).Name);
-                this.pfoodName[1] = sumDict[((Button)sender).Name];
-                this.Hide();
-                this.Dispose();
-            }
-            else
-            {
-                MessageBox.Show("Terjadi kesalahan", "Information", MessageBoxButtons.OK);
+                else
+                {
+                    MessageBox.Show("Terjadi kesalahan", "Information", MessageBoxButtons.OK);
+                }
+            } else {
+                Unit? unit = Database.GetUnitIfExist("1 Porsi" + " " + food.Name);
+                if (unit != null) {
+                    this.pselectedFood.Clear();
+                    pselectedFood.Add("1 Porsi", unit.Weight);
+                    pselectedFood.Add("Lemak", food.Lemak);
+                    pselectedFood.Add("Protein", food.Protein);
+                    pselectedFood.Add("Karbohidrat", food.Karbohidrat);
+                    pselectedFood.Add("Serat", food.Serat);
+                    pselectedFood.Add("Gula", food.Gula);
+                    this.pfoodName[0] = food.Name;
+                    this.pfoodName[1] = food.Summary;
+                    this.Hide();
+                    this.Dispose();
+                } else {
+                    MessageBox.Show("Terjadi kesalahan", "Information", MessageBoxButtons.OK);
+                }
             }
         }
         private async void searchButtonClicked(object sender, EventArgs e)

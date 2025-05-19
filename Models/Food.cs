@@ -19,12 +19,9 @@ namespace NutriNyan.Models
         public float Lemak { get; set; }
         public float Serat { get; set; }
         public float Gula { get; set; }
-        public int UnitId { get; set; }
         public string Summary { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
         public User? User { get; set; }
-        public Unit? Unit { get; set; }
     }
 }

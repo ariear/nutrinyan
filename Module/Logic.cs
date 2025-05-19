@@ -1,5 +1,6 @@
 using NutriNyan.Models;
 using Microsoft.EntityFrameworkCore;
+using NutriNyan.Models.Enums;
 
 public static class Logic
 {
@@ -17,6 +18,12 @@ public static class Logic
         result = BitConverter.ToString(hashValue).Replace("-", "");
         return result;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="pwd"></param>
+    /// <returns></returns>
     public static bool AuthCheck(string username, string pwd)
     {
         string pwd_hashed = Get_PWDHash(pwd);
@@ -131,27 +138,6 @@ public static class Logic
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="ActiveLevel"></param>
-    /// <returns></returns>
-    public static string GetMealTypeValue(NutriNyan.Models.Enums.MealType MealType)
-    {
-        switch (MealType)
-        {
-            case NutriNyan.Models.Enums.MealType.Breakfast:
-                return "Sarapan";
-            case NutriNyan.Models.Enums.MealType.Lunch:
-                return "Makan Siang";
-            case NutriNyan.Models.Enums.MealType.Dinner:
-                return "Makan Malam";
-            case NutriNyan.Models.Enums.MealType.Snack:
-                return "Snack";
-            default:
-                return "Error";
-        }
-    }
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="BirthDate"></param>
     /// <returns></returns>
     public static float GetAge(DateTime BirthDate)
@@ -201,5 +187,26 @@ public static class Logic
         System.Globalization.TextInfo ti = System.Globalization.CultureInfo.CurrentCulture.TextInfo;
         string placeHolder = ti.ToTitleCase(String.Join(" ", foodName.Split("-")));
         return placeHolder;
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="mealType"></param>
+    /// <returns></returns>
+    public static string? GetMealTypeValue(MealType mealType)
+    {
+        switch (mealType)
+        {
+            case MealType.Breakfast:
+                return "Breakfast";
+            case MealType.Lunch:
+                return "Lunch";
+            case MealType.Dinner:
+                return "Dinner";
+            case MealType.Snack:
+                return "Snack";
+            default:
+                return null;
+        }
     }
 }
