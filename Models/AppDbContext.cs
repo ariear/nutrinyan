@@ -82,7 +82,7 @@ namespace NutriNyan.Models
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<NutritionLog>()
-                .Property(n => n.CreatedAt)
+                .Property(n => n.Date)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<NutritionLog>()
