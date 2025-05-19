@@ -288,7 +288,7 @@ public static class Database
                 {
                     UserId = userId,
                     Note = note,
-                    CreatedAt = DateTime.UtcNow,
+                    Date = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 }
                 );
