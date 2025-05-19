@@ -39,7 +39,7 @@ namespace NutriNyan.Views.Auth
             }
             if (Logic.IsValidPwd(Pwd_TextBox.Text) &&
                 Nama_TextBox.Text != "" &&
-                Database.GetUserIfExist(Nama_TextBox.Text) != null &&
+                Database.GetUserIfExist(Nama_TextBox.Text) == null && // Avoiding duplicate username
                 TB_TextBox.Text != "" &&
                 BB_TextBox.Text != "" &&
                 !backgroundWorker1.IsBusy &&
@@ -48,7 +48,6 @@ namespace NutriNyan.Views.Auth
             {
                 // Add here
                 backgroundWorker1.RunWorkerAsync(); // change this
-                
                 MessageBox.Show("Success", "Information", MessageBoxButtons.OK);
             }
             else
