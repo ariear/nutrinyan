@@ -12,7 +12,6 @@ namespace NutriNyan.Models
     public class Food
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
         public string Name { get; set; } = null!;
         public float Karbohidrat { get; set; }
         public float Protein { get; set; }
@@ -22,6 +21,5 @@ namespace NutriNyan.Models
         public string Summary { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public User? User { get; set; }
     }
 }

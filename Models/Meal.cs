@@ -14,8 +14,6 @@ namespace NutriNyan.Models
     {
         public int Id { get; set; }
         public int LogId { get; set; }
-        [Column("MealType")]
-        [DataType(DataType.Text)]
         public string MealType { get; set; }
         public DateTime Date { get; set; }
         public DateTime UpdatedAt { get; set; }
