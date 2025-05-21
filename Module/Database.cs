@@ -72,6 +72,9 @@ public static class Database
     /// <summary>
     /// Get user by username if exist. If username with name is not exist or if error, return null
     /// </summary>
+    /// <para>
+    /// Using int as param will overload class
+    /// </para>
     /// <param name="Username"></param>
     /// <param name="db"></param>
     /// <returns></returns>
@@ -82,6 +85,27 @@ public static class Database
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             var dbContext = new AppDbContext(optionsBuilder.Options);
             var result = dbContext.Users.SingleOrDefault(b => b.Username == username);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    public static User? GetUserIfExist(int userId)
+    {
+        try
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            var dbContext = new AppDbContext(optionsBuilder.Options);
+            var result = dbContext.Users.SingleOrDefault(b => b.Id == userId);
             if (result != null)
             {
                 return result;
