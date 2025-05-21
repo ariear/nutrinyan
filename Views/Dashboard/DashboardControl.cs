@@ -10,72 +10,46 @@ using System.Windows.Forms;
 using Calculation;
 using NutriNyan.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace NutriNyan.Views.Dashboard
 {
     public partial class DashboardControl : UserControl
     {
-        Dictionary<string, float> result;
+        User user = new User();
         public DashboardControl()
         {
             InitializeComponent();
-            label1.Text = $"Halo {Database.UserId}. Semoga Harimu Menyenangkan";
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void chart2_Click(object sender, EventArgs e)
         {
-            // Process and format foodName from user input for http request
-            string? foodNameProc = Logic.GetFoodName(foodName.Text);
-            if (foodNameProc != null) // null if there is no single character
-            {
-                Food food = Database.GetFoodIfExist(foodName: foodNameProc);
-                if (food != null)
-                {
+            chart2.Series.Clear();
+            Series series = chart2.Series.Add("Kalori");
+            series.ChartType = SeriesChartType.Column;
+            series.XValueType = ChartValueType.Auto;
+            series.Color = Color.Yellow;
+            series.IsValueShownAsLabel = true;
+            series.LabelBackColor = Color.GreenYellow;
+            series["PointWidth"] = "0.6";
+            series.XValueType = ChartValueType.String;
+            chart2.ChartAreas[0].AxisX.Interval = 8;
 
-                }
-                else
-                {
-                    var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-                    using (var dbContext = new AppDbContext(optionsBuilder.Options))
-                    // await html of the http request
-                    result = await Api.GetReq(Api.fatsecretLinkFormat + foodNameProc);
-                    if (result != null) // Null if there is error when try to reach the website
-                    {
-                        if (result.Count != 0) // 0 if the page did exist
-                        {
-                            // print out the result of the http request
-                            string resultText = "Hasil Pencarian untuk " + foodName.Text;
-                            foreach (KeyValuePair<string, float> item in result)
-                            {
-                                resultText += $"\n{item.Key}: {item.Value}";
-                            }
-                            ResultLab.Text = resultText;
-                            // Adding food in meal
-                            // Database.AddFood(
-                            //     user: Database.GetUserIfExist(Username),
-                            //     foodName: Logic.FoodNameTitleCase(foodNameProc),
-                            //     karbohidrat: result["Karbohidrat"],
-                            //     protein: result["Protein"],
-                            //     lemak: result["Lemak"],
-                            //     serat: result["Serat"],
-                            //     gula: result["Gula"],
-                            //     unitId: 
-                            //     );
-                        }
-                        else
-                        {
-                            ResultLab.Text = $"Maaf, pencarian untuk {foodName.Text} tidak ada";
-                        }
-                    }
-                    else
-                    {
-                        ResultLab.Text = "Terdapat kesalahan, silakan coba lagi nanti";
-                    }
-                }
-            }else
-            {
-                ResultLab.Text = "Inputan tidak boleh kosong.";
-            }
+            //series.Points.Add(datapoint1)
+
+            series.Points.AddXY("senin", 99);
+            series.Points.AddXY("selasa", 169);
+            series.Points.AddXY("rabu", 187);
+            series.Points.AddXY("kamis", 125);
+            series.Points.AddXY("jumat", 156);
+            series.Points.AddXY("sabtu", 225);
+            series.Points.AddXY("minggu", 112);
+        }
+
+        private void DashboardControl_Load(object sender, EventArgs e)
+        {
+            user = Database.GetUserIfExist(Database.UserId);
+            label1.Text = $"Halo {user.Username}, Selamat Datang!";
         }
     }
 }
