@@ -168,7 +168,6 @@ public static class Database
             {
                 dbContext.Add(new Food
                 {
-                    UserId = userId,
                     Name = foodName,
                     Karbohidrat = karbohidrat,
                     Protein = protein,
