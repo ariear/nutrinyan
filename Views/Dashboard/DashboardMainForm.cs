@@ -24,6 +24,7 @@ namespace NutriNyan.Views.Dashboard
             SetActiveButton((IconButton)dashboardButton);
             LoadDashboard();
         }
+        
 
         private void DashboardMainForm_Load(object sender, EventArgs e)
         {
