@@ -21,7 +21,7 @@ namespace NutriNyan.Views.Dashboard
             InitializeComponent();
             label1.Text = $"Halo {Database.UserId}. Semoga Harimu Menyenangkan";
         }
-
+        
         private async void button1_Click(object sender, EventArgs e)
         {
             // Process and format foodName from user input for http request
@@ -31,7 +31,6 @@ namespace NutriNyan.Views.Dashboard
                 Food food = Database.GetFoodIfExist(foodName: foodNameProc);
                 if (food != null)
                 {
-
                 }
                 else
                 {
@@ -51,6 +50,7 @@ namespace NutriNyan.Views.Dashboard
                             }
                             ResultLab.Text = resultText;
                             // Adding food in meal
+
                             // Database.AddFood(
                             //     user: Database.GetUserIfExist(Username),
                             //     foodName: Logic.FoodNameTitleCase(foodNameProc),

@@ -1,4 +1,5 @@
-public static class Api{
+public static class Api
+{
     public static string fatsecretLinkFormat = "https://www.fatsecret.co.id/kalori-gizi/umum/";
     /// <summary>
     /// Get nutrition information of a food from the fatsecret web. Null if there is error such as no internet connection
@@ -72,12 +73,12 @@ public static class Api{
             return null;
         }
     }
-        /// <summary>
+    /// <summary>
     /// Get recomendation food. Don't forget to format the foodName first using GetFoodName. Return format [[foodName, nutritionFact], ...]. Return null if error
     /// </summary>
     /// <param name="http_string"></param>
     /// <returns></returns>
-    public static async Task<List<List<string>>>? GetRecomendation(string foodName)
+    public static async Task<List<List<string>>?> GetRecomendation(string foodName)
     {
         try
         {
@@ -94,6 +95,10 @@ public static class Api{
                     var response = await req_client.SendAsync(request);
 
                     string html = await response.Content.ReadAsStringAsync();
+                    if (html.Contains("Tidak ada hasil pencarian"))
+                    {
+                        return null;
+                    }
                     html = html.Substring(6000, 11000).Replace("\n", "");
                     List<string> my_list = html.Split("<a class=\"prominent\" href=\"/kalori-gizi/umum/").ToList();
                     my_list = my_list.Slice(1, my_list.Count - 1);
@@ -111,5 +116,34 @@ public static class Api{
         {
             return null;
         }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="task"></param>
+    /// <returns></returns>
+    public static async Task WaitingWindow(Task task)
+    {
+        var loadWindow = new NutriNyan.Views.Loading.LoadingWindow();
+        loadWindow.StartPosition = FormStartPosition.CenterScreen;
+        loadWindow.Show();
+        string initText = loadWindow.Controls[0].Text;
+        int count = 0;
+        while (!task.IsCompleted)
+        {
+            await Task.Delay(200);
+            if (count == 6)
+            {
+                loadWindow.Controls[0].Text = initText;
+                count = 0;
+            }
+            else
+            {
+                loadWindow.Controls[0].Text = loadWindow.Controls[0].Text + ".";
+                count++;
+            }
+        }
+        loadWindow.Hide();
+        loadWindow.Dispose();
     }
 }

@@ -5,6 +5,7 @@ using NutriNyan.Models.Enums;
 public static class Database
 {
     public static int UserId { get; private set; }
+    public static string[] MealTypes = ["Makan Pagi", "Makan Siang", "Makan Malam", "Jajan"];
     public static void SetUserId(int userId)
     {
         UserId = userId;
@@ -49,7 +50,10 @@ public static class Database
         }
     }
     /// <summary>
-    /// Get a food nutrition data if exist in the current database. If doesn't exist return null
+    /// Get a food nutrition data if exist in the current database using foodName. If doesn't exist return null
+    /// <para>
+    /// Use Id to overload query using Id food
+    /// </para>
     /// </summary>
     /// <returns></returns>
     public static Food? GetFoodIfExist(string foodName)
@@ -59,6 +63,27 @@ public static class Database
         using (var dbContext = new AppDbContext(optionsBuilder.Options))
         {
             var result = dbContext.Foods.SingleOrDefault(b => b.Name == foodName);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+    /// <summary>
+    /// Get a food nutrition data if exist in the current database using foodId. If doesn't exist return null
+    /// </summary>
+    /// <param name="foodId"></param>
+    /// <returns></returns>
+    public static Food? GetFoodIfExist(int foodId)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+        using (var dbContext = new AppDbContext(optionsBuilder.Options))
+        {
+            var result = dbContext.Foods.SingleOrDefault(b => b.Id == foodId);
             if (result != null)
             {
                 return result;
@@ -99,6 +124,9 @@ public static class Database
     /// <summary>
     /// Get Unit by unitType/unitName if exist. If Unit with UnitType/Name is not exist or if error, return null.
     /// </summary>
+    /// <para>
+    /// Use Id to overload query using Id
+    /// </para>
     /// <param name="unitName"></param>
     /// <returns></returns>
     public static Unit? GetUnitIfExist(string unitType)
@@ -123,7 +151,7 @@ public static class Database
         }
     }
     /// <summary>
-    /// Try to get unit data with id kay. Return null if error or didn't exist
+    /// Try to get unit data with unitId. Return null if error or didn't exist
     /// </summary>
     /// <param name="unitId"></param>
     /// <returns></returns>
@@ -137,6 +165,67 @@ public static class Database
             if (result != null)
             {
                 return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    /// <summary>
+    /// Get Meal fron database using  mealtype name and datetime
+    /// </summary>
+    /// <param name="mealType"></param>
+    /// <param name="date"></param>
+    /// <returns></returns>
+    public static Meal? GetMealIfExist(string mealType, DateTime date)
+    {
+        try
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            var dbContext = new AppDbContext(optionsBuilder.Options);
+            var result = dbContext.Meals.SingleOrDefault(b => b.MealType == mealType && b.Date.Date == date.Date);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="date"></param>
+    /// <returns></returns>
+    public static List<MealItem>? GetRowOfMealItems(DateTime date, string mealType)
+    {
+        try
+        {
+            Meal? meal = GetMealIfExist(mealType, date);
+            if (meal != null)
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                var dbContext = new AppDbContext(optionsBuilder.Options);
+                var result = dbContext.MealItems.Where(b => b.MealId == meal.Id);
+                if (result != null)
+                {
+                    return result.ToList();
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
@@ -168,7 +257,6 @@ public static class Database
             {
                 dbContext.Add(new Food
                 {
-                    UserId = userId,
                     Name = foodName,
                     Karbohidrat = karbohidrat,
                     Protein = protein,
@@ -216,7 +304,8 @@ public static class Database
     /// 
     /// </summary>
     /// <returns></returns>
-    public static bool AddMealItem()
+    public static bool AddMealItem(int mealId, int foodId, float qty, float karbohidrat,
+                            float protein, float lemak, float serat, float gula, int unitId)
     {
         try
         {
@@ -225,7 +314,17 @@ public static class Database
             {
                 dbContext.Add(new MealItem
                 {
-                    
+                    MealId = mealId,
+                    FoodId = foodId,
+                    Qty = qty,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Karbohidrat = karbohidrat,
+                    Protein = protein,
+                    Lemak = lemak,
+                    Serat = serat,
+                    Gula = gula,
+                    UnitId = unitId
                 }
                 );
                 dbContext.SaveChanges();
@@ -274,31 +373,58 @@ public static class Database
         }
     }
     /// <summary>
-    /// 
+    /// Ensure that nutrition log exist, if not exist will create immediately and return it. Null if error.
+    /// Note that this method also create Meals of the four types.
     /// </summary>
+    /// <para>
+    /// Use DateTime.UtcNow.
+    /// </para>
+    /// <param name="date"></param>
     /// <returns></returns>
-    public static bool AddNutritionLog(int userId, string note)
+    public static NutritionLog? EnsureNutritionLog(DateTime date, string note)
     {
         try
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             using (var dbContext = new AppDbContext(optionsBuilder.Options))
             {
-                dbContext.Add(new NutritionLog
+                NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(b => b.Date.Date == date.Date && b.UserId == UserId);
+                MessageBox.Show($"Come to DbContext\n{result}", "Information", MessageBoxButtons.OK);
+                if (result == null)
                 {
-                    UserId = userId,
-                    Note = note,
-                    Date = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    NutritionLog nutritionLog = new NutritionLog
+                    {
+                        UserId = UserId,
+                        Note = note,
+                        Date = date,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+                    dbContext.Add(nutritionLog);
+                    dbContext.SaveChanges();
+                    foreach (string item in MealTypes)
+                    {
+                        dbContext.Add(new Meal
+                        {
+                            LogId = nutritionLog.Id,
+                            MealType = item,
+                            Date = date,
+                            UpdatedAt = DateTime.UtcNow
+                        }
+                        );
+                        dbContext.SaveChanges();
+                    }
+                    MessageBox.Show("Success saving to the database", "Information", MessageBoxButtons.OK);
+                    return nutritionLog;
                 }
-                );
-                dbContext.SaveChanges();
+                else
+                {
+                    return result;
+                }
             }
-            return true;
         }
         catch
         {
-            return false;
+            return null;
         }
     }
 }
