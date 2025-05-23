@@ -151,6 +151,7 @@
             TrackingAirButton.TextAlign = ContentAlignment.MiddleLeft;
             TrackingAirButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             TrackingAirButton.UseVisualStyleBackColor = true;
+            TrackingAirButton.Click += TrackingAirButton_Click;
             // 
             // TrackingGiziButton
             // 

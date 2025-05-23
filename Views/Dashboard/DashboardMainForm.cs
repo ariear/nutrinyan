@@ -49,6 +49,11 @@ namespace NutriNyan.Views.Dashboard
             LoadUserControl(new TrackingGiziControl());
         }
 
+        private void LoadTrackingAir()
+        {
+            LoadUserControl(new TrackingAirControl());
+        }
+
         // Change bg color when btn active
         private void SetActiveButton(IconButton clickedButton)
         {
@@ -77,6 +82,16 @@ namespace NutriNyan.Views.Dashboard
         {
             SetActiveButton((IconButton)sender);
             LoadDashboard();
+        }
+
+        private void TrackingAirButton_Click(object sender, EventArgs e)
+        {
+            SetActiveButton((IconButton)sender);
+            if (Database.getWaterDay(DateTime.Now) == null)
+            {
+                Database.createWaterDay(DateTime.Now);
+            }
+            LoadTrackingAir();
         }
 
         // Expose panelcontent
