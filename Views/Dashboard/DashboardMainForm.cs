@@ -49,6 +49,11 @@ namespace NutriNyan.Views.Dashboard
             LoadUserControl(new TrackingGiziControl());
         }
 
+        private void LoadSetting()
+        {
+            LoadUserControl(new SettingControl());
+        }
+
         private void LoadTrackingAir()
         {
             LoadUserControl(new TrackingAirControl());
@@ -92,6 +97,12 @@ namespace NutriNyan.Views.Dashboard
                 Database.createWaterDay(DateTime.Now);
             }
             LoadTrackingAir();
+        }
+
+        private void settingButton_Click(object sender, EventArgs e)
+        {
+            SetActiveButton((IconButton)sender);
+            LoadSetting();
         }
 
         // Expose panelcontent
