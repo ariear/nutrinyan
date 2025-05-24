@@ -33,10 +33,12 @@ namespace NutriNyan.Views.Dashboard
             series.LabelBackColor = Color.GreenYellow;
             series["PointWidth"] = "0.6";
             series.XValueType = ChartValueType.String;
-            chart2.ChartAreas[0].AxisX.Interval = 8;
+            chart2.Series["Kalori"].IsXValueIndexed = true;
+            chart2.ChartAreas[0].AxisX.Interval = 1;
+            chart2.ChartAreas[0].AxisY.Minimum = 0;
+            chart2.ChartAreas[0].AxisY.Maximum = 3000;
 
-            //series.Points.Add(datapoint1)
-
+            // Menambahan data ke tabel kotak
             series.Points.AddXY("senin", 99);
             series.Points.AddXY("selasa", 169);
             series.Points.AddXY("rabu", 187);
