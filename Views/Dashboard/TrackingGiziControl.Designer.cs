@@ -130,7 +130,7 @@
             label2.Name = "label2";
             label2.Size = new Size(121, 37);
             label2.TabIndex = 2;
-            label2.Text = "Sarapan";
+            label2.Text = Database.MealTypes[0];
             // 
             // label3
             // 
@@ -219,7 +219,7 @@
             label7.Name = "label7";
             label7.Size = new Size(182, 37);
             label7.TabIndex = 7;
-            label7.Text = "Makan Siang";
+            label7.Text = Database.MealTypes[1];
             // 
             // makanSiangGridView
             // 
@@ -296,7 +296,7 @@
             label10.Name = "label10";
             label10.Size = new Size(200, 37);
             label10.TabIndex = 12;
-            label10.Text = "Makan Malam";
+            label10.Text = Database.MealTypes[2];
             // 
             // makanMalamGridView
             // 
@@ -412,6 +412,7 @@
             trackingDateTimePicker.Name = "trackingDateTimePicker";
             trackingDateTimePicker.Size = new Size(355, 39);
             trackingDateTimePicker.TabIndex = 21;
+            trackingDateTimePicker.ValueChanged += trackDatePickChanged;
             // 
             // label14
             // 
@@ -599,7 +600,7 @@
             makanButton.Name = "makanButton";
             makanButton.Size = new Size(96, 52);
             makanButton.TabIndex = 35;
-            makanButton.Tag = "Sarapan";
+            makanButton.Tag = Database.MealTypes[0];
             makanButton.Text = "Makan";
             makanButton.UseVisualStyleBackColor = false;
             makanButton.Click += makanButton_Click;
@@ -618,7 +619,7 @@
             iconButton1.Name = "iconButton1";
             iconButton1.Size = new Size(96, 52);
             iconButton1.TabIndex = 36;
-            iconButton1.Tag = "Makan Siang";
+            iconButton1.Tag = Database.MealTypes[1];
             iconButton1.Text = "Makan";
             iconButton1.UseVisualStyleBackColor = false;
             iconButton1.Click += makanButton_Click;
@@ -637,7 +638,7 @@
             iconButton2.Name = "iconButton2";
             iconButton2.Size = new Size(96, 52);
             iconButton2.TabIndex = 37;
-            iconButton2.Tag = "Makan Malam";
+            iconButton2.Tag = Database.MealTypes[2];
             iconButton2.Text = "Makan";
             iconButton2.UseVisualStyleBackColor = false;
             iconButton2.Click += makanButton_Click;
@@ -656,7 +657,7 @@
             iconButton3.Name = "iconButton3";
             iconButton3.Size = new Size(96, 52);
             iconButton3.TabIndex = 38;
-            iconButton3.Tag = "Jajan";
+            iconButton3.Tag = Database.MealTypes[3];
             iconButton3.Text = "Makan";
             iconButton3.UseVisualStyleBackColor = false;
             iconButton3.Click += makanButton_Click;

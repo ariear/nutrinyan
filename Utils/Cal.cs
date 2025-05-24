@@ -109,6 +109,15 @@ namespace Calculation
     // Class of IMT (Indeks Massa Tubuh)
     public static class IMT
     {
+        public enum IMT_Categories
+        {
+            BbKurang,
+            BbIdeal,
+            BbLebih,
+
+            BbGemuk,
+            BbSangatGemuk
+        }
         static List<string> IMT_Condition = ["Berat Badan Kurang", "Berat Badan Ideal", "Berat Badan Lebih", "Gemuk", "Sangat Gemuk"];
         static List<float> IMT_Table = [18.49F, 24.9F, 29.9F, 34.9F, 39.9F, 0F];
         /// <summary>
@@ -119,8 +128,8 @@ namespace Calculation
         /// <returns>(IMT_Value, IMT_Condition): (float, string)</returns>
         public static (float, string) GetIMT(float BB, float TB)
         {
-
-            float IMT = BB / (TB * TB);
+            float TbM = TB / 100;
+            float IMT = BB / (TbM * TbM);
             int index = 0;
             while (index < IMT_Table.Count - 1)
             {

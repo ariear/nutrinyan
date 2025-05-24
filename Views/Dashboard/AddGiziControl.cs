@@ -37,12 +37,12 @@ namespace NutriNyan.Views.Dashboard
         {
             if (this.selectedFood.Count != 0)
             {
-                Unit unit = Database.GetUnitIfExist("1 Porsi " + this.foodNameNSum[0]);
+                Unit unit = Database.units.GetUnitIfExist("1 Porsi " + this.foodNameNSum[0]);
                 if (unit == null)
                 {
                     if (selectedFood["1 Porsi"] != 0)
                     {
-                        Database.AddUnit(
+                        Database.units.AddUnit(
                             unitType: "1 Porsi" + " " + this.foodNameNSum[0],
                             weight: selectedFood["1 Porsi"]
                         );
@@ -85,32 +85,41 @@ namespace NutriNyan.Views.Dashboard
         }
         private void SaveFoodButtonClicked(object sender, EventArgs e)
         {
-            Unit unit = Database.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0]);
-            if (unit != null)
+            Unit? unit = Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0]);
+            Meal? meal = Database.GetMealIfExist(tipeMakan, trackingDateTime);
+            Food? food = Database.MyFoods.GetFoodIfExist(this.foodNameNSum[0]);
+            if (unit != null && meal != null && food != null)
             {
                 MessageBox.Show("Waiting", "Information", MessageBoxButtons.OK);
-                bool result = Database.AddFood(
-                    userId: Database.UserId,
-                    foodName: this.foodNameNSum[0],
-                    karbohidrat: selectedFood["Karbohidrat"],
-                    protein: selectedFood["Protein"],
-                    lemak: selectedFood["Lemak"],
-                    serat: selectedFood["Serat"],
-                    gula: selectedFood["Gula"],
-                    summary: this.foodNameNSum[1]
+                bool resultAddMealItem = Database.AddMealItem(
+                    mealId: meal.Id,
+                    foodId: food.Id,
+                    qty: Single.Parse(UnitValueBox.Text), // Need adjustment
+                    karbohidrat: Single.Parse(KarbTextBox.Text),
+                    protein: Single.Parse(ProtTextBox.Text),
+                    lemak: Single.Parse(LemakTextBox.Text),
+                    serat: Single.Parse(SeratTextBox.Text),
+                    gula: Single.Parse(GulaTextBox.Text),
+                    unitId: unit.Id
                 );
-                if (result)
+                if (resultAddMealItem)
                 {
                     MessageBox.Show("Success saving", "Information", MessageBoxButtons.OK);
+                    DashboardMainForm dashboardMainForm = (DashboardMainForm)Application.OpenForms["DashboardMainForm"];
+                    dashboardMainForm.PanelContent.Controls.Clear();
+                    TrackingGiziControl trackingGizi = new TrackingGiziControl(dateTime: trackingDateTime);
+                    trackingGizi.Dock = DockStyle.Fill;
+                    dashboardMainForm.PanelContent.Controls.Add(trackingGizi);
+                    this.Hide();
+                    this.Dispose();
                 }
                 else
                 {
                     MessageBox.Show("Failed to Save", "Information", MessageBoxButtons.OK);
                 }
-            }
-            else
+            } else
             {
-                MessageBox.Show("Terjadi kesalahan pada saving food", "Information", MessageBoxButtons.OK);
+                MessageBox.Show($"Terjadi kesalahan pada saving food\nUnit: {unit}\tmeal: {meal}\tfood: {food}", "Information", MessageBoxButtons.OK);
             }
         }
     }

@@ -34,21 +34,32 @@ namespace NutriNyan.Views.Auth
 
         private async void buttonRegister_Click(object sender, EventArgs e)
         {
-            if (backgroundWorker1.IsBusy) {
-                MessageBox.Show("Thread Busy", "Information", MessageBoxButtons.OK);
-            }
             if (Logic.IsValidPwd(Pwd_TextBox.Text) &&
                 Nama_TextBox.Text != "" &&
                 Database.GetUserIfExist(Nama_TextBox.Text) == null && // Avoiding duplicate username
                 TB_TextBox.Text != "" &&
-                BB_TextBox.Text != "" &&
-                !backgroundWorker1.IsBusy &&
                 Logic.IsNotTodayFuture(dateTimePicker1.Value)
                 )
             {
                 // Add here
-                backgroundWorker1.RunWorkerAsync(); // change this
+                Database.UserLogged user = new Database.UserLogged(
+                    username: Nama_TextBox.Text,
+                    pwd: Pwd_TextBox.Text,
+                    genderId: (int)jkBox.SelectedValue,
+                    genderIndex: (int)jkBox.SelectedIndex,
+                    dateBirth: dateTimePicker1.Value,
+                    tb: Single.Parse(TB_TextBox.Text),
+                    bb: Single.Parse(BB_TextBox.Text),
+                    tingkatAktivitas: (ActivityLevel)aktivitasBox.SelectedValue,
+                    purposeId: (int)targetBox.SelectedValue
+                );
                 MessageBox.Show("Success", "Information", MessageBoxButtons.OK);
+                Database.SetUserLogged(new Database.UserLogged(Database.GetUserIfExist(Nama_TextBox.Text)!));
+                Database.SetUnits();
+                Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm();
+                pMainAuth.Hide();
+                dashboard.ShowDialog();// need adjustment
+                pMainAuth.Dispose();
             }
             else
             {
@@ -88,31 +99,6 @@ namespace NutriNyan.Views.Auth
                 Compt.Text = ""; // Reset the text value
                 Compt.AppendText(Sub); // Append/restore text value but throw unaccepted character
             }
-        }
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            bool result = false;
-            this.Invoke(new MethodInvoker(() => result = Database.AddUser(
-                username: Nama_TextBox.Text,
-                password: Pwd_TextBox.Text,
-                genderId: (int)jkBox.SelectedValue,
-                genderIndex: jkBox.SelectedIndex,
-                dateBirth: dateTimePicker1.Value,
-                tb: Single.Parse(TB_TextBox.Text),
-                bb: Single.Parse(BB_TextBox.Text),
-                aktivitasLev: (ActivityLevel)aktivitasBox.SelectedValue,
-                purposeId: (int)targetBox.SelectedValue
-            ))); // Need to be async
-            if (result) {
-                MessageBox.Show("Success saving to the database", "Information", MessageBoxButtons.OK);
-                Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm();
-                pMainAuth.Invoke(new MethodInvoker(() => pMainAuth.Hide()));
-                pMainAuth.Invoke(new MethodInvoker(() => Database.SetUserId(Database.GetUserIfExist(Nama_TextBox.Text).Id)));
-                dashboard.ShowDialog();// need adjustment
-                pMainAuth.Invoke(new MethodInvoker(() => pMainAuth.Dispose()));   // need adjustment
-            } else {
-                MessageBox.Show("Failed to saving", "Information", MessageBoxButtons.OK);
-            };
         }
     }
 }

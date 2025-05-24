@@ -14,7 +14,7 @@ namespace NutriNyan.Models
     {
         public int Id { get; set; }
         public int LogId { get; set; }
-        public string MealType { get; set; }
+        public required string MealType { get; set; }
         public DateTime Date { get; set; }
         public DateTime UpdatedAt { get; set; }
         public NutritionLog Log { get; set; } = null!;

@@ -198,13 +198,13 @@ public static class Logic
         switch (mealType)
         {
             case MealType.Breakfast:
-                return "Breakfast";
+                return Database.MealTypes[0];
             case MealType.Lunch:
-                return "Lunch";
+                return Database.MealTypes[1];
             case MealType.Dinner:
-                return "Dinner";
+                return Database.MealTypes[2];
             case MealType.Snack:
-                return "Snack";
+                return Database.MealTypes[3];
             default:
                 return null;
         }

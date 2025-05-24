@@ -99,7 +99,7 @@ public static class Api
                     {
                         return null;
                     }
-                    html = html.Substring(6000, 11000).Replace("\n", "");
+                    html = html.Split("class=\"searchResultSummary\"")[1].Split("class=\"searchResultsPaging\"")[0].Replace("\n", "");
                     List<string> my_list = html.Split("<a class=\"prominent\" href=\"/kalori-gizi/umum/").ToList();
                     my_list = my_list.Slice(1, my_list.Count - 1);
                     List<List<string>> store = [];
@@ -107,6 +107,7 @@ public static class Api
                     {
                         string diss = my_list[i].Split("<br />Ukuran Lainnya:")[0].Split(", <i>lagi")[0];
                         store.Add([(diss.Split("\"")[0]), (diss.Replace("\t", "").Split("<div class=\"smallText greyText greyLink\">")[1].Substring(5))]);
+                        MessageBox.Show($"|{diss.Replace("\t", "").Split("<div class=\"smallText greyText greyLink\">")[1].Substring(5)}|", "Information", MessageBoxButtons.OK);
                     }
                     return store;
                 }
@@ -131,7 +132,7 @@ public static class Api
         int count = 0;
         while (!task.IsCompleted)
         {
-            await Task.Delay(200);
+            await Task.Delay(100);
             if (count == 6)
             {
                 loadWindow.Controls[0].Text = initText;

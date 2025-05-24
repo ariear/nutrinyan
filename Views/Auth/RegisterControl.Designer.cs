@@ -48,7 +48,6 @@
             label10 = new Label();
             aktivitasBox = new ComboBox();
             targetBox = new ComboBox();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             SuspendLayout();
             // 
             // linkToRegister
@@ -276,12 +275,6 @@
             targetBox.Size = new Size(276, 38);
             targetBox.TabIndex = 39;
             // 
-            // backgroundWorker1
-            // 
-            backgroundWorker1.WorkerReportsProgress = true;
-            backgroundWorker1.WorkerSupportsCancellation = true;
-            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-            // 
             // RegisterControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -337,6 +330,5 @@
         private Label label10;
         private ComboBox aktivitasBox;
         private ComboBox targetBox;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

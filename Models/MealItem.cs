@@ -20,7 +20,7 @@ namespace NutriNyan.Models
         public float Serat { get; set; }
         public float Gula { get; set; }
         public int UnitId { get; set; }
-        public Unit Unit { get; set; }
+        public Unit Unit { get; set; } = null!;
 
         public Meal Meal { get; set; } = null!;
         public Food Food { get; set; } = null!;

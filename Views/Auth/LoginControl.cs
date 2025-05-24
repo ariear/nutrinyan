@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using NutriNyan.Views.Auth;
 using static System.Windows.Forms.DataFormats;
 using Calculation;
+using System.Runtime.CompilerServices;
 
 namespace NutriNyan.Views.Auth
 {
@@ -25,7 +26,7 @@ namespace NutriNyan.Views.Auth
 
         private void linkToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AuthMainForm authMainForm= (AuthMainForm)Application.OpenForms["AuthMainForm"];
+            AuthMainForm authMainForm = (AuthMainForm)Application.OpenForms["AuthMainForm"];
             authMainForm.PanelAuth.Controls.Clear();
             RegisterControl register = new RegisterControl(pMainAuth);
             register.Dock = DockStyle.Fill;
@@ -35,17 +36,35 @@ namespace NutriNyan.Views.Auth
         private void LoginControl_Load(object sender, EventArgs e)
         {
         }
-        private void Button1_Clicked(object sender, EventArgs e){
-            if (Logic.AuthCheck(username: textBox1.Text, pwd: textBox2.Text)){
-                Database.SetUserId(userId: Database.GetUserIfExist(textBox1.Text)!.Id);
-                Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm();
+        private async void Button1_Clicked(object sender, EventArgs e)
+        {
+            Task<Dashboard.DashboardMainForm?> dashboard = Task.Run(() => Check());
+            await Api.WaitingWindow(dashboard);
+            Dashboard.DashboardMainForm? result = dashboard.Result;
+            if (result != null)
+            {
                 pMainAuth.Hide();
-                dashboard.ShowDialog();// need adjustment
-                pMainAuth.Dispose();   // need adjustment
-            }else{
+                result.ShowDialog();// need adjustment
+                pMainAuth.Dispose();// need adjustment
+            }
+            else
+            {
                 textBox1.Text = ""; textBox2.Text = "";
                 WrongLogin.Show();
-            };
+            }
+        }
+        private Dashboard.DashboardMainForm? Check()
+        {
+            if (Logic.AuthCheck(username: textBox1.Text, pwd: textBox2.Text))
+            {
+                Database.SetUserLogged(new Database.UserLogged(Database.GetUserIfExist(textBox1.Text)!));
+                Database.SetUnits();
+                return new Dashboard.DashboardMainForm();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
