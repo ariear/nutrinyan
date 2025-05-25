@@ -50,7 +50,7 @@ public static partial class Database
         {
             return user;
         }
-        public bool Update(User user) // Uji coba
+        public bool Update(User user)
         {
             try
             {
@@ -60,7 +60,15 @@ public static partial class Database
                     var result = dbContext.Users.SingleOrDefault(b => b.Id == user.Id);
                     if (result != null)
                     {
-                        result = user;
+                        result.Username = user.Username;
+                        result.DateBirth = user.DateBirth.ToUniversalTime();
+                        result.Tb = user.Tb;
+                        result.Bb = user.Bb;
+                        result.DefaultTargetWater = user.DefaultTargetWater;
+                        result.GenderId = user.GenderId;
+                        result.PurposeId = user.PurposeId;
+                        result.TingkatAktivitas = user.TingkatAktivitas;
+
                         dbContext.SaveChanges();
                     }
                     else
@@ -69,8 +77,38 @@ public static partial class Database
                         return false;
                     }
                 }
-                MessageBox.Show("Success saving", "Information", MessageBoxButtons.OK);
+                MessageBox.Show("Data pengguna berhasil diperbarui", "Information", MessageBoxButtons.OK);
                 return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK);
+                return false;
+            }
+        }
+
+        public bool UpdatePassword(string newPassword)
+        {
+            try
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                using (var dbContext = new AppDbContext(optionsBuilder.Options))
+                {
+                    var result = dbContext.Users.SingleOrDefault(b => b.Id == user.Id);
+                    if (result != null)
+                    {
+                        result.Password = Logic.Get_PWDHash(newPassword);
+                        dbContext.SaveChanges();
+
+                        MessageBox.Show("Password berhasil diperbarui", "Information", MessageBoxButtons.OK);
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("User tidak ditemukan", "Error", MessageBoxButtons.OK);
+                        return false;
+                    }
+                }
             }
             catch (Exception e)
             {
