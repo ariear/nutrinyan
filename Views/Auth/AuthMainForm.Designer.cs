@@ -46,10 +46,9 @@
             panelHiasan.Controls.Add(label2);
             panelHiasan.Controls.Add(label3);
             panelHiasan.Dock = DockStyle.Right;
-            panelHiasan.Location = new Point(714, 0);
-            panelHiasan.Margin = new Padding(3, 4, 3, 4);
+            panelHiasan.Location = new Point(627, 0);
             panelHiasan.Name = "panelHiasan";
-            panelHiasan.Size = new Size(709, 935);
+            panelHiasan.Size = new Size(620, 707);
             panelHiasan.TabIndex = 2;
             // 
             // label1
@@ -60,10 +59,10 @@
             label1.FlatStyle = FlatStyle.Flat;
             label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(0, 580);
+            label1.Location = new Point(0, 482);
             label1.Name = "label1";
-            label1.Padding = new Padding(29, 0, 0, 11);
-            label1.Size = new Size(745, 73);
+            label1.Padding = new Padding(25, 0, 0, 8);
+            label1.Size = new Size(593, 58);
             label1.TabIndex = 0;
             label1.Text = "Selamat Datang di NutriNyan !!";
             // 
@@ -75,10 +74,10 @@
             label2.FlatStyle = FlatStyle.Flat;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(0, 715);
+            label2.Location = new Point(0, 540);
             label2.Name = "label2";
-            label2.Padding = new Padding(29, 0, 0, 120);
-            label2.Size = new Size(460, 161);
+            label2.Padding = new Padding(25, 0, 0, 90);
+            label2.Size = new Size(373, 122);
             label2.TabIndex = 1;
             label2.Text = "Mulai hidup sehatmu di sini!!";
             // 
@@ -90,10 +89,10 @@
             label3.FlatStyle = FlatStyle.Flat;
             label3.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(0, 876);
+            label3.Location = new Point(0, 662);
             label3.Name = "label3";
-            label3.Padding = new Padding(29, 0, 0, 27);
-            label3.Size = new Size(348, 59);
+            label3.Padding = new Padding(25, 0, 0, 20);
+            label3.Size = new Size(278, 45);
             label3.TabIndex = 2;
             label3.Text = "By Kelompok 2 Kelas PBO D";
             // 
@@ -108,24 +107,23 @@
             panelAuth.BackColor = Color.FromArgb(17, 30, 29);
             panelAuth.Dock = DockStyle.Fill;
             panelAuth.Location = new Point(0, 0);
-            panelAuth.Margin = new Padding(3, 4, 3, 4);
             panelAuth.Name = "panelAuth";
-            panelAuth.Size = new Size(1423, 935);
+            panelAuth.Size = new Size(1247, 707);
             panelAuth.TabIndex = 3;
             // 
             // AuthMainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1423, 935);
+            ClientSize = new Size(1247, 707);
             Controls.Add(panelHiasan);
             Controls.Add(panelAuth);
-            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
-            MaximumSize = new Size(1441, 982);
-            MinimumSize = new Size(1441, 982);
+            MaximumSize = new Size(1263, 746);
+            MinimumSize = new Size(1263, 746);
             Name = "AuthMainForm";
-            Text = "AuthMainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Nutrinyan - Autentikasi";
             Load += AuthMainForm_Load;
             panelHiasan.ResumeLayout(false);
             panelHiasan.PerformLayout();
