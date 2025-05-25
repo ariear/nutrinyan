@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             sidebarMenu = new Panel();
+            logoutButton = new FontAwesome.Sharp.IconButton();
             settingButton = new FontAwesome.Sharp.IconButton();
             konsultasiButton = new FontAwesome.Sharp.IconButton();
             TrackingAirButton = new FontAwesome.Sharp.IconButton();
@@ -45,6 +46,7 @@
             // sidebarMenu
             // 
             sidebarMenu.BackColor = Color.FromArgb(1, 54, 63);
+            sidebarMenu.Controls.Add(logoutButton);
             sidebarMenu.Controls.Add(settingButton);
             sidebarMenu.Controls.Add(konsultasiButton);
             sidebarMenu.Controls.Add(TrackingAirButton);
@@ -56,6 +58,25 @@
             sidebarMenu.Name = "sidebarMenu";
             sidebarMenu.Size = new Size(262, 637);
             sidebarMenu.TabIndex = 0;
+            // 
+            // logoutButton
+            // 
+            logoutButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            logoutButton.BackColor = Color.FromArgb(255, 99, 99);
+            logoutButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            logoutButton.ForeColor = SystemColors.ControlLightLight;
+            logoutButton.IconChar = FontAwesome.Sharp.IconChar.RightToBracket;
+            logoutButton.IconColor = Color.White;
+            logoutButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            logoutButton.IconSize = 28;
+            logoutButton.Location = new Point(54, 562);
+            logoutButton.Name = "logoutButton";
+            logoutButton.Size = new Size(133, 43);
+            logoutButton.TabIndex = 7;
+            logoutButton.Text = "Keluar";
+            logoutButton.TextImageRelation = TextImageRelation.TextBeforeImage;
+            logoutButton.UseVisualStyleBackColor = false;
+            logoutButton.Click += logoutButton_Click;
             // 
             // settingButton
             // 
@@ -227,5 +248,6 @@
         private FontAwesome.Sharp.IconButton konsultasiButton;
         private PictureBox logoApp;
         private Panel panelContent;
+        private FontAwesome.Sharp.IconButton logoutButton;
     }
 }
