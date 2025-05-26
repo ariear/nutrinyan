@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             sidebarMenu = new Panel();
+            logoutButton = new FontAwesome.Sharp.IconButton();
             settingButton = new FontAwesome.Sharp.IconButton();
-            reminderButton = new FontAwesome.Sharp.IconButton();
             konsultasiButton = new FontAwesome.Sharp.IconButton();
             TrackingAirButton = new FontAwesome.Sharp.IconButton();
             TrackingGiziButton = new FontAwesome.Sharp.IconButton();
@@ -46,8 +46,8 @@
             // sidebarMenu
             // 
             sidebarMenu.BackColor = Color.FromArgb(1, 54, 63);
+            sidebarMenu.Controls.Add(logoutButton);
             sidebarMenu.Controls.Add(settingButton);
-            sidebarMenu.Controls.Add(reminderButton);
             sidebarMenu.Controls.Add(konsultasiButton);
             sidebarMenu.Controls.Add(TrackingAirButton);
             sidebarMenu.Controls.Add(TrackingGiziButton);
@@ -55,10 +55,28 @@
             sidebarMenu.Controls.Add(panelLogo);
             sidebarMenu.Dock = DockStyle.Left;
             sidebarMenu.Location = new Point(0, 0);
-            sidebarMenu.Margin = new Padding(4, 5, 4, 5);
             sidebarMenu.Name = "sidebarMenu";
-            sidebarMenu.Size = new Size(374, 1170);
+            sidebarMenu.Size = new Size(262, 637);
             sidebarMenu.TabIndex = 0;
+            // 
+            // logoutButton
+            // 
+            logoutButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            logoutButton.BackColor = Color.FromArgb(255, 99, 99);
+            logoutButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            logoutButton.ForeColor = SystemColors.ControlLightLight;
+            logoutButton.IconChar = FontAwesome.Sharp.IconChar.RightToBracket;
+            logoutButton.IconColor = Color.White;
+            logoutButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            logoutButton.IconSize = 28;
+            logoutButton.Location = new Point(54, 562);
+            logoutButton.Name = "logoutButton";
+            logoutButton.Size = new Size(133, 43);
+            logoutButton.TabIndex = 7;
+            logoutButton.Text = "Keluar";
+            logoutButton.TextImageRelation = TextImageRelation.TextBeforeImage;
+            logoutButton.UseVisualStyleBackColor = false;
+            logoutButton.Click += logoutButton_Click;
             // 
             // settingButton
             // 
@@ -72,40 +90,16 @@
             settingButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             settingButton.IconSize = 36;
             settingButton.ImageAlign = ContentAlignment.MiddleLeft;
-            settingButton.Location = new Point(0, 733);
-            settingButton.Margin = new Padding(4, 5, 4, 5);
+            settingButton.Location = new Point(0, 380);
             settingButton.Name = "settingButton";
-            settingButton.Padding = new Padding(14, 0, 21, 0);
-            settingButton.Size = new Size(374, 100);
+            settingButton.Padding = new Padding(10, 0, 15, 0);
+            settingButton.Size = new Size(262, 60);
             settingButton.TabIndex = 6;
             settingButton.Text = "Pengaturan";
             settingButton.TextAlign = ContentAlignment.MiddleLeft;
             settingButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             settingButton.UseVisualStyleBackColor = true;
             settingButton.Click += settingButton_Click;
-            // 
-            // reminderButton
-            // 
-            reminderButton.Dock = DockStyle.Top;
-            reminderButton.FlatAppearance.BorderSize = 0;
-            reminderButton.FlatStyle = FlatStyle.Flat;
-            reminderButton.Font = new Font("Segoe UI Semibold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            reminderButton.ForeColor = Color.FromArgb(183, 201, 200);
-            reminderButton.IconChar = FontAwesome.Sharp.IconChar.Bell;
-            reminderButton.IconColor = Color.FromArgb(183, 201, 200);
-            reminderButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            reminderButton.IconSize = 36;
-            reminderButton.ImageAlign = ContentAlignment.MiddleLeft;
-            reminderButton.Location = new Point(0, 633);
-            reminderButton.Margin = new Padding(4, 5, 4, 5);
-            reminderButton.Name = "reminderButton";
-            reminderButton.Padding = new Padding(14, 0, 21, 0);
-            reminderButton.Size = new Size(374, 100);
-            reminderButton.TabIndex = 5;
-            reminderButton.Text = "Pengingat Makan";
-            reminderButton.TextAlign = ContentAlignment.MiddleLeft;
-            reminderButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            reminderButton.UseVisualStyleBackColor = true;
             // 
             // konsultasiButton
             // 
@@ -119,11 +113,10 @@
             konsultasiButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             konsultasiButton.IconSize = 36;
             konsultasiButton.ImageAlign = ContentAlignment.MiddleLeft;
-            konsultasiButton.Location = new Point(0, 533);
-            konsultasiButton.Margin = new Padding(4, 5, 4, 5);
+            konsultasiButton.Location = new Point(0, 320);
             konsultasiButton.Name = "konsultasiButton";
-            konsultasiButton.Padding = new Padding(14, 0, 21, 0);
-            konsultasiButton.Size = new Size(374, 100);
+            konsultasiButton.Padding = new Padding(10, 0, 15, 0);
+            konsultasiButton.Size = new Size(262, 60);
             konsultasiButton.TabIndex = 4;
             konsultasiButton.Text = "Konsultasi Gizi";
             konsultasiButton.TextAlign = ContentAlignment.MiddleLeft;
@@ -142,11 +135,10 @@
             TrackingAirButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             TrackingAirButton.IconSize = 36;
             TrackingAirButton.ImageAlign = ContentAlignment.MiddleLeft;
-            TrackingAirButton.Location = new Point(0, 433);
-            TrackingAirButton.Margin = new Padding(4, 5, 4, 5);
+            TrackingAirButton.Location = new Point(0, 260);
             TrackingAirButton.Name = "TrackingAirButton";
-            TrackingAirButton.Padding = new Padding(14, 0, 21, 0);
-            TrackingAirButton.Size = new Size(374, 100);
+            TrackingAirButton.Padding = new Padding(10, 0, 15, 0);
+            TrackingAirButton.Size = new Size(262, 60);
             TrackingAirButton.TabIndex = 3;
             TrackingAirButton.Text = "Tracking Air";
             TrackingAirButton.TextAlign = ContentAlignment.MiddleLeft;
@@ -166,11 +158,10 @@
             TrackingGiziButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             TrackingGiziButton.IconSize = 36;
             TrackingGiziButton.ImageAlign = ContentAlignment.MiddleLeft;
-            TrackingGiziButton.Location = new Point(0, 333);
-            TrackingGiziButton.Margin = new Padding(4, 5, 4, 5);
+            TrackingGiziButton.Location = new Point(0, 200);
             TrackingGiziButton.Name = "TrackingGiziButton";
-            TrackingGiziButton.Padding = new Padding(14, 0, 21, 0);
-            TrackingGiziButton.Size = new Size(374, 100);
+            TrackingGiziButton.Padding = new Padding(10, 0, 15, 0);
+            TrackingGiziButton.Size = new Size(262, 60);
             TrackingGiziButton.TabIndex = 2;
             TrackingGiziButton.Text = "Tracking Gizi";
             TrackingGiziButton.TextAlign = ContentAlignment.MiddleLeft;
@@ -190,11 +181,10 @@
             dashboardButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             dashboardButton.IconSize = 36;
             dashboardButton.ImageAlign = ContentAlignment.MiddleLeft;
-            dashboardButton.Location = new Point(0, 233);
-            dashboardButton.Margin = new Padding(4, 5, 4, 5);
+            dashboardButton.Location = new Point(0, 140);
             dashboardButton.Name = "dashboardButton";
-            dashboardButton.Padding = new Padding(14, 0, 21, 0);
-            dashboardButton.Size = new Size(374, 100);
+            dashboardButton.Padding = new Padding(10, 0, 15, 0);
+            dashboardButton.Size = new Size(262, 60);
             dashboardButton.TabIndex = 1;
             dashboardButton.Text = "Dashboard";
             dashboardButton.TextAlign = ContentAlignment.MiddleLeft;
@@ -207,18 +197,16 @@
             panelLogo.Controls.Add(logoApp);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
-            panelLogo.Margin = new Padding(4, 5, 4, 5);
             panelLogo.Name = "panelLogo";
-            panelLogo.Size = new Size(374, 233);
+            panelLogo.Size = new Size(262, 140);
             panelLogo.TabIndex = 0;
             // 
             // logoApp
             // 
             logoApp.Image = Properties.Resources.nutrinyan_logo;
-            logoApp.Location = new Point(80, 60);
-            logoApp.Margin = new Padding(4, 5, 4, 5);
+            logoApp.Location = new Point(56, 36);
             logoApp.Name = "logoApp";
-            logoApp.Size = new Size(199, 117);
+            logoApp.Size = new Size(139, 70);
             logoApp.SizeMode = PictureBoxSizeMode.Zoom;
             logoApp.TabIndex = 1;
             logoApp.TabStop = false;
@@ -227,21 +215,19 @@
             // 
             panelContent.BackColor = Color.FromArgb(17, 30, 29);
             panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(374, 0);
-            panelContent.Margin = new Padding(4, 5, 4, 5);
+            panelContent.Location = new Point(262, 0);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(1407, 1170);
+            panelContent.Size = new Size(985, 637);
             panelContent.TabIndex = 1;
             // 
             // DashboardMainForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1781, 1170);
+            ClientSize = new Size(1247, 637);
             Controls.Add(panelContent);
             Controls.Add(sidebarMenu);
-            Margin = new Padding(4, 5, 4, 5);
-            MinimumSize = new Size(1795, 1126);
+            MinimumSize = new Size(1261, 638);
             Name = "DashboardMainForm";
             Text = "NutriNyan - Dashboard";
             Load += DashboardMainForm_Load;
@@ -259,9 +245,9 @@
         private FontAwesome.Sharp.IconButton TrackingAirButton;
         private FontAwesome.Sharp.IconButton TrackingGiziButton;
         private FontAwesome.Sharp.IconButton settingButton;
-        private FontAwesome.Sharp.IconButton reminderButton;
         private FontAwesome.Sharp.IconButton konsultasiButton;
         private PictureBox logoApp;
         private Panel panelContent;
+        private FontAwesome.Sharp.IconButton logoutButton;
     }
 }

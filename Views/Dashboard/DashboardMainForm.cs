@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FontAwesome.Sharp;
+using NutriNyan.Views.Auth;
 
 namespace NutriNyan.Views.Dashboard
 {
@@ -24,7 +25,7 @@ namespace NutriNyan.Views.Dashboard
             SetActiveButton((IconButton)dashboardButton);
             LoadDashboard();
         }
-        
+
 
         private void DashboardMainForm_Load(object sender, EventArgs e)
         {
@@ -103,6 +104,14 @@ namespace NutriNyan.Views.Dashboard
         {
             SetActiveButton((IconButton)sender);
             LoadSetting();
+        }
+
+        // Logout button
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AuthMainForm authMainForm = new AuthMainForm();
+            authMainForm.ShowDialog();
         }
 
         // Expose panelcontent
