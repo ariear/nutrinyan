@@ -48,8 +48,8 @@ namespace NutriNyan.Views.Auth
                     genderId: (int)jkBox.SelectedValue,
                     genderIndex: (int)jkBox.SelectedIndex,
                     dateBirth: dateTimePicker1.Value,
-                    tb: Single.Parse(TB_TextBox.Text),
-                    bb: Single.Parse(BB_TextBox.Text),
+                    tb: Single.Parse(TB_TextBox.Text.Replace(",", ".")),
+                    bb: Single.Parse(BB_TextBox.Text.Replace(",", ".")),
                     tingkatAktivitas: (ActivityLevel)aktivitasBox.SelectedValue,
                     purposeId: (int)targetBox.SelectedValue
                 );

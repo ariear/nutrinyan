@@ -51,7 +51,7 @@ public static class Logic
         bool IsDotExist = false;
         foreach (char c in Text)
         {
-            if (c == '.')
+            if (c == ',')
             {
                 if (!IsDotExist)
                 {

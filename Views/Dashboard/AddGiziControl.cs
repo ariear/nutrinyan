@@ -16,6 +16,7 @@ namespace NutriNyan.Views.Dashboard
     public partial class AddGiziControl : UserControl
     {
         private string tipeMakan = "";
+        private List<Unit> unitsList = Database.units.GetDefaultUnits() ?? []; 
         private DateTime trackingDateTime;
         private Dictionary<string, float> selectedFood = new Dictionary<string, float>();
         private string[] foodNameNSum = ["", ""]; // [foodName, Summary]
@@ -50,38 +51,66 @@ namespace NutriNyan.Views.Dashboard
                 }
                 try
                 {
-                    float multiply = 1;
+                    float weight;
                     foodNameBox.Text = this.foodNameNSum[0];
                     if (selectedFood["1 Porsi"] != 0)
                     {
-                        unitSizeComboBox.DataSource = (List<string>)["1 Porsi"];
-                        multiply = selectedFood["1 Porsi"] / 100; // Here
+                        List<Unit> DataSourceStore = (List<Unit>)(unitSizeComboBox.DataSource ?? new List<Unit>());
+                        DataSourceStore.Add(Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0])!);
+                        unitSizeComboBox.DataSource = null;
+                        unitSizeComboBox.Items.Clear();
+                        unitSizeComboBox.DataSource = DataSourceStore;
+                        unitSizeComboBox.ValueMember = "Weight";
+                        unitSizeComboBox.DisplayMember = "UnitType";
+                        unitSizeComboBox.SelectedIndex = DataSourceStore.Count - 1;
+                        weight = selectedFood["1 Porsi"]; // Here
+                        MessageBox.Show($"Added Units {((List<Unit>)unitSizeComboBox.DataSource).Count}", "Information", MessageBoxButtons.OK);
                     }
-                    UnitValueBox.Text = $"{selectedFood["1 Porsi"] * multiply}";
-                    LemakTextBox.Text = $"{selectedFood["Lemak"] * multiply}";
-                    ProtTextBox.Text = $"{selectedFood["Protein"] * multiply}";
-                    KarbTextBox.Text = $"{selectedFood["Karbohidrat"] * multiply}";
-                    SeratTextBox.Text = $"{selectedFood["Serat"] * multiply}";
-                    GulaTextBox.Text = $"{selectedFood["Gula"] * multiply}";
-                    KaloriTextBox.Text = Nutrition.CaloriCal(
-                        protein: selectedFood["Protein"] * multiply,
-                        karbo: selectedFood["Karbohidrat"] * multiply,
-                        lemak: selectedFood["Lemak"] * multiply,
-                        gula: selectedFood["Gula"] * multiply,
-                        serat: selectedFood["Serat"] * multiply
-                    ).ToString();
+                    else
+                    {
+                        weight = (float)(unitSizeComboBox.SelectedValue ?? 0F);
+                    }
+                    // Add some selectedFood["1 Porsi"]
+                    RefreshFillData(selectedFood["1 Porsi"]);
                 }
-                catch
+                catch (Exception e)
                 {
-                    MessageBox.Show("Terjadi kesalahan on Adding", "Information", MessageBoxButtons.OK);
+                    MessageBox.Show($"Terjadi kesalahan on Adding\n{e}", "Information", MessageBoxButtons.OK);
                 }
             }
+        }
+        private void RefreshFillData(float totalWeight)
+        {
+            if (selectedFood.Count != 0)
+            {
+                float multiply = totalWeight / 100;
+                UnitValueBox.Text = $"{totalWeight}";
+                LemakTextBox.Text = $"{selectedFood["Lemak"] * multiply}";
+                ProtTextBox.Text = $"{selectedFood["Protein"] * multiply}";
+                KarbTextBox.Text = $"{selectedFood["Karbohidrat"] * multiply}";
+                SeratTextBox.Text = $"{selectedFood["Serat"] * multiply}";
+                GulaTextBox.Text = $"{selectedFood["Gula"] * multiply}";
+                KaloriTextBox.Text = Nutrition.CaloriCal(
+                    protein: selectedFood["Protein"] * multiply,
+                    karbo: selectedFood["Karbohidrat"] * multiply,
+                    lemak: selectedFood["Lemak"] * multiply,
+                    gula: selectedFood["Gula"] * multiply,
+                    serat: selectedFood["Serat"] * multiply
+                ).ToString();
+            }
+        }
+        private void UnitChanged(object sender, EventArgs e)
+        {
+            RefreshFillData((float)unitSizeComboBox.SelectedValue);
         }
 
         private void AddGiziControl_Load(object sender, EventArgs e)
         {
             title.Text = $"Tambah Makanan yang Dikonsumsi pada {trackingDateTime.ToString("dd MMMM yyyy", new CultureInfo("id-ID"))}";
             periode.Text = $"Periode Makan : {tipeMakan}";
+            unitSizeComboBox.DataSource = this.unitsList;
+            unitSizeComboBox.ValueMember = "Weight";
+            unitSizeComboBox.DisplayMember = "UnitType";
         }
         private void SaveFoodButtonClicked(object sender, EventArgs e)
         {

@@ -129,6 +129,7 @@
             unitSizeComboBox.Name = "unitSizeComboBox";
             unitSizeComboBox.Size = new Size(220, 38);
             unitSizeComboBox.TabIndex = 8;
+            unitSizeComboBox.SelectionChangeCommitted += UnitChanged;
             // 
             // label5
             // 

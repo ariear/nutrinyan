@@ -1,6 +1,7 @@
 using NutriNyan.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore.Query;
 
 public static partial class Database
 {
@@ -12,6 +13,14 @@ public static partial class Database
         {
             this.unitName = unitName;
             SetDefaultUnits();
+            if (GetDefaultUnits()!.Count != 3)
+            {
+                bool result = DbAddDefaultUnits();
+                if (!result)
+                {
+                    MessageBox.Show("Tidak bisa menambahakan default unit pada database", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
         public Unit? Get()
         {
@@ -60,6 +69,35 @@ public static partial class Database
         public List<Unit>? GetDefaultUnits()
         {
             return defaultUnits;
+        }
+        private bool DbAddDefaultUnits()
+        {
+            try
+            {
+                // 1 sendok makan -> 19 gram
+                // 1 sendok teh ->  6,2 gram
+                // 100 gram -> 100 gram
+                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                var dbContext = new AppDbContext(optionsBuilder.Options);
+                bool result = false;
+                Dictionary<string, float> nameValueUnit = new Dictionary<string, float>{
+                                                        {"1 Sendok Makan", 19F },
+                                                        {"1 Sendok Teh",  6.2F},
+                                                        {"100 Gram", 100F }};
+                foreach (KeyValuePair<string, float> kvValue in nameValueUnit)
+                {
+                    result = AddUnit(unitType: kvValue.Key, weight: kvValue.Value);
+                    if (!result)
+                    {
+                        break;
+                    }
+                }
+                return result;
+            }
+            catch
+            {
+                return false;
+            }
         }
         /// <summary>
         /// To get All default unit type

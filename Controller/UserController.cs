@@ -5,7 +5,7 @@ public static partial class Database
 {
     public class UserLogged : IEntity<User>
     {
-        public User? user { get; private set; }
+        private User? user { get; set; }
 
         public UserLogged(string username, string pwd, int genderId, DateTime dateBirth,
                         float tb, float bb, int genderIndex, ActivityLevel tingkatAktivitas, int purposeId)
@@ -35,7 +35,6 @@ public static partial class Database
                     );
                     dbContext.SaveChanges();
                 }
-                MessageBox.Show("Success saving", "Information", MessageBoxButtons.OK);
             }
             catch (Exception e)
             {
@@ -69,7 +68,6 @@ public static partial class Database
                         return false;
                     }
                 }
-                MessageBox.Show("Success saving", "Information", MessageBoxButtons.OK);
                 return true;
             }
             catch (Exception e)

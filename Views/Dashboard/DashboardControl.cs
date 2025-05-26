@@ -16,7 +16,7 @@ namespace NutriNyan.Views.Dashboard
 {
     public partial class DashboardControl : UserControl
     {
-        User user = Database.userLogged.user;
+        User user = Database.userLogged.Get();
         public DashboardControl()
         {
             InitializeComponent();
@@ -52,5 +52,6 @@ namespace NutriNyan.Views.Dashboard
         {
             label1.Text = $"Halo {user.Username}, Selamat Datang!";
         }
+
     }
 }

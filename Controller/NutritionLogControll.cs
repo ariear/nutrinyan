@@ -19,13 +19,16 @@ public static partial class Database
             using (var dbContext = new AppDbContext(optionsBuilder.Options))
             {
                 int userId;
-                if (userLogged.user != null) {
-                    userId = userLogged.user.Id;
-                } else {
+                User? user = userLogged.Get();
+                if (user != null)
+                {
+                    userId = user.Id;
+                }
+                else
+                {
                     return null;
                 }
                 NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(nl => nl.Date.Date == date.Date && nl.UserId == userId);
-                MessageBox.Show($"Come to DbContext\n{result}", "Information", MessageBoxButtons.OK);
                 if (result == null)
                 {
                     NutritionLog nutritionLog = new NutritionLog
@@ -49,7 +52,6 @@ public static partial class Database
                         );
                         dbContext.SaveChanges();
                     }
-                    MessageBox.Show("Success saving to the database", "Information", MessageBoxButtons.OK);
                     return nutritionLog;
                 }
                 else

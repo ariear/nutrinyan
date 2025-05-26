@@ -107,7 +107,6 @@ public static class Api
                     {
                         string diss = my_list[i].Split("<br />Ukuran Lainnya:")[0].Split(", <i>lagi")[0];
                         store.Add([(diss.Split("\"")[0]), (diss.Replace("\t", "").Split("<div class=\"smallText greyText greyLink\">")[1].Substring(5))]);
-                        MessageBox.Show($"|{diss.Replace("\t", "").Split("<div class=\"smallText greyText greyLink\">")[1].Substring(5)}|", "Information", MessageBoxButtons.OK);
                     }
                     return store;
                 }
