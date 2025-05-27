@@ -132,7 +132,7 @@ public static partial class Database
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             var dbContext = new AppDbContext(optionsBuilder.Options);
-            var result = dbContext.Users.SingleOrDefault(b => b.Username == username);
+            var result = dbContext.Users.Include(u => u.Gender).Include(u => u.Purpose).SingleOrDefault(b => b.Username == username);
             if (result != null)
             {
                 return result;
