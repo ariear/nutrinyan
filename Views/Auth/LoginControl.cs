@@ -11,6 +11,7 @@ using NutriNyan.Views.Auth;
 using static System.Windows.Forms.DataFormats;
 using Calculation;
 using System.Runtime.CompilerServices;
+using FontAwesome.Sharp;
 
 namespace NutriNyan.Views.Auth
 {
@@ -64,6 +65,19 @@ namespace NutriNyan.Views.Auth
             else
             {
                 return null;
+            }
+        }
+
+        private void togglePwButton_Click(object sender, EventArgs e)
+        {
+            if (textBox2.PasswordChar == '*')
+            {
+                textBox2.PasswordChar = '\0';
+                togglePwButton.IconChar = IconChar.EyeSlash;
+            } else
+            {
+                textBox2.PasswordChar = '*';
+                togglePwButton.IconChar = IconChar.Eye;
             }
         }
     }

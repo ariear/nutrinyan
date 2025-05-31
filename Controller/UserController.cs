@@ -35,7 +35,6 @@ public static partial class Database
                     );
                     dbContext.SaveChanges();
                 }
-                MessageBox.Show("Success saving", "Information", MessageBoxButtons.OK);
             }
             catch (Exception e)
             {
