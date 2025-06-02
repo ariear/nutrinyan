@@ -16,7 +16,7 @@ namespace NutriNyan.Views.Dashboard
 {
     public partial class SettingControl : UserControl
     {
-        User? user = Database.userLogged.user;
+        User? user = Database.userLogged.Get();
         public SettingControl()
         {
             InitializeComponent();

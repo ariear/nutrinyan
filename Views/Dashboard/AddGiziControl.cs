@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace NutriNyan.Views.Dashboard
 {
     public partial class AddGiziControl : UserControl
     {
+        private int counter;
         private string tipeMakan = "";
         private List<Unit> unitsList = Database.units.GetDefaultUnits() ?? []; 
         private DateTime trackingDateTime;
@@ -63,6 +65,7 @@ namespace NutriNyan.Views.Dashboard
                         unitSizeComboBox.ValueMember = "Weight";
                         unitSizeComboBox.DisplayMember = "UnitType";
                         unitSizeComboBox.SelectedIndex = DataSourceStore.Count - 1;
+                        UnitValueBox.Text = "1";
                         weight = selectedFood["1 Porsi"]; // Here
                         MessageBox.Show($"Added Units {((List<Unit>)unitSizeComboBox.DataSource).Count}", "Information", MessageBoxButtons.OK);
                     }
@@ -79,12 +82,13 @@ namespace NutriNyan.Views.Dashboard
                 }
             }
         }
-        private void RefreshFillData(float totalWeight)
+        private void RefreshFillData(float totalUnit)
         {
             if (selectedFood.Count != 0)
             {
-                float multiply = totalWeight / 100;
-                UnitValueBox.Text = $"{totalWeight}";
+                float totalWeight = totalUnit * Single.Parse(UnitValueBox.Text);
+                float multiply =  totalWeight / 100;
+                TWPanelLabel.Text = $"{totalWeight} gram";
                 LemakTextBox.Text = $"{selectedFood["Lemak"] * multiply}";
                 ProtTextBox.Text = $"{selectedFood["Protein"] * multiply}";
                 KarbTextBox.Text = $"{selectedFood["Karbohidrat"] * multiply}";
@@ -101,7 +105,35 @@ namespace NutriNyan.Views.Dashboard
         }
         private void UnitChanged(object sender, EventArgs e)
         {
+            UnitValueBox.Text = "1";
             RefreshFillData((float)unitSizeComboBox.SelectedValue);
+        }
+        private void UnitValueChanged(object sender, EventArgs e)
+        {
+            RefreshFillData((float)unitSizeComboBox.SelectedValue);
+        }
+        private void FloatTextBoxhanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text == "")
+            {
+                textBox.AppendText("0");
+            }
+            else if (textBox.Text.Length > 1)
+            {
+                bool result = Logic.IsDigits(textBox.Text);
+                if (!result)
+                {
+                    string text = textBox.Text.Substring(0, textBox.Text.Length - 1);
+                    textBox.Text = text;
+                    textBox.SelectionStart = text.Length;
+                }else if (textBox.Text[0] == '0' && textBox.Text[1] != ',')
+                {
+                    string text = textBox.Text.Substring(1);
+                    textBox.Text = text;
+                    textBox.SelectionStart = text.Length;
+                }
+            }
         }
 
         private void AddGiziControl_Load(object sender, EventArgs e)
@@ -123,12 +155,12 @@ namespace NutriNyan.Views.Dashboard
                 bool resultAddMealItem = Database.AddMealItem(
                     mealId: meal.Id,
                     foodId: food.Id,
-                    qty: Single.Parse(UnitValueBox.Text), // Need adjustment
-                    karbohidrat: Single.Parse(KarbTextBox.Text),
-                    protein: Single.Parse(ProtTextBox.Text),
-                    lemak: Single.Parse(LemakTextBox.Text),
-                    serat: Single.Parse(SeratTextBox.Text),
-                    gula: Single.Parse(GulaTextBox.Text),
+                    qty: Single.Parse(UnitValueBox.Text.Replace(",", ".")), // Need adjustment
+                    karbohidrat: Single.Parse(KarbTextBox.Text.Replace(",", ".")),
+                    protein: Single.Parse(ProtTextBox.Text.Replace(",", ".")),
+                    lemak: Single.Parse(LemakTextBox.Text.Replace(",", ".")),
+                    serat: Single.Parse(SeratTextBox.Text.Replace(",", ".")),
+                    gula: Single.Parse(GulaTextBox.Text.Replace(",", ".")),
                     unitId: unit.Id
                 );
                 if (resultAddMealItem)

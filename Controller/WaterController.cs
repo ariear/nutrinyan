@@ -34,10 +34,11 @@ public static partial class Database
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             using (var dbContext = new AppDbContext(optionsBuilder.Options))
             {
+                User user = userLogged.Get();
                 dbContext.Add(new Water
                 {
-                    UserId = userLogged.user.Id,
-                    Target = userLogged.user.DefaultTargetWater,
+                    UserId =user.Id,
+                    Target = user.DefaultTargetWater,
                     CreatedAt = TimeZoneInfo.ConvertTimeToUtc(date.Date),
                     UpdatedAt = TimeZoneInfo.ConvertTimeToUtc(date.Date)
                 }

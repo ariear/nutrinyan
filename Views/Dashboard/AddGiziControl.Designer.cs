@@ -50,6 +50,10 @@
             SeratTextBox = new TextBox();
             SaveFoodButton = new Button();
             periode = new Label();
+            TotalWeightLabel = new Label();
+            TotalWeightPanel = new Panel();
+            TWPanelLabel = new Label();
+            TotalWeightPanel.SuspendLayout();
             SuspendLayout();
             // 
             // searchFoodButton
@@ -150,6 +154,9 @@
             UnitValueBox.Name = "UnitValueBox";
             UnitValueBox.Size = new Size(197, 39);
             UnitValueBox.TabIndex = 10;
+            UnitValueBox.Text = "0";
+            UnitValueBox.TextChanged += FloatTextBoxhanged;
+            UnitValueBox.LostFocus += UnitValueChanged;
             // 
             // label6
             // 
@@ -170,6 +177,8 @@
             LemakTextBox.Name = "LemakTextBox";
             LemakTextBox.Size = new Size(273, 39);
             LemakTextBox.TabIndex = 11;
+            LemakTextBox.Text = "0";
+            LemakTextBox.TextChanged += FloatTextBoxhanged;
             // 
             // label7
             // 
@@ -190,6 +199,8 @@
             ProtTextBox.Name = "ProtTextBox";
             ProtTextBox.Size = new Size(273, 39);
             ProtTextBox.TabIndex = 13;
+            ProtTextBox.Text = "0";
+            ProtTextBox.TextChanged += FloatTextBoxhanged;
             // 
             // label8
             // 
@@ -210,6 +221,8 @@
             KarbTextBox.Name = "KarbTextBox";
             KarbTextBox.Size = new Size(273, 39);
             KarbTextBox.TabIndex = 15;
+            KarbTextBox.Text = "0";
+            KarbTextBox.TextChanged += FloatTextBoxhanged;
             // 
             // label9
             // 
@@ -230,6 +243,8 @@
             KaloriTextBox.Name = "KaloriTextBox";
             KaloriTextBox.Size = new Size(273, 39);
             KaloriTextBox.TabIndex = 21;
+            KaloriTextBox.Text = "0";
+            KaloriTextBox.TextChanged += FloatTextBoxhanged;
             // 
             // label10
             // 
@@ -250,6 +265,8 @@
             GulaTextBox.Name = "GulaTextBox";
             GulaTextBox.Size = new Size(273, 39);
             GulaTextBox.TabIndex = 19;
+            GulaTextBox.Text = "0";
+            GulaTextBox.TextChanged += FloatTextBoxhanged;
             // 
             // label11
             // 
@@ -270,6 +287,8 @@
             SeratTextBox.Name = "SeratTextBox";
             SeratTextBox.Size = new Size(273, 39);
             SeratTextBox.TabIndex = 17;
+            SeratTextBox.Text = "0";
+            SeratTextBox.TextChanged += FloatTextBoxhanged;
             // 
             // SaveFoodButton
             // 
@@ -277,7 +296,7 @@
             SaveFoodButton.FlatStyle = FlatStyle.Flat;
             SaveFoodButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             SaveFoodButton.ForeColor = Color.FromArgb(1, 54, 63);
-            SaveFoodButton.Location = new Point(38, 637);
+            SaveFoodButton.Location = new Point(38, 684);
             SaveFoodButton.Margin = new Padding(3, 4, 3, 4);
             SaveFoodButton.Name = "SaveFoodButton";
             SaveFoodButton.Size = new Size(879, 56);
@@ -297,11 +316,45 @@
             periode.TabIndex = 24;
             periode.Text = "Periode Makan : ";
             // 
+            // TotalWeightLabel
+            // 
+            TotalWeightLabel.AutoSize = true;
+            TotalWeightLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TotalWeightLabel.ForeColor = SystemColors.ControlLightLight;
+            TotalWeightLabel.Location = new Point(479, 620);
+            TotalWeightLabel.Name = "TotalWeightLabel";
+            TotalWeightLabel.Size = new Size(136, 31);
+            TotalWeightLabel.TabIndex = 25;
+            TotalWeightLabel.Text = "Total Berat:";
+            // 
+            // TotalWeightPanel
+            // 
+            TotalWeightPanel.BackColor = Color.White;
+            TotalWeightPanel.Controls.Add(TWPanelLabel);
+            TotalWeightPanel.ForeColor = SystemColors.ActiveCaptionText;
+            TotalWeightPanel.Location = new Point(642, 611);
+            TotalWeightPanel.Name = "TotalWeightPanel";
+            TotalWeightPanel.RightToLeft = RightToLeft.No;
+            TotalWeightPanel.Size = new Size(274, 45);
+            TotalWeightPanel.TabIndex = 26;
+            // 
+            // TWPanelLabel
+            // 
+            TWPanelLabel.AutoSize = true;
+            TWPanelLabel.Font = new Font("Segoe UI", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TWPanelLabel.Location = new Point(0, 9);
+            TWPanelLabel.Name = "TWPanelLabel";
+            TWPanelLabel.Size = new Size(86, 31);
+            TWPanelLabel.TabIndex = 0;
+            TWPanelLabel.Text = "0 gram";
+            // 
             // AddGiziControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 30, 29);
+            Controls.Add(TotalWeightPanel);
+            Controls.Add(TotalWeightLabel);
             Controls.Add(periode);
             Controls.Add(SaveFoodButton);
             Controls.Add(label9);
@@ -328,6 +381,8 @@
             Name = "AddGiziControl";
             Size = new Size(1098, 819);
             Load += AddGiziControl_Load;
+            TotalWeightPanel.ResumeLayout(false);
+            TotalWeightPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -356,5 +411,8 @@
         private TextBox SeratTextBox;
         private Button SaveFoodButton;
         private Label periode;
+        private Label TotalWeightLabel;
+        private Panel TotalWeightPanel;
+        private Label TWPanelLabel;
     }
 }

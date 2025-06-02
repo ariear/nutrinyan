@@ -60,12 +60,12 @@
             label17 = new Label();
             label18 = new Label();
             label19 = new Label();
-            label20 = new Label();
-            label21 = new Label();
-            label22 = new Label();
-            label23 = new Label();
-            label24 = new Label();
-            label25 = new Label();
+            KaloriValLab = new Label();
+            GulaValLab = new Label();
+            SeratValLab = new Label();
+            ProteinValLab = new Label();
+            KarboValLab = new Label();
+            LemakValLab = new Label();
             groupBox1 = new GroupBox();
             makanButton = new FontAwesome.Sharp.IconButton();
             iconButton1 = new FontAwesome.Sharp.IconButton();
@@ -486,77 +486,77 @@
             label19.TabIndex = 27;
             label19.Text = "Kalori";
             // 
-            // label20
+            // KaloriValLab
             // 
-            label20.AutoSize = true;
-            label20.BackColor = Color.FromArgb(1, 54, 63);
-            label20.Font = new Font("Segoe UI", 13F);
-            label20.ForeColor = SystemColors.ControlLightLight;
-            label20.Location = new Point(831, 83);
-            label20.Name = "label20";
-            label20.Size = new Size(49, 30);
-            label20.TabIndex = 33;
-            label20.Text = "112";
+            KaloriValLab.AutoSize = true;
+            KaloriValLab.BackColor = Color.FromArgb(1, 54, 63);
+            KaloriValLab.Font = new Font("Segoe UI", 13F);
+            KaloriValLab.ForeColor = SystemColors.ControlLightLight;
+            KaloriValLab.Location = new Point(831, 83);
+            KaloriValLab.Name = "KaloriValLab";
+            KaloriValLab.Size = new Size(49, 30);
+            KaloriValLab.TabIndex = 33;
+            KaloriValLab.Text = "112";
             // 
-            // label21
+            // GulaValLab
             // 
-            label21.AutoSize = true;
-            label21.BackColor = Color.FromArgb(1, 54, 63);
-            label21.Font = new Font("Segoe UI", 13F);
-            label21.ForeColor = SystemColors.ControlLightLight;
-            label21.Location = new Point(648, 83);
-            label21.Name = "label21";
-            label21.Size = new Size(25, 30);
-            label21.TabIndex = 32;
-            label21.Text = "7";
+            GulaValLab.AutoSize = true;
+            GulaValLab.BackColor = Color.FromArgb(1, 54, 63);
+            GulaValLab.Font = new Font("Segoe UI", 13F);
+            GulaValLab.ForeColor = SystemColors.ControlLightLight;
+            GulaValLab.Location = new Point(648, 83);
+            GulaValLab.Name = "GulaValLab";
+            GulaValLab.Size = new Size(25, 30);
+            GulaValLab.TabIndex = 32;
+            GulaValLab.Text = "7";
             // 
-            // label22
+            // SeratValLab
             // 
-            label22.AutoSize = true;
-            label22.BackColor = Color.FromArgb(1, 54, 63);
-            label22.Font = new Font("Segoe UI", 13F);
-            label22.ForeColor = SystemColors.ControlLightLight;
-            label22.Location = new Point(488, 83);
-            label22.Name = "label22";
-            label22.Size = new Size(25, 30);
-            label22.TabIndex = 31;
-            label22.Text = "9";
+            SeratValLab.AutoSize = true;
+            SeratValLab.BackColor = Color.FromArgb(1, 54, 63);
+            SeratValLab.Font = new Font("Segoe UI", 13F);
+            SeratValLab.ForeColor = SystemColors.ControlLightLight;
+            SeratValLab.Location = new Point(488, 83);
+            SeratValLab.Name = "SeratValLab";
+            SeratValLab.Size = new Size(25, 30);
+            SeratValLab.TabIndex = 31;
+            SeratValLab.Text = "9";
             // 
-            // label23
+            // ProteinValLab
             // 
-            label23.AutoSize = true;
-            label23.BackColor = Color.FromArgb(1, 54, 63);
-            label23.Font = new Font("Segoe UI", 13F);
-            label23.ForeColor = SystemColors.ControlLightLight;
-            label23.Location = new Point(326, 83);
-            label23.Name = "label23";
-            label23.Size = new Size(37, 30);
-            label23.TabIndex = 30;
-            label23.Text = "20";
+            ProteinValLab.AutoSize = true;
+            ProteinValLab.BackColor = Color.FromArgb(1, 54, 63);
+            ProteinValLab.Font = new Font("Segoe UI", 13F);
+            ProteinValLab.ForeColor = SystemColors.ControlLightLight;
+            ProteinValLab.Location = new Point(326, 83);
+            ProteinValLab.Name = "ProteinValLab";
+            ProteinValLab.Size = new Size(37, 30);
+            ProteinValLab.TabIndex = 30;
+            ProteinValLab.Text = "20";
             // 
-            // label24
+            // KarboValLab
             // 
-            label24.AutoSize = true;
-            label24.BackColor = Color.FromArgb(1, 54, 63);
-            label24.Font = new Font("Segoe UI", 13F);
-            label24.ForeColor = SystemColors.ControlLightLight;
-            label24.Location = new Point(177, 83);
-            label24.Name = "label24";
-            label24.Size = new Size(37, 30);
-            label24.TabIndex = 29;
-            label24.Text = "30";
+            KarboValLab.AutoSize = true;
+            KarboValLab.BackColor = Color.FromArgb(1, 54, 63);
+            KarboValLab.Font = new Font("Segoe UI", 13F);
+            KarboValLab.ForeColor = SystemColors.ControlLightLight;
+            KarboValLab.Location = new Point(177, 83);
+            KarboValLab.Name = "KarboValLab";
+            KarboValLab.Size = new Size(37, 30);
+            KarboValLab.TabIndex = 29;
+            KarboValLab.Text = "30";
             // 
-            // label25
+            // LemakValLab
             // 
-            label25.AutoSize = true;
-            label25.BackColor = Color.FromArgb(1, 54, 63);
-            label25.Font = new Font("Segoe UI", 13F);
-            label25.ForeColor = SystemColors.ControlLightLight;
-            label25.Location = new Point(30, 83);
-            label25.Name = "label25";
-            label25.Size = new Size(37, 30);
-            label25.TabIndex = 28;
-            label25.Text = "10";
+            LemakValLab.AutoSize = true;
+            LemakValLab.BackColor = Color.FromArgb(1, 54, 63);
+            LemakValLab.Font = new Font("Segoe UI", 13F);
+            LemakValLab.ForeColor = SystemColors.ControlLightLight;
+            LemakValLab.Location = new Point(30, 83);
+            LemakValLab.Name = "LemakValLab";
+            LemakValLab.Size = new Size(37, 30);
+            LemakValLab.TabIndex = 28;
+            LemakValLab.Text = "10";
             // 
             // groupBox1
             // 
@@ -564,17 +564,17 @@
             groupBox1.AutoSize = true;
             groupBox1.BackColor = Color.FromArgb(1, 54, 63);
             groupBox1.Controls.Add(label18);
-            groupBox1.Controls.Add(label20);
+            groupBox1.Controls.Add(KaloriValLab);
             groupBox1.Controls.Add(label14);
-            groupBox1.Controls.Add(label21);
+            groupBox1.Controls.Add(GulaValLab);
             groupBox1.Controls.Add(label15);
-            groupBox1.Controls.Add(label22);
+            groupBox1.Controls.Add(SeratValLab);
             groupBox1.Controls.Add(label16);
-            groupBox1.Controls.Add(label23);
+            groupBox1.Controls.Add(ProteinValLab);
             groupBox1.Controls.Add(label17);
-            groupBox1.Controls.Add(label24);
+            groupBox1.Controls.Add(KarboValLab);
             groupBox1.Controls.Add(label19);
-            groupBox1.Controls.Add(label25);
+            groupBox1.Controls.Add(LemakValLab);
             groupBox1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             groupBox1.ForeColor = SystemColors.ControlLightLight;
             groupBox1.Location = new Point(38, 117);
@@ -743,12 +743,12 @@
         private Label label17;
         private Label label18;
         private Label label19;
-        private Label label20;
-        private Label label21;
-        private Label label22;
-        private Label label23;
-        private Label label24;
-        private Label label25;
+        private Label KaloriValLab;
+        private Label GulaValLab;
+        private Label SeratValLab;
+        private Label ProteinValLab;
+        private Label KarboValLab;
+        private Label LemakValLab;
         private GroupBox groupBox1;
         private FontAwesome.Sharp.IconButton makanButton;
         private FontAwesome.Sharp.IconButton iconButton1;

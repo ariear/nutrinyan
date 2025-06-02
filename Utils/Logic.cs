@@ -42,7 +42,7 @@ public static class Logic
         }
     }
     /// <summary>
-    /// Used to determine does the string is a number or not. True if reay to float parse, false if not
+    /// Used to determine does the string is a number or not (Exclude one coma). True if reay to float parse, false if not
     /// </summary>
     /// <param name="c"></param>
     /// <returns></returns>

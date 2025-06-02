@@ -150,7 +150,7 @@ namespace NutriNyan.Views.Dashboard
                     this.pfoodNameNSum[0] = Logic.FoodNameTitleCase(((Button)sender).Name);
                     this.pfoodNameNSum[1] = sumDict[((Button)sender).Name];
                     bool resultAddFood = Database.AddFood(
-                        userId: Database.userLogged.user.Id,
+                        userId: Database.userLogged.Get().Id,
                         foodName: this.pfoodNameNSum[0],
                         karbohidrat: pselectedFood["Karbohidrat"],
                         protein: pselectedFood["Protein"],
