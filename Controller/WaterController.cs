@@ -12,7 +12,8 @@ public static partial class Database
 
             var startUtc = TimeZoneInfo.ConvertTimeToUtc(date.Date);
             var endUtc = TimeZoneInfo.ConvertTimeToUtc(date.Date.AddDays(1));
-            var result = dbContext.Waters.Include(w => w.Entries).SingleOrDefault(b => b.CreatedAt >= startUtc && b.CreatedAt < endUtc && b.UserId == userLogged.user.Id);
+            int userId = userLogged.Get().Id;
+            var result = dbContext.Waters.Include(w => w.Entries).SingleOrDefault(b => b.CreatedAt >= startUtc && b.CreatedAt < endUtc && b.UserId == userId);
             if (result != null)
             {
                 return result;

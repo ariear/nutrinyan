@@ -15,7 +15,7 @@ namespace NutriNyan.Views.Dashboard
 {
     public partial class KonsultasiControl : UserControl
     {
-        User user = Database.userLogged.user;
+        User user = Database.userLogged.Get();
         private readonly ChatController _chatController;
 
         public KonsultasiControl()
