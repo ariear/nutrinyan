@@ -55,6 +55,11 @@ namespace NutriNyan.Views.Dashboard
             LoadUserControl(new SettingControl());
         }
 
+        private void LoadKonsultasi()
+        {
+            LoadUserControl(new KonsultasiControl());
+        }
+
         private void LoadTrackingAir()
         {
             LoadUserControl(new TrackingAirControl());
@@ -104,6 +109,12 @@ namespace NutriNyan.Views.Dashboard
         {
             SetActiveButton((IconButton)sender);
             LoadSetting();
+        }
+
+        private void konsultasiButton_Click(object sender, EventArgs e)
+        {
+            SetActiveButton((IconButton)sender);
+            LoadKonsultasi();
         }
 
         // Logout button

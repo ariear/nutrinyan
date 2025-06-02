@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Calculation;
+using FontAwesome.Sharp;
 using Microsoft.EntityFrameworkCore;
 using NutriNyan.Models;
 using NutriNyan.Models.Enums;
@@ -53,7 +54,7 @@ namespace NutriNyan.Views.Auth
                     tingkatAktivitas: (ActivityLevel)aktivitasBox.SelectedValue,
                     purposeId: (int)targetBox.SelectedValue
                 );
-                MessageBox.Show("Success", "Information", MessageBoxButtons.OK);
+                MessageBox.Show("Registrasi akun berhasil!!!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Database.SetUserLogged(new Database.UserLogged(Database.GetUserIfExist(Nama_TextBox.Text)!));
                 Database.SetUnits();
                 Dashboard.DashboardMainForm dashboard = new Dashboard.DashboardMainForm();
@@ -63,7 +64,55 @@ namespace NutriNyan.Views.Auth
             }
             else
             {
-                MessageBox.Show("Hadehhhh", "Register", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (string.IsNullOrWhiteSpace(Nama_TextBox.Text))
+                {
+                    MessageBox.Show("Nama tidak boleh kosong", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (Database.GetUserIfExist(Nama_TextBox.Text) != null)
+                {
+                    MessageBox.Show("Username sudah digunakan, silakan pilih username lain", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!Logic.IsValidPwd(Pwd_TextBox.Text))
+                {
+                    if (Pwd_TextBox.Text.Length < 6)
+                    {
+                        MessageBox.Show("Password harus minimal 6 karakter", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Password harus mengandung angka, huruf, dan simbol", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
+
+                if (!Logic.IsNotTodayFuture(dateTimePicker1.Value))
+                {
+                    if (dateTimePicker1.Value.ToString("MM-dd-yyyy") == DateTime.Now.ToString("MM-dd-yyyy"))
+                    {
+                        MessageBox.Show("Tanggal lahir tidak boleh hari ini", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (DateTime.Now < dateTimePicker1.Value)
+                    {
+                        MessageBox.Show("Tanggal lahir tidak boleh di masa depan", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(TB_TextBox.Text) || !float.TryParse(TB_TextBox.Text, out _))
+                {
+                    MessageBox.Show("Tinggi badan harus diisi!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(BB_TextBox.Text) || !float.TryParse(BB_TextBox.Text, out _))
+                {
+                    MessageBox.Show("Berat badan harus diisi!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
         }
 
@@ -98,6 +147,19 @@ namespace NutriNyan.Views.Auth
                 string Sub = Compt.Text.Substring(0, Compt.Text.Length - 1); // Store the substring
                 Compt.Text = ""; // Reset the text value
                 Compt.AppendText(Sub); // Append/restore text value but throw unaccepted character
+            }
+        }
+
+        private void togglePwButton_Click(object sender, EventArgs e)
+        {
+            if (Pwd_TextBox.PasswordChar == '*')
+            {
+                Pwd_TextBox.PasswordChar = '\0';
+                togglePwButton.IconChar = IconChar.EyeSlash;
+            } else
+            {
+                Pwd_TextBox.PasswordChar = '*';
+                togglePwButton.IconChar = IconChar.Eye;
             }
         }
     }

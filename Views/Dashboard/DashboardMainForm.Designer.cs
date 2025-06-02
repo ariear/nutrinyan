@@ -122,6 +122,7 @@
             konsultasiButton.TextAlign = ContentAlignment.MiddleLeft;
             konsultasiButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             konsultasiButton.UseVisualStyleBackColor = true;
+            konsultasiButton.Click += konsultasiButton_Click;
             // 
             // TrackingAirButton
             // 
