@@ -1,12 +1,14 @@
 using NutriNyan.Models;
 using NutriNyan.Models.Enums;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 public static partial class Database
 {
     public class UserLogged : IEntity<User>
     {
         private User? user { get; set; }
-
+        public Genders userGender { get; private set; }
+        private Dictionary<float, List<float>> NutritionNeeded = new Dictionary<float, List<float>>();
         public UserLogged(string username, string pwd, int genderId, DateTime dateBirth,
                         float tb, float bb, int genderIndex, ActivityLevel tingkatAktivitas, int purposeId)
         {
@@ -25,6 +27,7 @@ public static partial class Database
                 TingkatAktivitas = activLevel,
                 PurposeId = purposeId,
             };
+            SetUserGender(genderId);
             try
             {
                 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
@@ -44,10 +47,26 @@ public static partial class Database
         public UserLogged(User user)
         {
             this.user = user;
+            SetUserGender(user.GenderId);
         }
         public User? Get()
         {
             return user;
+        }
+        private void SetUserGender(int genderId)
+        {
+            if (genderId == genders[0].DbGender.Id)
+            {
+                userGender = genders[0];
+            }
+            else if (genderId == genders[1].DbGender.Id)
+            {
+                userGender = genders[1];
+            }
+            else
+            {
+                MessageBox.Show("Error saat set gender pada user", "Error", MessageBoxButtons.OK);
+            }
         }
         public bool Update(User user)
         {
@@ -69,6 +88,7 @@ public static partial class Database
                         result.TingkatAktivitas = user.TingkatAktivitas;
 
                         dbContext.SaveChanges();
+
                     }
                     else
                     {
@@ -113,6 +133,22 @@ public static partial class Database
             {
                 MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK);
                 return false;
+            }
+        }
+        public List<float> GetNutritionNeeded(DateTime date)
+        {
+            float age = Logic.GetAge(user.DateBirth);
+            if (NutritionNeeded.ContainsKey(age)) {
+                return NutritionNeeded[age];
+            } else {
+                int genderIndex = userGender.GetGenderIndex();
+                // if (user.GenderId)
+                List<float> nutritionNeed = Calculation.AKG.CalAKG(
+                    age: age,
+                    genderIndex: genderIndex
+                );
+                NutritionNeeded.Add(age, nutritionNeed);
+                return nutritionNeed;
             }
         }
     }

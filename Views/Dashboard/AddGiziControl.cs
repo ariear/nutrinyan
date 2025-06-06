@@ -16,17 +16,15 @@ namespace NutriNyan.Views.Dashboard
 {
     public partial class AddGiziControl : UserControl
     {
-        private int counter;
-        private string tipeMakan = "";
+        private Database.NutritionLogOfDay MealOfADay { get; set; }
         private List<Unit> unitsList = Database.units.GetDefaultUnits() ?? []; 
-        private DateTime trackingDateTime;
+        private DateTime trackingDateTime { get; set; }
         private Dictionary<string, float> selectedFood = new Dictionary<string, float>();
         private string[] foodNameNSum = ["", ""]; // [foodName, Summary]
-        public AddGiziControl(string tipeMakan, DateTime trackingDateTime)
+        public AddGiziControl(Database.NutritionLogOfDay MealOfADay, DateTime trackingDateTime)
         {
             InitializeComponent();
-
-            this.tipeMakan = tipeMakan;
+            this.MealOfADay = MealOfADay;
             this.trackingDateTime = trackingDateTime;
         }
 
@@ -58,7 +56,15 @@ namespace NutriNyan.Views.Dashboard
                     if (selectedFood["1 Porsi"] != 0)
                     {
                         List<Unit> DataSourceStore = (List<Unit>)(unitSizeComboBox.DataSource ?? new List<Unit>());
-                        DataSourceStore.Add(Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0])!);
+                        if (DataSourceStore.Count < 4)
+                        {
+                            DataSourceStore.Add(Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0])!);
+                        }
+                        else
+                        {
+                            DataSourceStore.RemoveAt(DataSourceStore.Count - 1);
+                            DataSourceStore.Add(Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0])!);
+                        }
                         unitSizeComboBox.DataSource = null;
                         unitSizeComboBox.Items.Clear();
                         unitSizeComboBox.DataSource = DataSourceStore;
@@ -67,7 +73,6 @@ namespace NutriNyan.Views.Dashboard
                         unitSizeComboBox.SelectedIndex = DataSourceStore.Count - 1;
                         UnitValueBox.Text = "1";
                         weight = selectedFood["1 Porsi"]; // Here
-                        MessageBox.Show($"Added Units {((List<Unit>)unitSizeComboBox.DataSource).Count}", "Information", MessageBoxButtons.OK);
                     }
                     else
                     {
@@ -94,7 +99,7 @@ namespace NutriNyan.Views.Dashboard
                 KarbTextBox.Text = $"{selectedFood["Karbohidrat"] * multiply}";
                 SeratTextBox.Text = $"{selectedFood["Serat"] * multiply}";
                 GulaTextBox.Text = $"{selectedFood["Gula"] * multiply}";
-                KaloriTextBox.Text = Nutrition.CaloriCal(
+                KaloriTextBox.Text = Calori.CaloriCal(
                     protein: selectedFood["Protein"] * multiply,
                     karbo: selectedFood["Karbohidrat"] * multiply,
                     lemak: selectedFood["Lemak"] * multiply,
@@ -139,7 +144,7 @@ namespace NutriNyan.Views.Dashboard
         private void AddGiziControl_Load(object sender, EventArgs e)
         {
             title.Text = $"Tambah Makanan yang Dikonsumsi pada {trackingDateTime.ToString("dd MMMM yyyy", new CultureInfo("id-ID"))}";
-            periode.Text = $"Periode Makan : {tipeMakan}";
+            periode.Text = $"Periode Makan : {MealOfADay.mealType}";
             unitSizeComboBox.DataSource = this.unitsList;
             unitSizeComboBox.ValueMember = "Weight";
             unitSizeComboBox.DisplayMember = "UnitType";
@@ -147,28 +152,25 @@ namespace NutriNyan.Views.Dashboard
         private void SaveFoodButtonClicked(object sender, EventArgs e)
         {
             Unit? unit = Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0]);
-            Meal? meal = Database.GetMealIfExist(tipeMakan, trackingDateTime);
             Food? food = Database.MyFoods.GetFoodIfExist(this.foodNameNSum[0]);
-            if (unit != null && meal != null && food != null)
+            if (unit != null && food != null)
             {
-                MessageBox.Show("Waiting", "Information", MessageBoxButtons.OK);
-                bool resultAddMealItem = Database.AddMealItem(
-                    mealId: meal.Id,
+                bool resultAddMealItem = MealOfADay.AddMealItem(
+                    dateOfDay: trackingDateTime.ToUniversalTime(),
                     foodId: food.Id,
-                    qty: Single.Parse(UnitValueBox.Text.Replace(",", ".")), // Need adjustment
-                    karbohidrat: Single.Parse(KarbTextBox.Text.Replace(",", ".")),
-                    protein: Single.Parse(ProtTextBox.Text.Replace(",", ".")),
-                    lemak: Single.Parse(LemakTextBox.Text.Replace(",", ".")),
-                    serat: Single.Parse(SeratTextBox.Text.Replace(",", ".")),
-                    gula: Single.Parse(GulaTextBox.Text.Replace(",", ".")),
+                    qty: float.Parse(UnitValueBox.Text), // Need adjustment
+                    karbohidrat: float.Parse(KarbTextBox.Text),
+                    protein: float.Parse(ProtTextBox.Text),
+                    lemak: float.Parse(LemakTextBox.Text),
+                    serat: float.Parse(SeratTextBox.Text),
+                    gula: float.Parse(GulaTextBox.Text),
                     unitId: unit.Id
                 );
                 if (resultAddMealItem)
                 {
-                    MessageBox.Show("Success saving", "Information", MessageBoxButtons.OK);
                     DashboardMainForm dashboardMainForm = (DashboardMainForm)Application.OpenForms["DashboardMainForm"];
                     dashboardMainForm.PanelContent.Controls.Clear();
-                    TrackingGiziControl trackingGizi = new TrackingGiziControl(dateTime: trackingDateTime);
+                    TrackingGiziControl trackingGizi = new TrackingGiziControl(dateTime: trackingDateTime);//error here
                     trackingGizi.Dock = DockStyle.Fill;
                     dashboardMainForm.PanelContent.Controls.Add(trackingGizi);
                     this.Hide();
@@ -180,7 +182,7 @@ namespace NutriNyan.Views.Dashboard
                 }
             } else
             {
-                MessageBox.Show($"Terjadi kesalahan pada saving food\nUnit: {unit}\tmeal: {meal}\tfood: {food}", "Information", MessageBoxButtons.OK);
+                MessageBox.Show($"Terjadi kesalahan pada saving food\nUnit: {unit}\tmeal: {MealOfADay.mealType}\tfood: {food}", "Information", MessageBoxButtons.OK);
             }
         }
     }

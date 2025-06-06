@@ -23,4 +23,6 @@ public static partial class Database
     {
         units = new Units("100 gram");
     }
+    public static List<Genders> genders = [new LakiLaki(), new Perempuan()];
+    public static List<NutritionLogOfDay> MealsOfADay = [new MakanPagi(), new MakanSiang(), new MakanMalam(), new Jajan()];
 }

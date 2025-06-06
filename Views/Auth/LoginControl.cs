@@ -39,9 +39,7 @@ namespace NutriNyan.Views.Auth
         }
         private async void Button1_Clicked(object sender, EventArgs e)
         {
-            Task<Dashboard.DashboardMainForm?> dashboard = Task.Run(() => Check());
-            await Api.WaitingWindow(dashboard);
-            Dashboard.DashboardMainForm? result = dashboard.Result;
+            Dashboard.DashboardMainForm? result = Check();
             if (result != null)
             {
                 pMainAuth.Hide();

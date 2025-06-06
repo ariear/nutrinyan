@@ -6,7 +6,7 @@ namespace Calculation
     // Class of AKG (Angka Kecukupan Gizi)
     public static class AKG
     {
-        private static List<string> AKG_header = ["UsiaKurangDari", "BB(Kg)", "TB (cm)", "Energi (kkal)", "Protein", "Total", "Omega3", "Omega6", "Karbohidrat", "Serat", "Air"];
+        private static List<string> AKG_header = ["UsiaKurangDari", "BB(Kg)", "TB (cm)", "Energi (kkal)", "Protein", "Total Lemak", "Omega3", "Omega6", "Karbohidrat", "Serat", "Air"];
         private static List<List<float>> AKGT_Child = [// [UsiaKurangDari, BB, TB, Energi (kkal), Protein, Total, Omega3, Omega6, Karbohidrat, Serat, Air]
                                                         [0.42F, 6F, 60F, 550F, 9F, 31F, 0.5F, 4.4F, 59F, 0F, 700F],
                                                     [0.99F, 9F, 72F, 800F, 15F, 35F, 0.5F, 4.4F, 105F, 11F, 900F],
@@ -39,7 +39,7 @@ namespace Calculation
         /// </summary>
         /// <param name="age">Umur</param>
         /// <returns>List<float></returns>
-        public static List<float> CalAKG(float age, int gender)
+        public static List<float> CalAKG(float age, int genderIndex)
         {
             if (age <= 0)
             {
@@ -69,7 +69,7 @@ namespace Calculation
                     while (true)
                     {
                         int startIndex = 0;
-                        switch (gender)
+                        switch (genderIndex)
                         {
                             case 0:
                                 while (startIndex < AKGT_Man.Count - 1)
@@ -145,7 +145,7 @@ namespace Calculation
             return (IMT_Table[index], IMT_Condition[index]);
         }
     }
-    public static class Nutrition
+    public static class Calori
     {
         public static Dictionary<string, float> CaloriValue = new Dictionary<string, float>{
             {"Protein", 4F },

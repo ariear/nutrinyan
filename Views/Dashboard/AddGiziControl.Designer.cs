@@ -156,7 +156,7 @@
             UnitValueBox.TabIndex = 10;
             UnitValueBox.Text = "0";
             UnitValueBox.TextChanged += FloatTextBoxhanged;
-            UnitValueBox.LostFocus += UnitValueChanged;
+            UnitValueBox.TextChanged += UnitValueChanged;
             // 
             // label6
             // 

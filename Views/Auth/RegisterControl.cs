@@ -49,8 +49,8 @@ namespace NutriNyan.Views.Auth
                     genderId: (int)jkBox.SelectedValue,
                     genderIndex: (int)jkBox.SelectedIndex,
                     dateBirth: dateTimePicker1.Value,
-                    tb: Single.Parse(TB_TextBox.Text.Replace(",", ".")),
-                    bb: Single.Parse(BB_TextBox.Text.Replace(",", ".")),
+                    tb: Single.Parse(TB_TextBox.Text),
+                    bb: Single.Parse(BB_TextBox.Text),
                     tingkatAktivitas: (ActivityLevel)aktivitasBox.SelectedValue,
                     purposeId: (int)targetBox.SelectedValue
                 );
@@ -122,11 +122,16 @@ namespace NutriNyan.Views.Auth
             var _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             using (var dbContext = new AppDbContext(_optionsBuilder.Options))
             {
-
-                jkBox.DataSource = dbContext.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
-                jkBox.DisplayMember = "Type";
-                jkBox.ValueMember = "Id";
-
+                try
+                {
+                    jkBox.DataSource = (Database.genders); // Get only Type column of Genders table
+                    jkBox.DisplayMember = "GenderName";
+                    jkBox.ValueMember = "DbGenderId";
+                }
+                catch (Exception E)
+                {
+                    MessageBox.Show($"{E}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
 
                 targetBox.DataSource = purposes;

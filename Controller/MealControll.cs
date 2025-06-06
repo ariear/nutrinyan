@@ -4,6 +4,34 @@ using Microsoft.EntityFrameworkCore;
 public static partial class Database
 {
     public static string[] MealTypes = ["Makan Pagi", "Makan Siang", "Makan Malam", "Jajan"];
+    public class MakanPagi : NutritionLogOfDay
+    {
+        public MakanPagi()
+        {
+            mealType = "Makan Pagi";
+        }
+    }
+    public class MakanSiang : NutritionLogOfDay
+    {
+        public MakanSiang()
+        {
+            mealType = "Makan Siang";
+        }
+    }
+    public class MakanMalam : NutritionLogOfDay
+    {
+        public MakanMalam()
+        {
+            mealType = "Makan Malam";
+        }
+    }
+    public class Jajan : NutritionLogOfDay
+    {
+        public Jajan()
+        {
+            mealType = "Jajan";
+        }
+    }
     /// <summary>
     /// Get Meal fron database using  mealtype name and datetime
     /// </summary>
@@ -12,6 +40,7 @@ public static partial class Database
     /// <returns></returns>
     public static Meal? GetMealIfExist(string mealType, DateTime date)
     {
+        date = date.ToUniversalTime() + DateTimeOffset.Now.Offset;
         try
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
@@ -49,7 +78,7 @@ public static partial class Database
                     {
                         LogId = logId,
                         MealType = mealTypeText,
-                        Date = date,
+                        Date = date.ToUniversalTime(),
                         UpdatedAt = DateTime.UtcNow,
                     }
                     );

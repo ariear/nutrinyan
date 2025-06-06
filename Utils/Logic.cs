@@ -140,9 +140,10 @@ public static class Logic
     /// </summary>
     /// <param name="BirthDate"></param>
     /// <returns></returns>
-    public static float GetAge(DateTime BirthDate)
+    public static float GetAge(DateTime BirthDate, DateTime? dateTarget=null)
     {
-        return (float)Math.Round((DateTime.Now - BirthDate).TotalDays / 365.2425, 2);
+        if (dateTarget == null){ dateTarget = DateTime.Now; }
+        return (float)Math.Round(((DateTime)dateTarget - BirthDate).TotalDays / 365.2425, 2);
     }
     /// <summary>
     /// 

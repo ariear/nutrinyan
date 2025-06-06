@@ -2,6 +2,7 @@ using NutriNyan.Models;
 using Microsoft.EntityFrameworkCore;
 public static partial class Database
 {
+    
     /// <summary>
     /// Ensure that nutrition log exist, if not exist will create immediately and return it. Null if error.
     /// Note that this method also create Meals of the four types.
@@ -28,14 +29,15 @@ public static partial class Database
                 {
                     return null;
                 }
-                NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(nl => nl.Date.Date == date.Date && nl.UserId == userId);
+                DateTime queryDate = date.ToUniversalTime() + DateTimeOffset.Now.Offset;
+                NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(nl => nl.Date.Date == queryDate.Date && nl.UserId == userId);
                 if (result == null)
                 {
                     NutritionLog nutritionLog = new NutritionLog
                     {
                         UserId = userId,
                         Note = note,
-                        Date = date,
+                        Date = date.ToUniversalTime(),
                         UpdatedAt = DateTime.UtcNow
                     };
                     dbContext.Add(nutritionLog);
@@ -46,7 +48,7 @@ public static partial class Database
                         {
                             LogId = nutritionLog.Id,
                             MealType = item,
-                            Date = date,
+                            Date = date.ToUniversalTime(),
                             UpdatedAt = DateTime.UtcNow
                         }
                         );
