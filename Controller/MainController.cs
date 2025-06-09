@@ -7,6 +7,12 @@ using System.CodeDom;
 
 public static partial class Database
 {
+    // Start Region of Global Attribute
+    public static List<Genders> genders = [new LakiLaki(), new Perempuan()];
+    public static List<NutritionLogOfDay> MealsOfADay = [new MakanPagi(), new MakanSiang(), new MakanMalam(), new Jajan()];
+    public static List<Tujuan> purposes = [new HidupSehat(), new Pemulihan(), new DietRingan()];
+    // Start Region of Global Attribute
+
     public interface IEntity<T>
     {
         public T? Get();
@@ -23,6 +29,4 @@ public static partial class Database
     {
         units = new Units("100 gram");
     }
-    public static List<Genders> genders = [new LakiLaki(), new Perempuan()];
-    public static List<NutritionLogOfDay> MealsOfADay = [new MakanPagi(), new MakanSiang(), new MakanMalam(), new Jajan()];
 }

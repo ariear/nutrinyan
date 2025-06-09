@@ -36,20 +36,26 @@ namespace NutriNyan.Views.Dashboard
             TargetAirbox.Text = Convert.ToString(user.DefaultTargetWater);
             TingkatAktivitasbox.DataSource = Enum.GetValues(typeof(ActivityLevel));
 
-            var _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            using (var dbContext = new AppDbContext(_optionsBuilder.Options))
-            {
+            // var _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            // using (var dbContext = new AppDbContext(_optionsBuilder.Options))
+            // {
+                
 
-                JKbox.DataSource = dbContext.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
-                JKbox.DisplayMember = "Type";
-                JKbox.ValueMember = "Id";
+                // JKbox.DataSource = dbContext.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
+                // JKbox.DisplayMember = "Type";
+                // JKbox.ValueMember = "Id";
 
-                var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
+                // var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
 
-                TargetTujuanbox.DataSource = purposes;
-                TargetTujuanbox.DisplayMember = "Title";
-                TargetTujuanbox.ValueMember = "Id";
-            }
+            
+            // }
+            JKbox.DataSource = Database.genders; // Get only Type column of Genders table
+            JKbox.DisplayMember = "GenderName";
+            JKbox.ValueMember = "DbGenderId";
+
+            TargetTujuanbox.DataSource = Database.purposes;
+            TargetTujuanbox.DisplayMember = "purposeName";
+            TargetTujuanbox.ValueMember = "purposeId";
 
             JKbox.SelectedValue = user.GenderId;
             TargetTujuanbox.SelectedValue = user.PurposeId;
