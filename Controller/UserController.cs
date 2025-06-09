@@ -8,6 +8,7 @@ public static partial class Database
     {
         private User? user { get; set; }
         public Genders userGender { get; private set; }
+        public Tujuan userTujuan { get; private set; }
         private Dictionary<float, List<float>> NutritionNeeded = new Dictionary<float, List<float>>();
         public UserLogged(string username, string pwd, int genderId, DateTime dateBirth,
                         float tb, float bb, int genderIndex, ActivityLevel tingkatAktivitas, int purposeId)
@@ -27,7 +28,6 @@ public static partial class Database
                 TingkatAktivitas = activLevel,
                 PurposeId = purposeId,
             };
-            SetUserGender(genderId);
             try
             {
                 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
@@ -43,11 +43,15 @@ public static partial class Database
             {
                 MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK);
             }
+            // Set Gender and Purpose AKA Tujuan
+            SetUserGender(genderId);
+            SetUserPurpose(purposeId);
         }
         public UserLogged(User user)
         {
             this.user = user;
             SetUserGender(user.GenderId);
+            SetUserPurpose(user.PurposeId);
         }
         public User? Get()
         {
@@ -67,6 +71,18 @@ public static partial class Database
             {
                 MessageBox.Show("Error saat set gender pada user", "Error", MessageBoxButtons.OK);
             }
+        }
+        private void SetUserPurpose(int idPurpose)
+        {
+            foreach (Tujuan tujuan in purposes)
+            {
+                if (idPurpose == tujuan.purpose.Id)
+                {
+                    this.userTujuan = tujuan;
+                    return;
+                }
+            }
+            MessageBox.Show("Error saat set gender pada user", "Error", MessageBoxButtons.OK);
         }
         public bool Update(User user)
         {
@@ -137,9 +153,9 @@ public static partial class Database
         }
         public List<float> GetNutritionNeeded(DateTime date)
         {
-            float age = Logic.GetAge(user.DateBirth);
+            float age = Logic.GetAge(user.DateBirth, date);
             if (NutritionNeeded.ContainsKey(age)) {
-                return NutritionNeeded[age];
+                return userTujuan.AdjustNutritionNeeded(NutritionNeeded[age]);
             } else {
                 int genderIndex = userGender.GetGenderIndex();
                 // if (user.GenderId)
@@ -148,7 +164,7 @@ public static partial class Database
                     genderIndex: genderIndex
                 );
                 NutritionNeeded.Add(age, nutritionNeed);
-                return nutritionNeed;
+                return userTujuan.AdjustNutritionNeeded(nutritionNeed);
             }
         }
     }

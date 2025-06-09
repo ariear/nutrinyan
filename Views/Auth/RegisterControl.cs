@@ -119,25 +119,33 @@ namespace NutriNyan.Views.Auth
         private void RegisterControl_Load(object sender, EventArgs e)
         {
             aktivitasBox.DataSource = Enum.GetValues(typeof(ActivityLevel));
-            var _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            using (var dbContext = new AppDbContext(_optionsBuilder.Options))
-            {
-                try
-                {
-                    jkBox.DataSource = (Database.genders); // Get only Type column of Genders table
-                    jkBox.DisplayMember = "GenderName";
-                    jkBox.ValueMember = "DbGenderId";
-                }
-                catch (Exception E)
-                {
-                    MessageBox.Show($"{E}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
+            jkBox.DataSource = Database.genders; // Get only Type column of Genders table
+            jkBox.DisplayMember = "GenderName";
+            jkBox.ValueMember = "DbGenderId";
 
-                targetBox.DataSource = purposes;
-                targetBox.DisplayMember = "Title";
-                targetBox.ValueMember = "Id";
-            }
+            targetBox.DataSource = Database.purposes;
+            targetBox.DisplayMember = "purposeName";
+            targetBox.ValueMember = "purposeId";
+
+            // var _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            // using (var dbContext = new AppDbContext(_optionsBuilder.Options))
+            // {
+            //     try
+            //     {
+            //         jkBox.DataSource = Database.genders; // Get only Type column of Genders table
+            //         jkBox.DisplayMember = "GenderName";
+            //         jkBox.ValueMember = "DbGenderId";
+            //     }
+            //     catch (Exception E)
+            //     {
+            //         MessageBox.Show($"{E}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //     }
+            //     var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
+
+            //     targetBox.DataSource = purposes;
+            //     targetBox.DisplayMember = "Title";
+            //     targetBox.ValueMember = "Id";
+            // }
         }
         /// <summary>
         /// This method won't allow TextBox to have alpha, means text must be alphabet and only allow one dot (assuming float number)
