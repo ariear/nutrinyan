@@ -9,12 +9,6 @@ public static partial class Database
         public string deskripsi { get; set; }
         public int purposeId { get; private set; }
         public Purpose purpose { get; private set; }
-        public float kaloriPercent = 1;
-        public float seratPercent = 1;
-        public float lemakPercent = 1;
-        public float proteinPercent = 1;
-        public float karboPercent = 1;
-        public float gula = 1;
         public abstract List<float> AdjustNutritionNeeded(List<float> nutritionNeeded);
         public Purpose? EnsureCreated(float CaloriMin, float CaloriMAx)
         {
@@ -84,20 +78,15 @@ public static partial class Database
             {
                 setPurpose(purpose);
             }
-            this.kaloriPercent = 1.2F;
-            this.proteinPercent = 1.15F;
-            this.karboPercent = 1.2F;
-            this.seratPercent = 1.1F;
-            this.lemakPercent = 1.1F;
         }
         public override List<float> AdjustNutritionNeeded(List<float> nutritionNeeded)
         {
             List<float> nutriNeedCopy =  nutritionNeeded.Select(b => b).ToList();
-            nutriNeedCopy[3] = MathF.Round(nutriNeedCopy[3]*this.kaloriPercent, 2);
-            nutriNeedCopy[4] = MathF.Round(nutriNeedCopy[4]*this.proteinPercent, 2);
-            nutriNeedCopy[8] = MathF.Round(nutriNeedCopy[8]*this.karboPercent, 2);
-            nutriNeedCopy[9] = MathF.Round(nutriNeedCopy[9]*this.seratPercent, 2);
-            nutriNeedCopy[5] = MathF.Round(nutriNeedCopy[5]*this.lemakPercent, 2);
+            nutriNeedCopy[3] = MathF.Round(nutriNeedCopy[3]*1.2F, 2);   // Kalori
+            nutriNeedCopy[4] = MathF.Round(nutriNeedCopy[4]*1.15F, 2);  // Protein
+            nutriNeedCopy[8] = MathF.Round(nutriNeedCopy[8]*1.2F, 2);   // Karbo
+            nutriNeedCopy[9] = MathF.Round(nutriNeedCopy[9]*1.1F, 2);   // Serat
+            nutriNeedCopy[5] = MathF.Round(nutriNeedCopy[5]*1.1F, 2);   // Lemak
             return nutriNeedCopy;
         }
     }
@@ -112,18 +101,14 @@ public static partial class Database
             {
                 setPurpose(purpose);
             }
-            this.kaloriPercent = 0.9F;
-            this.proteinPercent = 0.9F;
-            this.karboPercent = 0.85F;
-            this.lemakPercent = 0.85F;
         }
         public override List<float> AdjustNutritionNeeded(List<float> nutritionNeeded)
         {
             List<float> nutriNeedCopy =  nutritionNeeded.Select(b => b).ToList();
-            nutriNeedCopy[3] = MathF.Round(nutriNeedCopy[3]*this.kaloriPercent, 2);
-            nutriNeedCopy[4] = MathF.Round(nutriNeedCopy[4]*this.proteinPercent, 2);
-            nutriNeedCopy[8] = MathF.Round(nutriNeedCopy[8]*this.karboPercent, 2);
-            nutriNeedCopy[5] = MathF.Round(nutriNeedCopy[5]*this.lemakPercent, 2);
+            nutriNeedCopy[3] = MathF.Round(nutriNeedCopy[3]*0.9F, 2);   // Kalori
+            nutriNeedCopy[4] = MathF.Round(nutriNeedCopy[4]*0.9F, 2);   // Protein
+            nutriNeedCopy[8] = MathF.Round(nutriNeedCopy[8]*0.85F, 2);  // Karbo
+            nutriNeedCopy[5] = MathF.Round(nutriNeedCopy[5]*0.85F, 2);  // Lemak
             return nutriNeedCopy;
         }
     }

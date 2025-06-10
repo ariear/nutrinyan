@@ -43,7 +43,6 @@
             label8 = new Label();
             KarbTextBox = new TextBox();
             label9 = new Label();
-            KaloriTextBox = new TextBox();
             label10 = new Label();
             GulaTextBox = new TextBox();
             label11 = new Label();
@@ -53,7 +52,10 @@
             TotalWeightLabel = new Label();
             TotalWeightPanel = new Panel();
             TWPanelLabel = new Label();
+            kaloriPanel = new Panel();
+            kaloriValLab = new Label();
             TotalWeightPanel.SuspendLayout();
+            kaloriPanel.SuspendLayout();
             SuspendLayout();
             // 
             // searchFoodButton
@@ -235,17 +237,6 @@
             label9.TabIndex = 22;
             label9.Text = "Kalori ";
             // 
-            // KaloriTextBox
-            // 
-            KaloriTextBox.Font = new Font("Segoe UI", 14F);
-            KaloriTextBox.Location = new Point(643, 549);
-            KaloriTextBox.Margin = new Padding(3, 4, 3, 4);
-            KaloriTextBox.Name = "KaloriTextBox";
-            KaloriTextBox.Size = new Size(273, 39);
-            KaloriTextBox.TabIndex = 21;
-            KaloriTextBox.Text = "0";
-            KaloriTextBox.TextChanged += FloatTextBoxhanged;
-            // 
             // label10
             // 
             label10.AutoSize = true;
@@ -348,17 +339,38 @@
             TWPanelLabel.TabIndex = 0;
             TWPanelLabel.Text = "0 gram";
             // 
+            // kaloriPanel
+            // 
+            kaloriPanel.BackColor = Color.White;
+            kaloriPanel.Controls.Add(kaloriValLab);
+            kaloriPanel.ForeColor = SystemColors.ActiveCaptionText;
+            kaloriPanel.Location = new Point(642, 549);
+            kaloriPanel.Name = "kaloriPanel";
+            kaloriPanel.RightToLeft = RightToLeft.No;
+            kaloriPanel.Size = new Size(274, 39);
+            kaloriPanel.TabIndex = 27;
+            // 
+            // kaloriValLab
+            // 
+            kaloriValLab.AutoSize = true;
+            kaloriValLab.Font = new Font("Segoe UI", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            kaloriValLab.Location = new Point(1, 4);
+            kaloriValLab.Name = "kaloriValLab";
+            kaloriValLab.Size = new Size(72, 31);
+            kaloriValLab.TabIndex = 0;
+            kaloriValLab.Text = "0 kkal";
+            // 
             // AddGiziControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 30, 29);
+            Controls.Add(kaloriPanel);
             Controls.Add(TotalWeightPanel);
             Controls.Add(TotalWeightLabel);
             Controls.Add(periode);
             Controls.Add(SaveFoodButton);
             Controls.Add(label9);
-            Controls.Add(KaloriTextBox);
             Controls.Add(label10);
             Controls.Add(GulaTextBox);
             Controls.Add(label11);
@@ -383,6 +395,8 @@
             Load += AddGiziControl_Load;
             TotalWeightPanel.ResumeLayout(false);
             TotalWeightPanel.PerformLayout();
+            kaloriPanel.ResumeLayout(false);
+            kaloriPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -404,7 +418,6 @@
         private Label label8;
         private TextBox KarbTextBox;
         private Label label9;
-        private TextBox KaloriTextBox;
         private Label label10;
         private TextBox GulaTextBox;
         private Label label11;
@@ -414,5 +427,7 @@
         private Label TotalWeightLabel;
         private Panel TotalWeightPanel;
         private Label TWPanelLabel;
+        private Panel kaloriPanel;
+        private Label kaloriValLab;
     }
 }

@@ -99,13 +99,13 @@ namespace NutriNyan.Views.Dashboard
                 KarbTextBox.Text = $"{selectedFood["Karbohidrat"] * multiply}";
                 SeratTextBox.Text = $"{selectedFood["Serat"] * multiply}";
                 GulaTextBox.Text = $"{selectedFood["Gula"] * multiply}";
-                KaloriTextBox.Text = Calori.CaloriCal(
+                kaloriValLab.Text = Calori.CaloriCal(
                     protein: selectedFood["Protein"] * multiply,
                     karbo: selectedFood["Karbohidrat"] * multiply,
                     lemak: selectedFood["Lemak"] * multiply,
                     gula: selectedFood["Gula"] * multiply,
                     serat: selectedFood["Serat"] * multiply
-                ).ToString();
+                ).ToString() + " kkal";
             }
         }
         private void UnitChanged(object sender, EventArgs e)
@@ -156,14 +156,14 @@ namespace NutriNyan.Views.Dashboard
             if (unit != null && food != null)
             {
                 bool resultAddMealItem = MealOfADay.AddMealItem(
-                    dateOfDay: trackingDateTime.ToUniversalTime(),
+                    dateOfDay: trackingDateTime,
                     foodId: food.Id,
-                    qty: float.Parse(UnitValueBox.Text), // Need adjustment
-                    karbohidrat: float.Parse(KarbTextBox.Text),
-                    protein: float.Parse(ProtTextBox.Text),
-                    lemak: float.Parse(LemakTextBox.Text),
-                    serat: float.Parse(SeratTextBox.Text),
-                    gula: float.Parse(GulaTextBox.Text),
+                    qty: Single.Parse(UnitValueBox.Text), // Need adjustment
+                    karbohidrat: Single.Parse(KarbTextBox.Text),
+                    protein: Single.Parse(ProtTextBox.Text),
+                    lemak: Single.Parse(LemakTextBox.Text),
+                    serat: Single.Parse(SeratTextBox.Text),
+                    gula: Single.Parse(GulaTextBox.Text),
                     unitId: unit.Id
                 );
                 if (resultAddMealItem)

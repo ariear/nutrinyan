@@ -25,7 +25,7 @@ namespace NutriNyan.Views.Dashboard
         private void TrackingGiziControl_Load(object sender, EventArgs e)
         {
             sarapanGridView.Columns.Add("makanan", "Makanan");
-            sarapanGridView.Columns.Add("satuan", "Satuan");
+            sarapanGridView.Columns.Add("berat", "Berat");
             sarapanGridView.Columns.Add("lemak", "Lemak");
             sarapanGridView.Columns.Add("karbo", "Karbo");
             sarapanGridView.Columns.Add("protein", "Protein");
@@ -45,7 +45,7 @@ namespace NutriNyan.Views.Dashboard
                 Text = "Hapus"
             });
             makanSiangGridView.Columns.Add("makanan", "Makanan");
-            makanSiangGridView.Columns.Add("satuan", "Satuan");
+            makanSiangGridView.Columns.Add("berat", "Berat");
             makanSiangGridView.Columns.Add("lemak", "Lemak");
             makanSiangGridView.Columns.Add("karbo", "Karbo");
             makanSiangGridView.Columns.Add("protein", "Protein");
@@ -65,7 +65,7 @@ namespace NutriNyan.Views.Dashboard
                 Text = "Hapus"
             });
             makanMalamGridView.Columns.Add("makanan", "Makanan");
-            makanMalamGridView.Columns.Add("satuan", "Satuan");
+            makanMalamGridView.Columns.Add("berat", "Berat");
             makanMalamGridView.Columns.Add("lemak", "Lemak");
             makanMalamGridView.Columns.Add("karbo", "Karbo");
             makanMalamGridView.Columns.Add("protein", "Protein");
@@ -85,7 +85,7 @@ namespace NutriNyan.Views.Dashboard
                 Text = "Hapus"
             });
             jajanGridView.Columns.Add("makanan", "Makanan");
-            jajanGridView.Columns.Add("satuan", "Satuan");
+            jajanGridView.Columns.Add("berat", "Berat");
             jajanGridView.Columns.Add("lemak", "Lemak");
             jajanGridView.Columns.Add("karbo", "Karbo");
             jajanGridView.Columns.Add("protein", "Protein");
@@ -108,6 +108,7 @@ namespace NutriNyan.Views.Dashboard
         }
         private void GridViewFill()
         {
+            Database.EnsureNutritionLog(trackingDateTimePicker.Value, "Unknown");
             List<DataGridView> dataGridObjects = [sarapanGridView, makanSiangGridView, makanMalamGridView, jajanGridView];
             List<Label> kaloriLabels = [totalKaloriPagi, totalKaloriSiang, totalKaloriMalam, totalKaloriJajan];
             float totalKaloriADay = 0;
@@ -134,8 +135,8 @@ namespace NutriNyan.Views.Dashboard
                                                         serat: mealItem.Serat
                                                     );
                             totalKalori += kalori;
-                            dataGridObjects[i].Rows.Add(food.Name, unit.UnitType, mealItem.Lemak, mealItem.Karbohidrat,
-                                                    mealItem.Protein, mealItem.Serat, mealItem.Gula, kalori
+                            dataGridObjects[i].Rows.Add(food.Name, MathF.Round(mealItem.Qty*unit.Weight).ToString() + " gram", mealItem.Lemak,
+                                                    mealItem.Karbohidrat, mealItem.Protein, mealItem.Serat, mealItem.Gula, kalori
                                                     );
                             nutritionOfTheDay[0] += mealItem.Lemak;         // Lemak
                             nutritionOfTheDay[1] += mealItem.Serat;         // Serat
@@ -148,13 +149,12 @@ namespace NutriNyan.Views.Dashboard
                     kaloriLabels[i].Text = ((int)totalKalori).ToString();
                 }
             }
-            int iconButCount = 4;
-            for (int i = 0; i < iconButCount; i++)
-            {
-                Controls[i].Tag = i.ToString();
-            }
+            // int iconButCount = 4;
+            // for (int i = 0; i < iconButCount; i++)
+            // {
+            //     Controls[i].Tag = i.ToString();
+            // }
             KaloriValLab.Text = ((int)totalKaloriADay).ToString() + "/" + KaloriValLab.Text.Split("/")[1];
-            Database.EnsureNutritionLog(trackingDateTimePicker.Value, "Unknown");
             nutritionNeeded(nutritionOfTheDay);
             // List<MealItem> mealsPagi =  Database.MealsOfADay[0].GetRowOfMealItems(trackingDateTimePicker.Value);
             // if (mealsPagi != null)
@@ -252,8 +252,24 @@ namespace NutriNyan.Views.Dashboard
             //         }
             //     }
             // }
-
         }
+
+        private void DataGridContentClicked(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView senderGrid = sender as DataGridView;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                MealItem mealItem = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)].GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
+                DashboardMainForm dashboardMainForm = (DashboardMainForm)Application.OpenForms["DashboardMainForm"];
+                dashboardMainForm.PanelContent.Controls.Clear();
+                EditMakanan editMakanan = new EditMakanan(mealItem, trackingDateTimePicker.Value);
+                editMakanan.Dock = DockStyle.Fill;
+                dashboardMainForm.PanelContent.Controls.Add(editMakanan);
+            }
+        }
+
 
         private void makanButton_Click(object sender, EventArgs e)
         {
@@ -261,17 +277,9 @@ namespace NutriNyan.Views.Dashboard
             Database.NutritionLogOfDay meal = Database.MealsOfADay[Int32.Parse((string)tombolClick.Tag)];
             DashboardMainForm dashboardMainForm = (DashboardMainForm)Application.OpenForms["DashboardMainForm"];
             dashboardMainForm.PanelContent.Controls.Clear();
-            try
-            {
-                AddGiziControl addGizi = new AddGiziControl(meal, trackingDateTimePicker.Value);
-                addGizi.Dock = DockStyle.Fill;
-                dashboardMainForm.PanelContent.Controls.Add(addGizi);
-            }
-            catch (Exception E)
-            {
-                MessageBox.Show($"Error\n{E}", "Information", MessageBoxButtons.OK);
-            }
-            
+            AddGiziControl addGizi = new AddGiziControl(meal, trackingDateTimePicker.Value);
+            addGizi.Dock = DockStyle.Fill;
+            dashboardMainForm.PanelContent.Controls.Add(addGizi);
         }
 
         private void sarapanGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -388,19 +396,19 @@ namespace NutriNyan.Views.Dashboard
             List<int> index = [5, 9, 4, 8, 3];
             foreach (Control ctrl in groupBox1.Controls)
             {
-                if (count == 4)
+                if (count == 5)
                 {
                     break;
                 }
                 else
                 {
                     Label label = ctrl as Label;
-                    label.Text = nutritionValADay[count] + "/" + nutriNeed[index[count]].ToString() + " gram";
+                    label.Text = MathF.Round(nutritionValADay[count], 2) + "/" + nutriNeed[index[count]].ToString(); //+ " gram";
                     count++;
                 }
             }
-            groupBox1.Controls[4].Text = nutritionValADay[4] + "/" + nutriNeed[index[4]].ToString() + " kkal";//kebutuhan kalori
-            groupBox1.Controls[5].Text = nutritionValADay[5] + "/" + "50 gram"; // Kebutuhan gula
+            // groupBox1.Controls[4].Text = MathF.Round(nutritionValADay[4], 2) + "/" + nutriNeed[index[4]].ToString() + " kkal";//kebutuhan kalori
+            groupBox1.Controls[5].Text = MathF.Round(nutritionValADay[5], 2) + "/" + "50"; // Kebutuhan gula
         }
     }
 }

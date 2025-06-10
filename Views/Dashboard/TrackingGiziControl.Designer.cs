@@ -116,10 +116,12 @@
             sarapanGridView.Location = new Point(38, 372);
             sarapanGridView.Margin = new Padding(3, 4, 3, 4);
             sarapanGridView.Name = "sarapanGridView";
+            sarapanGridView.Tag = "0";
             sarapanGridView.RowHeadersWidth = 51;
             sarapanGridView.Size = new Size(802, 392);
             sarapanGridView.TabIndex = 1;
             sarapanGridView.RowPostPaint += sarapanGridView_RowPostPaint;
+            sarapanGridView.CellContentClick += DataGridContentClicked;
             // 
             // label2
             // 
@@ -245,6 +247,8 @@
             makanSiangGridView.Size = new Size(802, 379);
             makanSiangGridView.TabIndex = 6;
             makanSiangGridView.RowPostPaint += makanSiangGridView_RowPostPaint;
+            makanSiangGridView.Tag = "1";
+            makanSiangGridView.CellContentClick += DataGridContentClicked;
             // 
             // iconPictureBox3
             // 
@@ -321,6 +325,8 @@
             makanMalamGridView.Size = new Size(808, 327);
             makanMalamGridView.TabIndex = 11;
             makanMalamGridView.RowPostPaint += makanMalamGridView_RowPostPaint;
+            makanMalamGridView.Tag = "2";
+            makanMalamGridView.CellContentClick += DataGridContentClicked;
             // 
             // iconPictureBox4
             // 
@@ -398,6 +404,8 @@
             jajanGridView.Size = new Size(808, 327);
             jajanGridView.TabIndex = 16;
             jajanGridView.RowPostPaint += jajanGridView_RowPostPaint;
+            jajanGridView.Tag = "3";
+            jajanGridView.CellContentClick += DataGridContentClicked;
             // 
             // trackingDateTimePicker
             // 
@@ -517,7 +525,7 @@
             SeratValLab.Name = "SeratValLab";
             SeratValLab.Size = new Size(34, 30);
             SeratValLab.TabIndex = 31;
-            SeratValLab.Text = "9/";
+            SeratValLab.Text = "0/";
             // 
             // ProteinValLab
             // 
@@ -529,7 +537,7 @@
             ProteinValLab.Name = "ProteinValLab";
             ProteinValLab.Size = new Size(46, 30);
             ProteinValLab.TabIndex = 30;
-            ProteinValLab.Text = "20/";
+            ProteinValLab.Text = "0/";
             // 
             // KarboValLab
             // 
@@ -541,7 +549,7 @@
             KarboValLab.Name = "KarboValLab";
             KarboValLab.Size = new Size(46, 30);
             KarboValLab.TabIndex = 29;
-            KarboValLab.Text = "30/";
+            KarboValLab.Text = "0/";
             // 
             // LemakValLab
             // 
@@ -599,6 +607,7 @@
             mknPagiIconButton.TabIndex = 35;
             mknPagiIconButton.Text = "Makan";
             mknPagiIconButton.UseVisualStyleBackColor = false;
+            mknPagiIconButton.Tag = "0";
             mknPagiIconButton.Click += makanButton_Click;
             // 
             // mknSiangIconButton1
@@ -617,6 +626,7 @@
             mknSiangIconButton1.TabIndex = 36;
             mknSiangIconButton1.Text = "Makan";
             mknSiangIconButton1.UseVisualStyleBackColor = false;
+            mknSiangIconButton1.Tag = "1";
             mknSiangIconButton1.Click += makanButton_Click;
             // 
             // mknMlmIconButton
@@ -635,6 +645,7 @@
             mknMlmIconButton.TabIndex = 37;
             mknMlmIconButton.Text = "Makan";
             mknMlmIconButton.UseVisualStyleBackColor = false;
+            mknMlmIconButton.Tag = "2";
             mknMlmIconButton.Click += makanButton_Click;
             // 
             // jajanIconButton
@@ -653,6 +664,7 @@
             jajanIconButton.TabIndex = 38;
             jajanIconButton.Text = "Makan";
             jajanIconButton.UseVisualStyleBackColor = false;
+            jajanIconButton.Tag = "3";
             jajanIconButton.Click += makanButton_Click;
             // 
             // TrackingGiziControl

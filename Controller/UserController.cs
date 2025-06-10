@@ -91,7 +91,7 @@ public static partial class Database
                 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
                 using (var dbContext = new AppDbContext(optionsBuilder.Options))
                 {
-                    var result = dbContext.Users.SingleOrDefault(b => b.Id == user.Id);
+                    User? result = dbContext.Users.SingleOrDefault(b => b.Id == user.Id);
                     if (result != null)
                     {
                         result.Username = user.Username;
@@ -102,7 +102,6 @@ public static partial class Database
                         result.GenderId = user.GenderId;
                         result.PurposeId = user.PurposeId;
                         result.TingkatAktivitas = user.TingkatAktivitas;
-
                         dbContext.SaveChanges();
 
                     }

@@ -8,7 +8,7 @@ public static partial class Database
         public string mealType { get; set; }
         public List<MealItem>? GetRowOfMealItems(DateTime dateOfDay)
         {
-            Meal? meal = GetMealIfExist(this.mealType, dateOfDay.ToUniversalTime());
+            Meal? meal = GetMealIfExist(this.mealType, dateOfDay);
             try
             {
                 if (meal != null)
@@ -73,6 +73,38 @@ public static partial class Database
             catch
             {
                 return false;
+            }
+        }
+        public static void UpdateMealItem(MealItem mealItem)
+        {
+            try
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                using (var dbContext = new AppDbContext(optionsBuilder.Options))
+                {
+                    MealItem? qmealItem = dbContext.MealItems.SingleOrDefault(mi => mi.Id == mealItem.Id);
+                    if (qmealItem != null)
+                    {
+                        qmealItem.Gula = mealItem.Gula;
+                        qmealItem.Karbohidrat = mealItem.Karbohidrat;
+                        qmealItem.Lemak = mealItem.Lemak;
+                        qmealItem.Protein = mealItem.Protein;
+                        qmealItem.Serat = mealItem.Serat;
+                        qmealItem.Qty = mealItem.Qty;
+                        qmealItem.UnitId = mealItem.UnitId;
+                        qmealItem.UpdatedAt = DateTime.UtcNow;
+
+                        dbContext.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot save meal item", "Error", MessageBoxButtons.OK);;
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Cannot save meal item\nError on access database", "Error", MessageBoxButtons.OK);;
             }
         }
     }
