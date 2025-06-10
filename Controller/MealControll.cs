@@ -40,12 +40,20 @@ public static partial class Database
     /// <returns></returns>
     public static Meal? GetMealIfExist(string mealType, DateTime date)
     {
-        date = date.ToUniversalTime() + DateTimeOffset.Now.Offset;
+        DateTime queryDate = date.ToUniversalTime();
+        if (queryDate.Date != date.Date)
+        {
+            queryDate = queryDate.AddDays(1).Date;
+        }
+        else
+        {
+            queryDate = queryDate.Date;
+        }
         try
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             var dbContext = new AppDbContext(optionsBuilder.Options);
-            var result = dbContext.Meals.SingleOrDefault(b => b.MealType == mealType && b.Date.Date == date.Date);
+            var result = dbContext.Meals.SingleOrDefault(b => b.MealType == mealType && b.Date.Date == queryDate);
             if (result != null)
             {
                 return result;
@@ -55,8 +63,9 @@ public static partial class Database
                 return null;
             }
         }
-        catch
+        catch (Exception e)
         {
+            MessageBox.Show($"Error GetMealIfExist\n{e}", "Information", MessageBoxButtons.OK);
             return null;
         }
     }

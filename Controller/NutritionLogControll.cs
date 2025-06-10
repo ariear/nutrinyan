@@ -29,8 +29,16 @@ public static partial class Database
                 {
                     return null;
                 }
-                DateTime queryDate = date.ToUniversalTime() + DateTimeOffset.Now.Offset;
-                NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(nl => nl.Date.Date == queryDate.Date && nl.UserId == userId);
+                DateTime queryDate = date.ToUniversalTime();//.ToUniversalTime();
+                if (queryDate.Date != date.Date)
+                {
+                    queryDate = queryDate.AddDays(1).Date;
+                }
+                else
+                {
+                    queryDate = queryDate.Date;
+                }
+                NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(nl => nl.Date.Date == queryDate && nl.UserId == userId);
                 if (result == null)
                 {
                     NutritionLog nutritionLog = new NutritionLog
@@ -62,8 +70,9 @@ public static partial class Database
                 }
             }
         }
-        catch
+        catch (Exception e)
         {
+            MessageBox.Show($"Ensure NutLog Result: {e}", "Information", MessageBoxButtons.OK);
             return null;
         }
     }
