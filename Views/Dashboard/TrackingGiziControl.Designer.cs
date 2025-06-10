@@ -34,24 +34,24 @@
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             label1 = new Label();
             sarapanGridView = new DataGridView();
-            label2 = new Label();
+            makanPagiLabel = new Label();
             label3 = new Label();
             totalKaloriPagi = new Label();
             iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             totalKaloriSiang = new Label();
             label6 = new Label();
-            label7 = new Label();
+            makanSiangLabel = new Label();
             makanSiangGridView = new DataGridView();
             iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
             totalKaloriMalam = new Label();
             label9 = new Label();
-            label10 = new Label();
+            makanMalamLabel = new Label();
             makanMalamGridView = new DataGridView();
             iconPictureBox4 = new FontAwesome.Sharp.IconPictureBox();
             totalKaloriJajan = new Label();
             label12 = new Label();
-            label13 = new Label();
+            jajanLabel = new Label();
             jajanGridView = new DataGridView();
             trackingDateTimePicker = new DateTimePicker();
             label14 = new Label();
@@ -123,15 +123,16 @@
             sarapanGridView.RowPostPaint += sarapanGridView_RowPostPaint;
             sarapanGridView.CellContentClick += DataGridContentClicked;
             // 
-            // label2
+            // makanPagiLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label2.ForeColor = SystemColors.ControlLightLight;
-            label2.Location = new Point(80, 311);
-            label2.Name = "label2";
-            label2.Size = new Size(0, 37);
-            label2.TabIndex = 2;
+            makanPagiLabel.AutoSize = true;
+            makanPagiLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            makanPagiLabel.ForeColor = SystemColors.ControlLightLight;
+            makanPagiLabel.Location = new Point(80, 311);
+            makanPagiLabel.Name = "makanPagiLabel";
+            makanPagiLabel.Size = new Size(0, 37);
+            makanPagiLabel.TabIndex = 2;
+            makanPagiLabel.Text = Database.MealsOfADay[0].mealType;
             // 
             // label3
             // 
@@ -211,15 +212,16 @@
             label6.TabIndex = 8;
             label6.Text = "Kalori";
             // 
-            // label7
+            // makanSiangLabel
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label7.ForeColor = SystemColors.ControlLightLight;
-            label7.Location = new Point(80, 803);
-            label7.Name = "label7";
-            label7.Size = new Size(0, 37);
-            label7.TabIndex = 7;
+            makanSiangLabel.AutoSize = true;
+            makanSiangLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            makanSiangLabel.ForeColor = SystemColors.ControlLightLight;
+            makanSiangLabel.Location = new Point(80, 803);
+            makanSiangLabel.Name = "makanSiangLabel";
+            makanSiangLabel.Size = new Size(0, 37);
+            makanSiangLabel.TabIndex = 7;
+            makanSiangLabel.Text = Database.MealsOfADay[1].mealType;
             // 
             // makanSiangGridView
             // 
@@ -289,15 +291,16 @@
             label9.TabIndex = 13;
             label9.Text = "Kalori";
             // 
-            // label10
+            // makanMalamLabel
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label10.ForeColor = SystemColors.ControlLightLight;
-            label10.Location = new Point(80, 1281);
-            label10.Name = "label10";
-            label10.Size = new Size(0, 37);
-            label10.TabIndex = 12;
+            makanMalamLabel.AutoSize = true;
+            makanMalamLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            makanMalamLabel.ForeColor = SystemColors.ControlLightLight;
+            makanMalamLabel.Location = new Point(80, 1281);
+            makanMalamLabel.Name = "makanMalamLabel";
+            makanMalamLabel.Size = new Size(0, 37);
+            makanMalamLabel.TabIndex = 12;
+            makanMalamLabel.Text = Database.MealsOfADay[2].mealType;
             // 
             // makanMalamGridView
             // 
@@ -367,16 +370,16 @@
             label12.TabIndex = 18;
             label12.Text = "Kalori";
             // 
-            // label13
+            // jajanLabel
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label13.ForeColor = SystemColors.ControlLightLight;
-            label13.Location = new Point(80, 1715);
-            label13.Name = "label13";
-            label13.Size = new Size(169, 37);
-            label13.TabIndex = 17;
-            label13.Text = "Jajan/Snack";
+            jajanLabel.AutoSize = true;
+            jajanLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            jajanLabel.ForeColor = SystemColors.ControlLightLight;
+            jajanLabel.Location = new Point(80, 1715);
+            jajanLabel.Name = "jajanLabel";
+            jajanLabel.Size = new Size(169, 37);
+            jajanLabel.TabIndex = 17;
+            jajanLabel.Text = Database.MealsOfADay[3].mealType;
             // 
             // jajanGridView
             // 
@@ -681,22 +684,22 @@
             Controls.Add(iconPictureBox4);
             Controls.Add(totalKaloriJajan);
             Controls.Add(label12);
-            Controls.Add(label13);
+            Controls.Add(jajanLabel);
             Controls.Add(jajanGridView);
             Controls.Add(iconPictureBox3);
             Controls.Add(totalKaloriMalam);
             Controls.Add(label9);
-            Controls.Add(label10);
+            Controls.Add(makanMalamLabel);
             Controls.Add(makanMalamGridView);
             Controls.Add(iconPictureBox2);
             Controls.Add(totalKaloriSiang);
             Controls.Add(label6);
-            Controls.Add(label7);
+            Controls.Add(makanSiangLabel);
             Controls.Add(makanSiangGridView);
             Controls.Add(iconPictureBox1);
             Controls.Add(totalKaloriPagi);
             Controls.Add(label3);
-            Controls.Add(label2);
+            Controls.Add(makanPagiLabel);
             Controls.Add(sarapanGridView);
             Controls.Add(label1);
             Controls.Add(groupBox1);
@@ -722,24 +725,24 @@
 
         private Label label1;
         private DataGridView sarapanGridView;
-        private Label label2;
+        private Label makanPagiLabel;
         private Label label3;
         private Label totalKaloriPagi;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
         private Label totalKaloriSiang;
         private Label label6;
-        private Label label7;
+        private Label makanSiangLabel;
         private DataGridView makanSiangGridView;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox3;
         private Label totalKaloriMalam;
         private Label label9;
-        private Label label10;
+        private Label makanMalamLabel;
         private DataGridView makanMalamGridView;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox4;
         private Label totalKaloriJajan;
         private Label label12;
-        private Label label13;
+        private Label jajanLabel;
         private DataGridView jajanGridView;
         private DateTimePicker trackingDateTimePicker;
         private Label label14;
