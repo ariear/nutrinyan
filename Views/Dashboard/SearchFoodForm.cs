@@ -166,30 +166,30 @@ namespace NutriNyan.Views.Dashboard
                     }
                     else
                     {
-                        MessageBox.Show("Terjadi kesalahan saat Saving ke Database", "Information", MessageBoxButtons.OK);
+                        MessageBox.Show($"Terjadi kesalahan saat Saving ke Database", "Information", MessageBoxButtons.OK);
                     }
                 }
-                    else
-                    {
-                        MessageBox.Show("Terjadi kesalahan", "Information", MessageBoxButtons.OK);
-                    }
+                else
+                {
+                    MessageBox.Show($"Terjadi kesalahan\nResult: {result.Count}", "Information", MessageBoxButtons.OK);
+                }
             } else {
                 Unit? unit = Database.units.GetUnitIfExist("1 Porsi" + " " + food.Name);
+                this.pselectedFood.Clear();
                 if (unit != null) {
-                    this.pselectedFood.Clear();
                     pselectedFood.Add("1 Porsi", unit.Weight);
-                    pselectedFood.Add("Lemak", food.Lemak);
-                    pselectedFood.Add("Protein", food.Protein);
-                    pselectedFood.Add("Karbohidrat", food.Karbohidrat);
-                    pselectedFood.Add("Serat", food.Serat);
-                    pselectedFood.Add("Gula", food.Gula);
-                    this.pfoodNameNSum[0] = food.Name;
-                    this.pfoodNameNSum[1] = food.Summary;
-                    this.Hide();
-                    this.Dispose();
+                    
                 } else {
-                    MessageBox.Show("Terjadi kesalahan", "Information", MessageBoxButtons.OK);
                 }
+                pselectedFood.Add("Lemak", food.Lemak);
+                pselectedFood.Add("Protein", food.Protein);
+                pselectedFood.Add("Karbohidrat", food.Karbohidrat);
+                pselectedFood.Add("Serat", food.Serat);
+                pselectedFood.Add("Gula", food.Gula);
+                this.pfoodNameNSum[0] = food.Name;
+                this.pfoodNameNSum[1] = food.Summary;
+                this.Hide();
+                this.Dispose();
             }
         }
         private async void searchButtonClicked(object sender, EventArgs e)
