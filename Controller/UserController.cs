@@ -69,7 +69,7 @@ public static partial class Database
             }
             else
             {
-                MessageBox.Show("Error saat set gender pada user", "Error", MessageBoxButtons.OK);
+                MessageBox.Show($"Error saat set gender pada user", "Error", MessageBoxButtons.OK);
             }
         }
         private void SetUserPurpose(int idPurpose)
@@ -82,7 +82,7 @@ public static partial class Database
                     return;
                 }
             }
-            MessageBox.Show("Error saat set gender pada user", "Error", MessageBoxButtons.OK);
+            MessageBox.Show("Error saat set tujuan", "Error", MessageBoxButtons.OK);
         }
         public bool Update(User user)
         {

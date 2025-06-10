@@ -6,9 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using NutriNyan.Models;
 using NutriNyan.Views.Auth;
+using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace NutriNyan.Views.Dashboard
 {
@@ -257,25 +260,38 @@ namespace NutriNyan.Views.Dashboard
         private void DataGridContentClicked(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView senderGrid = sender as DataGridView;
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0)
+            if (e.ColumnIndex == 8 && e.RowIndex >= 0)
             {
                 MealItem mealItem = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)].GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
-                DashboardMainForm dashboardMainForm = (DashboardMainForm)Application.OpenForms["DashboardMainForm"];
+                DashboardMainForm dashboardMainForm = (DashboardMainForm)System.Windows.Forms.Application.OpenForms["DashboardMainForm"];
                 dashboardMainForm.PanelContent.Controls.Clear();
                 EditMakanan editMakanan = new EditMakanan(mealItem, trackingDateTimePicker.Value);
                 editMakanan.Dock = DockStyle.Fill;
                 dashboardMainForm.PanelContent.Controls.Add(editMakanan);
+            } 
+            else if (e.ColumnIndex == 9 && e.RowIndex >= 0)
+            {
+                MessageBox.Show("apakah anda yakin menghapus daftar ini?");
+                Database.NutritionLogOfDay nutDay = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)];
+                MealItem mealItem = nutDay.GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
+                Database.NutritionLogOfDay.RemoveMealItem(mealItem);
+                RefreshGridView();
             }
         }
-
+        private void RefreshGridView()
+        {
+            sarapanGridView.Rows.Clear();
+            makanSiangGridView.Rows.Clear();
+            makanMalamGridView.Rows.Clear();
+            jajanGridView.Rows.Clear();
+            GridViewFill();
+        }
 
         private void makanButton_Click(object sender, EventArgs e)
         {
             FontAwesome.Sharp.IconButton tombolClick = sender as FontAwesome.Sharp.IconButton;
             Database.NutritionLogOfDay meal = Database.MealsOfADay[Int32.Parse((string)tombolClick.Tag)];
-            DashboardMainForm dashboardMainForm = (DashboardMainForm)Application.OpenForms["DashboardMainForm"];
+            DashboardMainForm dashboardMainForm = (DashboardMainForm)System.Windows.Forms.Application.OpenForms["DashboardMainForm"];
             dashboardMainForm.PanelContent.Controls.Clear();
             AddGiziControl addGizi = new AddGiziControl(meal, trackingDateTimePicker.Value);
             addGizi.Dock = DockStyle.Fill;

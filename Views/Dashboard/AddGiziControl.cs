@@ -41,7 +41,7 @@ namespace NutriNyan.Views.Dashboard
                 Unit unit = Database.units.GetUnitIfExist("1 Porsi " + this.foodNameNSum[0]);
                 if (unit == null)
                 {
-                    if (selectedFood["1 Porsi"] != 0)
+                    if (selectedFood.ContainsKey("1 Porsi"))
                     {
                         Database.units.AddUnit(
                             unitType: "1 Porsi" + " " + this.foodNameNSum[0],
@@ -51,14 +51,17 @@ namespace NutriNyan.Views.Dashboard
                 }
                 try
                 {
-                    float weight;
                     foodNameBox.Text = this.foodNameNSum[0];
-                    if (selectedFood["1 Porsi"] != 0)
+                    if (selectedFood.ContainsKey("1 Porsi"))
                     {
                         List<Unit> DataSourceStore = (List<Unit>)(unitSizeComboBox.DataSource ?? new List<Unit>());
                         if (DataSourceStore.Count < 4)
                         {
-                            DataSourceStore.Add(Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0])!);
+                            Unit? unitLocal = Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0]);
+                            if (unitLocal != null)
+                            {
+                                DataSourceStore.Add(Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0])!);
+                            }
                         }
                         else
                         {
@@ -72,14 +75,14 @@ namespace NutriNyan.Views.Dashboard
                         unitSizeComboBox.DisplayMember = "UnitType";
                         unitSizeComboBox.SelectedIndex = DataSourceStore.Count - 1;
                         UnitValueBox.Text = "1";
-                        weight = selectedFood["1 Porsi"]; // Here
                     }
                     else
                     {
-                        weight = (float)(unitSizeComboBox.SelectedValue ?? 0F);
+                        unitSizeComboBox.SelectedIndex = 2;
+                        UnitValueBox.Text = "1";
                     }
                     // Add some selectedFood["1 Porsi"]
-                    RefreshFillData(selectedFood["1 Porsi"]);
+                    RefreshFillData((float)unitSizeComboBox.SelectedValue);
                 }
                 catch (Exception e)
                 {
@@ -151,19 +154,27 @@ namespace NutriNyan.Views.Dashboard
         }
         private void SaveFoodButtonClicked(object sender, EventArgs e)
         {
-            Unit? unit = Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0]);
+            Unit? unit;
+            if (unitSizeComboBox.SelectedIndex == 3)
+            {
+                unit = Database.units.GetUnitIfExist("1 Porsi" + " " + this.foodNameNSum[0]);
+            }
+            else
+            {
+                unit = Database.units.GetDefaultUnits()[unitSizeComboBox.SelectedIndex];
+            }
             Food? food = Database.MyFoods.GetFoodIfExist(this.foodNameNSum[0]);
             if (unit != null && food != null)
             {
                 bool resultAddMealItem = MealOfADay.AddMealItem(
                     dateOfDay: trackingDateTime,
                     foodId: food.Id,
-                    qty: Single.Parse(UnitValueBox.Text), // Need adjustment
-                    karbohidrat: Single.Parse(KarbTextBox.Text),
-                    protein: Single.Parse(ProtTextBox.Text),
-                    lemak: Single.Parse(LemakTextBox.Text),
-                    serat: Single.Parse(SeratTextBox.Text),
-                    gula: Single.Parse(GulaTextBox.Text),
+                    qty: Single.Parse(UnitValueBox.Text, CultureInfo.InvariantCulture), // Need adjustment
+                    karbohidrat: Single.Parse(KarbTextBox.Text, CultureInfo.InvariantCulture),
+                    protein: Single.Parse(ProtTextBox.Text, CultureInfo.InvariantCulture),
+                    lemak: Single.Parse(LemakTextBox.Text, CultureInfo.InvariantCulture),
+                    serat: Single.Parse(SeratTextBox.Text, CultureInfo.InvariantCulture),
+                    gula: Single.Parse(GulaTextBox.Text, CultureInfo.InvariantCulture),
                     unitId: unit.Id
                 );
                 if (resultAddMealItem)

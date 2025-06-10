@@ -148,8 +148,9 @@ public static partial class Database
                     return null;
                 }
             }
-            catch
+            catch (Exception e)
             {
+                //MessageBox.Show($"Tidak bisa mencari unit pada database\n{e}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
         }
@@ -174,8 +175,9 @@ public static partial class Database
                     return null;
                 }
             }
-            catch
+            catch (Exception e)
             {
+                MessageBox.Show($"Tidak bisa mencari unit pada database\n{e}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
         }

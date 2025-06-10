@@ -79,8 +79,8 @@ public static partial class Database
         {
             try
             {
-                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-                using (var dbContext = new AppDbContext(optionsBuilder.Options))
+                DbContextOptionsBuilder<AppDbContext> optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                using (AppDbContext dbContext = new AppDbContext(optionsBuilder.Options))
                 {
                     MealItem? qmealItem = dbContext.MealItems.SingleOrDefault(mi => mi.Id == mealItem.Id);
                     if (qmealItem != null)
@@ -104,8 +104,24 @@ public static partial class Database
             }
             catch
             {
-                MessageBox.Show("Cannot save meal item\nError on access database", "Error", MessageBoxButtons.OK);;
+                MessageBox.Show("Cannot save meal item\nError on access database", "Error", MessageBoxButtons.OK);
             }
+        }
+        public static void RemoveMealItem(MealItem mealItem)
+        {
+            try
+            {
+                DbContextOptionsBuilder<AppDbContext> optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                using (AppDbContext dbContext = new AppDbContext(optionsBuilder.Options))
+                {
+                    dbContext.MealItems.Remove(mealItem);
+                    dbContext.SaveChanges();
+                }
+            }catch (Exception e)
+            {
+                MessageBox.Show($"Cannot remove meal item\nError on access database \n{e}", "Error", MessageBoxButtons.OK); ;
+            }
+            
         }
     }
     /// <summary>
