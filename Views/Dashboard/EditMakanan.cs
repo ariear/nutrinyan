@@ -96,7 +96,7 @@ namespace NutriNyan.Views.Dashboard
         private void RefreshFillData()
         {
             float valueUnitBox;
-            if (Single.Parse(UnitValueBox.Text) < Single.Parse(UnitValueBox.Text.Replace(",", ".")))
+            if (Single.Parse("1,001") < Single.Parse("1.001"))
             {
                 valueUnitBox = Single.Parse(UnitValueBox.Text);
             }
@@ -122,7 +122,7 @@ namespace NutriNyan.Views.Dashboard
         }
         private void SaveFoodButton_Clicked(object sender, EventArgs e)
         {
-            if (Single.Parse(GulaTextBox.Text) < Single.Parse(GulaTextBox.Text.Replace(",", ".")))
+            if (Single.Parse("1,001") < Single.Parse("1.001"))
             {
                 mealItem.Gula = Single.Parse(GulaTextBox.Text);
                 mealItem.Karbohidrat = Single.Parse(KarbTextBox.Text);

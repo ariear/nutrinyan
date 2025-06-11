@@ -95,7 +95,7 @@ namespace NutriNyan.Views.Dashboard
             if (selectedFood.Count != 0)
             {
                 float unitVal;
-                if (Single.Parse(UnitValueBox.Text) < Single.Parse(UnitValueBox.Text.Replace(",", ".")))
+                if (Single.Parse("1,001") < Single.Parse("1.001".Replace(",", ".")))
                 {
                     unitVal = Single.Parse(UnitValueBox.Text);
                 }
@@ -176,7 +176,7 @@ namespace NutriNyan.Views.Dashboard
             if (unit != null && food != null)
             {
                 List<float> nutValue = new List<float>();
-                if (Single.Parse(UnitValueBox.Text) < Single.Parse(UnitValueBox.Text.Replace(",", ".")))
+                if (Single.Parse("1,001") < Single.Parse("1.001"))
                 {
                     nutValue.Add(Single.Parse(UnitValueBox.Text));
                     nutValue.Add(Single.Parse(KarbTextBox.Text));

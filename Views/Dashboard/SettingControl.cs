@@ -68,7 +68,7 @@ namespace NutriNyan.Views.Dashboard
         private void PerbaruiButton_Click(object sender, EventArgs e)
         {
             User userUpdate = Database.userLogged.Get();
-            if (Single.Parse(TBbox.Text) < Single.Parse(TBbox.Text.Replace(",", ".")))
+            if (Single.Parse("1,001") < Single.Parse("1.001"))
             {
                 userUpdate.Tb = Single.Parse(TBbox.Text);
                 userUpdate.Bb = Single.Parse(BBbox.Text);

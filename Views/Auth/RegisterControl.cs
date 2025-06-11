@@ -45,7 +45,7 @@ namespace NutriNyan.Views.Auth
                 // Add here
                 float tb;
                 float bb;
-                if (Single.Parse(TB_TextBox.Text) < Single.Parse(TB_TextBox.Text.Replace(",", ".")))
+                if (Single.Parse("1,001") < Single.Parse("1.001"))
                 {
                     tb = Single.Parse(TB_TextBox.Text);
                     bb = Single.Parse(BB_TextBox.Text);
