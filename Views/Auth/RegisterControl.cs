@@ -43,14 +43,26 @@ namespace NutriNyan.Views.Auth
                 )
             {
                 // Add here
+                float tb;
+                float bb;
+                if (Single.Parse(TB_TextBox.Text) < Single.Parse(TB_TextBox.Text.Replace(",", ".")))
+                {
+                    tb = Single.Parse(TB_TextBox.Text);
+                    bb = Single.Parse(BB_TextBox.Text);
+                }
+                else
+                {
+                    tb = Single.Parse(TB_TextBox.Text.Replace(",","."));
+                    bb = Single.Parse(BB_TextBox.Text.Replace(",","."));
+                }
                 Database.UserLogged user = new Database.UserLogged(
                     username: Nama_TextBox.Text,
                     pwd: Pwd_TextBox.Text,
                     genderId: (int)jkBox.SelectedValue,
                     genderIndex: (int)jkBox.SelectedIndex,
                     dateBirth: dateTimePicker1.Value,
-                    tb: Single.Parse(TB_TextBox.Text),
-                    bb: Single.Parse(BB_TextBox.Text),
+                    tb: tb,
+                    bb: bb,
                     tingkatAktivitas: (ActivityLevel)aktivitasBox.SelectedValue,
                     purposeId: (int)targetBox.SelectedValue
                 );

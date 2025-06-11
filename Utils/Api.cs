@@ -42,22 +42,41 @@ public static class Api
                         else
                         {
                             // Adding nutrition value of search the item
+                            bool isComma = false;
+                            if (Single.Parse("1,001") < Single.Parse("1.001"))
+                            {
+                                isComma = true;
+                            }
                             List<string> listGet = ["Lemak", "Protein", "Karbohidrat", "Serat", "Gula"];
                             foreach (string item in listGet)
                             {
                                 string replace_html2 = html2;
                                 string value = replace_html2.Split($"{item}</div>")[1].Split("</div>")[0].Split(">")[1];
-                                my_dict.Add(item, float.Parse(value.Substring(0, value.Length - 1)));
+                                if (isComma)
+                                {
+                                    my_dict.Add(item, float.Parse(value.Substring(0, value.Length - 1)));
+                                }
+                                else
+                                {
+                                    my_dict.Add(item, float.Parse(value.Substring(0, value.Length - 1).Replace(",",".")));
+                                }
                             }
                             // Adding a portion weight of the item if "1 porsi" exist in the html
                             if (html2.Contains("1 porsi"))
                             {
-                                my_dict.Add("1 Porsi", float.Parse(html2.Split("1 porsi</a> <span class=\"smallText greyText\">(")[1].Split(" ")[0]));
+                                if (isComma)
+                                {
+                                    my_dict.Add("1 Porsi", float.Parse(html2.Split("1 porsi</a> <span class=\"smallText greyText\">(")[1].Split(" ")[0]));
+                                }
+                                else
+                                {
+                                    my_dict.Add("1 Porsi", float.Parse(html2.Split("1 porsi</a> <span class=\"smallText greyText\">(")[1].Split(" ")[0].Replace(",", ".")));
+                                }
                             }
-                            else
-                            {
-                                my_dict.Add("1 Porsi", 0F);
-                            }
+                                else
+                                {
+                                    my_dict.Add("1 Porsi", 0F);
+                                }
                         }
                         return my_dict;
                     }

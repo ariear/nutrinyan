@@ -121,7 +121,7 @@
             sarapanGridView.Size = new Size(802, 392);
             sarapanGridView.TabIndex = 1;
             sarapanGridView.RowPostPaint += sarapanGridView_RowPostPaint;
-            sarapanGridView.CellContentClick += DataGridContentClicked;
+            sarapanGridView.CellClick += DataGridContentClicked;
             // 
             // makanPagiLabel
             // 
@@ -250,7 +250,7 @@
             makanSiangGridView.TabIndex = 6;
             makanSiangGridView.RowPostPaint += makanSiangGridView_RowPostPaint;
             makanSiangGridView.Tag = "1";
-            makanSiangGridView.CellContentClick += DataGridContentClicked;
+            makanSiangGridView.CellClick += DataGridContentClicked;
             // 
             // iconPictureBox3
             // 
@@ -329,7 +329,7 @@
             makanMalamGridView.TabIndex = 11;
             makanMalamGridView.RowPostPaint += makanMalamGridView_RowPostPaint;
             makanMalamGridView.Tag = "2";
-            makanMalamGridView.CellContentClick += DataGridContentClicked;
+            makanMalamGridView.CellClick += DataGridContentClicked;
             // 
             // iconPictureBox4
             // 
@@ -408,7 +408,7 @@
             jajanGridView.TabIndex = 16;
             jajanGridView.RowPostPaint += jajanGridView_RowPostPaint;
             jajanGridView.Tag = "3";
-            jajanGridView.CellContentClick += DataGridContentClicked;
+            jajanGridView.CellClick += DataGridContentClicked;
             // 
             // trackingDateTimePicker
             // 

@@ -17,7 +17,8 @@ namespace NutriNyan.Views.Auth
 {
     public partial class LoginControl : UserControl
     {
-        AuthMainForm pMainAuth;
+        AuthMainForm pMainAuth { get; set; }
+        Dashboard.DashboardMainForm? dashboardMainForm { get; set; }
         public LoginControl(AuthMainForm pMainAuth)
         {
             InitializeComponent();
@@ -39,11 +40,11 @@ namespace NutriNyan.Views.Auth
         }
         private async void Button1_Clicked(object sender, EventArgs e)
         {
-            Dashboard.DashboardMainForm? result = Check();
-            if (result != null)
+            dashboardMainForm = Check();
+            if (dashboardMainForm != null)
             {
                 pMainAuth.Hide();
-                result.ShowDialog();// need adjustment
+                dashboardMainForm.ShowDialog();// need adjustment
                 pMainAuth.Dispose();// need adjustment
             }
             else

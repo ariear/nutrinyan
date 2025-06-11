@@ -94,7 +94,16 @@ namespace NutriNyan.Views.Dashboard
         {
             if (selectedFood.Count != 0)
             {
-                float totalWeight = totalUnit * Single.Parse(UnitValueBox.Text);
+                float unitVal;
+                if (Single.Parse(UnitValueBox.Text) < Single.Parse(UnitValueBox.Text.Replace(",", ".")))
+                {
+                    unitVal = Single.Parse(UnitValueBox.Text);
+                }
+                else
+                {
+                    unitVal = Single.Parse(UnitValueBox.Text.Replace(",", "."));
+                }
+                float totalWeight = totalUnit * unitVal;
                 float multiply =  totalWeight / 100;
                 TWPanelLabel.Text = $"{totalWeight} gram";
                 LemakTextBox.Text = $"{selectedFood["Lemak"] * multiply}";
@@ -166,15 +175,34 @@ namespace NutriNyan.Views.Dashboard
             Food? food = Database.MyFoods.GetFoodIfExist(this.foodNameNSum[0]);
             if (unit != null && food != null)
             {
+                List<float> nutValue = new List<float>();
+                if (Single.Parse(UnitValueBox.Text) < Single.Parse(UnitValueBox.Text.Replace(",", ".")))
+                {
+                    nutValue.Add(Single.Parse(UnitValueBox.Text));
+                    nutValue.Add(Single.Parse(KarbTextBox.Text));
+                    nutValue.Add(Single.Parse(ProtTextBox.Text));
+                    nutValue.Add(Single.Parse(LemakTextBox.Text));
+                    nutValue.Add(Single.Parse(SeratTextBox.Text));
+                    nutValue.Add(Single.Parse(GulaTextBox.Text));
+                }
+                else
+                {
+                    nutValue.Add(Single.Parse(UnitValueBox.Text.Replace(",", ".")));
+                    nutValue.Add(Single.Parse(KarbTextBox.Text.Replace(",", ".")));
+                    nutValue.Add(Single.Parse(ProtTextBox.Text.Replace(",", ".")));
+                    nutValue.Add(Single.Parse(LemakTextBox.Text.Replace(",", ".")));
+                    nutValue.Add(Single.Parse(SeratTextBox.Text.Replace(",", ".")));
+                    nutValue.Add(Single.Parse(GulaTextBox.Text.Replace(",", ".")));
+                }
                 bool resultAddMealItem = MealOfADay.AddMealItem(
                     dateOfDay: trackingDateTime,
                     foodId: food.Id,
-                    qty: Single.Parse(UnitValueBox.Text, CultureInfo.InvariantCulture), // Need adjustment
-                    karbohidrat: Single.Parse(KarbTextBox.Text, CultureInfo.InvariantCulture),
-                    protein: Single.Parse(ProtTextBox.Text, CultureInfo.InvariantCulture),
-                    lemak: Single.Parse(LemakTextBox.Text, CultureInfo.InvariantCulture),
-                    serat: Single.Parse(SeratTextBox.Text, CultureInfo.InvariantCulture),
-                    gula: Single.Parse(GulaTextBox.Text, CultureInfo.InvariantCulture),
+                    qty: nutValue[0],//Single.Parse(UnitValueBox.Text), // Need adjustment
+                    karbohidrat: nutValue[1], //Single.Parse(KarbTextBox.Text),
+                    protein: nutValue[2], //Single.Parse(ProtTextBox.Text),
+                    lemak: nutValue[3], //Single.Parse(LemakTextBox.Text),
+                    serat: nutValue[4], //Single.Parse(SeratTextBox.Text),
+                    gula: nutValue[5], //Single.Parse(GulaTextBox.Text),
                     unitId: unit.Id
                 );
                 if (resultAddMealItem)

@@ -95,7 +95,16 @@ namespace NutriNyan.Views.Dashboard
         }
         private void RefreshFillData()
         {
-            float totalWeight = (float)unitSizeComboBox.SelectedValue * Single.Parse(UnitValueBox.Text);
+            float valueUnitBox;
+            if (Single.Parse(UnitValueBox.Text) < Single.Parse(UnitValueBox.Text.Replace(",", ".")))
+            {
+                valueUnitBox = Single.Parse(UnitValueBox.Text);
+            }
+            else
+            {
+                valueUnitBox = Single.Parse(UnitValueBox.Text.Replace(",", "."));
+            }
+                float totalWeight = (float)unitSizeComboBox.SelectedValue * valueUnitBox;
             float multiply = totalWeight / 100;
             TWPanelLabel.Text = $"{totalWeight} gram";
             LemakTextBox.Text = $"{food.Lemak * multiply}";
@@ -113,12 +122,24 @@ namespace NutriNyan.Views.Dashboard
         }
         private void SaveFoodButton_Clicked(object sender, EventArgs e)
         {
-            mealItem.Gula = Single.Parse(GulaTextBox.Text);
-            mealItem.Karbohidrat = Single.Parse(KarbTextBox.Text);
-            mealItem.Lemak = Single.Parse(LemakTextBox.Text);
-            mealItem.Protein = Single.Parse(ProtTextBox.Text);
-            mealItem.Serat = Single.Parse(SeratTextBox.Text);
-            mealItem.Qty = Single.Parse(UnitValueBox.Text);
+            if (Single.Parse(GulaTextBox.Text) < Single.Parse(GulaTextBox.Text.Replace(",", ".")))
+            {
+                mealItem.Gula = Single.Parse(GulaTextBox.Text);
+                mealItem.Karbohidrat = Single.Parse(KarbTextBox.Text);
+                mealItem.Lemak = Single.Parse(LemakTextBox.Text);
+                mealItem.Protein = Single.Parse(ProtTextBox.Text);
+                mealItem.Serat = Single.Parse(SeratTextBox.Text);
+                mealItem.Qty = Single.Parse(UnitValueBox.Text);
+            }
+            else
+            {
+                mealItem.Gula = Single.Parse(GulaTextBox.Text.Replace(",", "."));
+                mealItem.Karbohidrat = Single.Parse(KarbTextBox.Text.Replace(",", "."));
+                mealItem.Lemak = Single.Parse(LemakTextBox.Text.Replace(",", "."));
+                mealItem.Protein = Single.Parse(ProtTextBox.Text.Replace(",", "."));
+                mealItem.Serat = Single.Parse(SeratTextBox.Text.Replace(",", "."));
+                mealItem.Qty = Single.Parse(UnitValueBox.Text.Replace(",", "."));
+            }
             mealItem.UnitId = unitsList[unitSizeComboBox.SelectedIndex].Id;
             Database.NutritionLogOfDay.UpdateMealItem(mealItem);
             // Back to tracking Gizi

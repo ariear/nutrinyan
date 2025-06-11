@@ -68,10 +68,18 @@ namespace NutriNyan.Views.Dashboard
         private void PerbaruiButton_Click(object sender, EventArgs e)
         {
             User userUpdate = Database.userLogged.Get();
+            if (Single.Parse(TBbox.Text) < Single.Parse(TBbox.Text.Replace(",", ".")))
+            {
+                userUpdate.Tb = Single.Parse(TBbox.Text);
+                userUpdate.Bb = Single.Parse(BBbox.Text);
+            }
+            else
+            {
+                userUpdate.Tb = Single.Parse(TBbox.Text.Replace(",","."));
+                userUpdate.Bb = Single.Parse(BBbox.Text.Replace(",","."));
+            }
             userUpdate.Username = NamaBox.Text;
             userUpdate.DateBirth = TGLlahirdates.Value;
-            userUpdate.Tb = Single.Parse(TBbox.Text);
-            userUpdate.Bb = Single.Parse(BBbox.Text);
             userUpdate.DefaultTargetWater = Convert.ToInt32(TargetAirbox.Text);
             userUpdate.GenderId = (int)JKbox.SelectedValue;
             userUpdate.PurposeId = (int)TargetTujuanbox.SelectedValue;

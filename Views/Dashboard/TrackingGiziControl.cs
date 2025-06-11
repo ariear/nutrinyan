@@ -268,22 +268,47 @@ namespace NutriNyan.Views.Dashboard
                 EditMakanan editMakanan = new EditMakanan(mealItem, trackingDateTimePicker.Value);
                 editMakanan.Dock = DockStyle.Fill;
                 dashboardMainForm.PanelContent.Controls.Add(editMakanan);
-            } 
+            }
             else if (e.ColumnIndex == 9 && e.RowIndex >= 0)
             {
-                MessageBox.Show("apakah anda yakin menghapus daftar ini?");
-                Database.NutritionLogOfDay nutDay = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)];
-                MealItem mealItem = nutDay.GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
-                Database.NutritionLogOfDay.RemoveMealItem(mealItem);
-                RefreshGridView();
+                try
+                {
+                    MessageBox.Show("apakah anda yakin menghapus daftar ini?");
+                    Database.NutritionLogOfDay nutDay = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)];
+                    MealItem mealItem = nutDay.GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
+                    Database.NutritionLogOfDay.RemoveMealItem(mealItem);
+                    RefreshGridView();
+                }
+                catch (Exception E)
+                {
+                    MessageBox.Show($"Error\n{E}");
+                }
             }
         }
         private void RefreshGridView()
         {
-            sarapanGridView.Rows.Clear();
-            makanSiangGridView.Rows.Clear();
-            makanMalamGridView.Rows.Clear();
-            jajanGridView.Rows.Clear();
+            if (sarapanGridView != null)
+            {
+                // List<DataGridView> dataGridObjects = [sarapanGridView, makanSiangGridView, makanMalamGridView, jajanGridView];
+                // foreach (DataGridView dataGridView in dataGridObjects)
+                // {
+                //     foreach (DataGridViewRow dataGridViewRow in dataGridView.Rows)
+                //     {
+                //         try
+                //         {
+                //             dataGridView.Rows.Remove(dataGridViewRow);
+                //         }
+                //         catch (Exception e)
+                //         {
+                //             MessageBox.Show($"Error in remove: {e}");
+                //         }
+                //     }
+                // }
+                sarapanGridView.Rows.Clear();
+                makanSiangGridView.Rows.Clear();
+                makanMalamGridView.Rows.Clear();
+                jajanGridView.Rows.Clear();
+            }
             GridViewFill();
         }
 
@@ -397,11 +422,7 @@ namespace NutriNyan.Views.Dashboard
         {
             if (IsInitialize)
             {
-                sarapanGridView.Rows.Clear();
-                makanMalamGridView.Rows.Clear();
-                makanSiangGridView.Rows.Clear();
-                jajanGridView.Rows.Clear();
-                GridViewFill();
+                RefreshGridView();
             }
         }
 
