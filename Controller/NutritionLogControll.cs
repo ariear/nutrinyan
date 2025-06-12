@@ -1,5 +1,7 @@
 using NutriNyan.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using Calculation;
 public static partial class Database
 {
     
@@ -74,6 +76,54 @@ public static partial class Database
         {
             MessageBox.Show($"Ensure NutLog Result: {e}", "Information", MessageBoxButtons.OK);
             return null;
+        }
+    }
+
+    public static Dictionary<string, double> GetWeeklyCalories()
+    {
+        var dailyCalories = new Dictionary<string, double>();
+        var endDate = DateTime.Today;
+        var startDate = endDate.AddDays(-6);
+
+        try
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            using var dbContext = new AppDbContext(optionsBuilder.Options);
+
+            var caloriesData = dbContext.NutritionLogs
+                .Where(n => n.UserId == userLogged.Get().Id &&
+                           n.Date >= TimeZoneInfo.ConvertTimeToUtc(startDate.Date) &&
+                           n.Date <= TimeZoneInfo.ConvertTimeToUtc(endDate.Date.AddDays(1)))
+                .Include(n => n.Meals)
+                    .ThenInclude(m => m.MealItems)
+                .AsEnumerable()
+                .GroupBy(n => n.Date.Date)
+                .Select(g => new {
+                    Date = g.Key,
+                    TotalCalories = g.SelectMany(n => n.Meals)
+                                   .SelectMany(m => m.MealItems)
+                                   .Sum(mi => Calori.CaloriCal(mi.Protein, mi.Karbohidrat, mi.Lemak, mi.Gula, mi.Serat))
+                })
+                .ToList();
+
+            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                var dataForDate = caloriesData.FirstOrDefault(d => d.Date == date.Date);
+                string dateKey = date.ToString("dddd", new CultureInfo("id-ID"));
+
+                dailyCalories.Add(dateKey, dataForDate?.TotalCalories ?? 0);
+            }
+
+            return dailyCalories;
+        }
+        catch (Exception ex)
+        {
+            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                string dateKey = date.ToString("dd/MM", CultureInfo.InvariantCulture);
+                dailyCalories.Add(dateKey, 0);
+            }
+            return dailyCalories;
         }
     }
 }

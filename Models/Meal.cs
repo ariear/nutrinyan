@@ -18,6 +18,6 @@ namespace NutriNyan.Models
         public DateTime Date { get; set; }
         public DateTime UpdatedAt { get; set; }
         public NutritionLog Log { get; set; } = null!;
-        public List<MealItem> Items { get; set; } = new();
+        public ICollection<MealItem> MealItems { get; set; }
     }
 }

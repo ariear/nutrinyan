@@ -64,10 +64,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ActiveCaption;
-            label1.Location = new Point(78, 42);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(55, 25);
             label1.Name = "label1";
-            label1.Size = new Size(179, 45);
+            label1.Size = new Size(118, 30);
             label1.TabIndex = 0;
             label1.Text = "Dashboard";
             // 
@@ -79,8 +78,8 @@
             chart2.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             chart2.Legends.Add(legend1);
-            chart2.Location = new Point(78, 388);
-            chart2.Margin = new Padding(2);
+            chart2.Location = new Point(55, 249);
+            chart2.Margin = new Padding(1, 1, 1, 1);
             chart2.Name = "chart2";
             chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Light;
             series1.ChartArea = "ChartArea1";
@@ -130,13 +129,12 @@
             series1.Points.Add(dataPoint7);
             series1.XValueMember = "12";
             chart2.Series.Add(series1);
-            chart2.Size = new Size(806, 335);
+            chart2.Size = new Size(564, 201);
             chart2.TabIndex = 35;
             chart2.Tag = "";
             chart2.Text = "chart2";
             title1.Name = "Title1";
             chart2.Titles.Add(title1);
-            chart2.Click += chart2_Click;
             // 
             // groupBox1
             // 
@@ -157,11 +155,9 @@
             groupBox1.Controls.Add(LemakValLabel);
             groupBox1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             groupBox1.ForeColor = SystemColors.ControlLightLight;
-            groupBox1.Location = new Point(78, 118);
-            groupBox1.Margin = new Padding(4, 5, 4, 5);
+            groupBox1.Location = new Point(55, 71);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(1110, 185);
+            groupBox1.Size = new Size(777, 115);
             groupBox1.TabIndex = 36;
             groupBox1.TabStop = false;
             groupBox1.Text = "Kandungan Gizi Hari Ini";
@@ -172,10 +168,9 @@
             label18.BackColor = Color.FromArgb(1, 54, 63);
             label18.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label18.ForeColor = SystemColors.ControlLightLight;
-            label18.Location = new Point(818, 56);
-            label18.Margin = new Padding(4, 0, 4, 0);
+            label18.Location = new Point(573, 34);
             label18.Name = "label18";
-            label18.Size = new Size(66, 32);
+            label18.Size = new Size(45, 21);
             label18.TabIndex = 26;
             label18.Text = "Gula";
             // 
@@ -185,10 +180,9 @@
             KaloriLabel.BackColor = Color.FromArgb(1, 54, 63);
             KaloriLabel.Font = new Font("Segoe UI", 13F);
             KaloriLabel.ForeColor = SystemColors.ControlLightLight;
-            KaloriLabel.Location = new Point(1004, 111);
-            KaloriLabel.Margin = new Padding(4, 0, 4, 0);
+            KaloriLabel.Location = new Point(703, 67);
             KaloriLabel.Name = "KaloriLabel";
-            KaloriLabel.Size = new Size(57, 36);
+            KaloriLabel.Size = new Size(42, 25);
             KaloriLabel.TabIndex = 33;
             KaloriLabel.Text = "112";
             // 
@@ -198,10 +192,9 @@
             label14.BackColor = Color.FromArgb(1, 54, 63);
             label14.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label14.ForeColor = SystemColors.ControlLightLight;
-            label14.Location = new Point(90, 59);
-            label14.Margin = new Padding(4, 0, 4, 0);
+            label14.Location = new Point(63, 35);
             label14.Name = "label14";
-            label14.Size = new Size(87, 32);
+            label14.Size = new Size(60, 21);
             label14.TabIndex = 22;
             label14.Text = "Lemak";
             // 
@@ -211,10 +204,9 @@
             GulaValLab.BackColor = Color.FromArgb(1, 54, 63);
             GulaValLab.Font = new Font("Segoe UI", 13F);
             GulaValLab.ForeColor = SystemColors.ControlLightLight;
-            GulaValLab.Location = new Point(842, 111);
-            GulaValLab.Margin = new Padding(4, 0, 4, 0);
+            GulaValLab.Location = new Point(589, 67);
             GulaValLab.Name = "GulaValLab";
-            GulaValLab.Size = new Size(29, 36);
+            GulaValLab.Size = new Size(22, 25);
             GulaValLab.TabIndex = 32;
             GulaValLab.Text = "7";
             // 
@@ -224,10 +216,9 @@
             label15.BackColor = Color.FromArgb(1, 54, 63);
             label15.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label15.ForeColor = SystemColors.ControlLightLight;
-            label15.Location = new Point(262, 56);
-            label15.Margin = new Padding(4, 0, 4, 0);
+            label15.Location = new Point(183, 34);
             label15.Name = "label15";
-            label15.Size = new Size(83, 32);
+            label15.Size = new Size(55, 21);
             label15.TabIndex = 23;
             label15.Text = "Karbo";
             // 
@@ -237,10 +228,9 @@
             SeratValLabel.BackColor = Color.FromArgb(1, 54, 63);
             SeratValLabel.Font = new Font("Segoe UI", 13F);
             SeratValLabel.ForeColor = SystemColors.ControlLightLight;
-            SeratValLabel.Location = new Point(689, 111);
-            SeratValLabel.Margin = new Padding(4, 0, 4, 0);
+            SeratValLabel.Location = new Point(482, 67);
             SeratValLabel.Name = "SeratValLabel";
-            SeratValLabel.Size = new Size(29, 36);
+            SeratValLabel.Size = new Size(22, 25);
             SeratValLabel.TabIndex = 31;
             SeratValLabel.Text = "9";
             // 
@@ -250,10 +240,9 @@
             label16.BackColor = Color.FromArgb(1, 54, 63);
             label16.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label16.ForeColor = SystemColors.ControlLightLight;
-            label16.Location = new Point(452, 56);
-            label16.Margin = new Padding(4, 0, 4, 0);
+            label16.Location = new Point(316, 34);
             label16.Name = "label16";
-            label16.Size = new Size(98, 32);
+            label16.Size = new Size(66, 21);
             label16.TabIndex = 24;
             label16.Text = "Protein";
             // 
@@ -263,10 +252,9 @@
             ProteinValLabel.BackColor = Color.FromArgb(1, 54, 63);
             ProteinValLabel.Font = new Font("Segoe UI", 13F);
             ProteinValLabel.ForeColor = SystemColors.ControlLightLight;
-            ProteinValLabel.Location = new Point(480, 108);
-            ProteinValLabel.Margin = new Padding(4, 0, 4, 0);
+            ProteinValLabel.Location = new Point(336, 65);
             ProteinValLabel.Name = "ProteinValLabel";
-            ProteinValLabel.Size = new Size(43, 36);
+            ProteinValLabel.Size = new Size(32, 25);
             ProteinValLabel.TabIndex = 30;
             ProteinValLabel.Text = "20";
             // 
@@ -276,10 +264,9 @@
             label17.BackColor = Color.FromArgb(1, 54, 63);
             label17.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label17.ForeColor = SystemColors.ControlLightLight;
-            label17.Location = new Point(665, 56);
-            label17.Margin = new Padding(4, 0, 4, 0);
+            label17.Location = new Point(466, 34);
             label17.Name = "label17";
-            label17.Size = new Size(72, 32);
+            label17.Size = new Size(49, 21);
             label17.TabIndex = 25;
             label17.Text = "Serat";
             // 
@@ -289,10 +276,9 @@
             KarboValLabel.BackColor = Color.FromArgb(1, 54, 63);
             KarboValLabel.Font = new Font("Segoe UI", 13F);
             KarboValLabel.ForeColor = SystemColors.ControlLightLight;
-            KarboValLabel.Location = new Point(284, 108);
-            KarboValLabel.Margin = new Padding(4, 0, 4, 0);
+            KarboValLabel.Location = new Point(199, 65);
             KarboValLabel.Name = "KarboValLabel";
-            KarboValLabel.Size = new Size(43, 36);
+            KarboValLabel.Size = new Size(32, 25);
             KarboValLabel.TabIndex = 29;
             KarboValLabel.Text = "30";
             // 
@@ -302,10 +288,9 @@
             label19.BackColor = Color.FromArgb(1, 54, 63);
             label19.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             label19.ForeColor = SystemColors.ControlLightLight;
-            label19.Location = new Point(975, 56);
-            label19.Margin = new Padding(4, 0, 4, 0);
+            label19.Location = new Point(682, 34);
             label19.Name = "label19";
-            label19.Size = new Size(86, 36);
+            label19.Size = new Size(62, 25);
             label19.TabIndex = 27;
             label19.Text = "Kalori";
             // 
@@ -315,37 +300,34 @@
             LemakValLabel.BackColor = Color.FromArgb(1, 54, 63);
             LemakValLabel.Font = new Font("Segoe UI", 13F);
             LemakValLabel.ForeColor = SystemColors.ControlLightLight;
-            LemakValLabel.Location = new Point(112, 108);
-            LemakValLabel.Margin = new Padding(4, 0, 4, 0);
+            LemakValLabel.Location = new Point(78, 65);
             LemakValLabel.Name = "LemakValLabel";
-            LemakValLabel.Size = new Size(43, 36);
+            LemakValLabel.Size = new Size(32, 25);
             LemakValLabel.TabIndex = 28;
             LemakValLabel.Text = "10";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Segoe UI Semibold", 12.5F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(78, 335);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(55, 214);
             label2.Name = "label2";
-            label2.Size = new Size(202, 32);
+            label2.Size = new Size(142, 23);
             label2.TabIndex = 37;
             label2.Text = "Kalori Minggu Ini";
             // 
             // DashboardControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 30, 29);
             Controls.Add(label2);
             Controls.Add(groupBox1);
             Controls.Add(chart2);
             Controls.Add(label1);
-            Margin = new Padding(4, 5, 4, 5);
             Name = "DashboardControl";
-            Size = new Size(1246, 876);
+            Size = new Size(872, 526);
             Load += DashboardControl_Load;
             ((System.ComponentModel.ISupportInitialize)chart2).EndInit();
             groupBox1.ResumeLayout(false);
