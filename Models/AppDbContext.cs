@@ -94,6 +94,11 @@ namespace NutriNyan.Models
                 .HasConversion<string>();
 
             modelBuilder.Entity<Meal>()
+                .HasMany(m => m.MealItems)
+                .WithOne(mi => mi.Meal)
+                .HasForeignKey(mi => mi.MealId);
+
+            modelBuilder.Entity<Meal>()
                 .Property(m => m.Date)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
