@@ -31,16 +31,11 @@ public static partial class Database
                 {
                     return null;
                 }
-                DateTime queryDate = date.ToUniversalTime();//.ToUniversalTime();
-                if (queryDate.Date != date.Date)
-                {
-                    queryDate = queryDate.AddDays(1).Date;
-                }
-                else
-                {
-                    queryDate = queryDate.Date;
-                }
-                NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(nl => nl.Date.Date == queryDate && nl.UserId == userId);
+                DateTime startUtc = date.Date.ToUniversalTime();
+                DateTime endUtc = date.Date.AddDays(1).ToUniversalTime();
+
+                TimeSpan timeSpan = DateTime.Now - DateTime.UtcNow;
+                NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(nl => nl.Date >= startUtc && nl.Date < endUtc && nl.UserId == userId);
                 if (result == null)
                 {
                     NutritionLog nutritionLog = new NutritionLog

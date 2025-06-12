@@ -40,20 +40,16 @@ public static partial class Database
     /// <returns></returns>
     public static Meal? GetMealIfExist(string mealType, DateTime date)
     {
-        DateTime queryDate = date.ToUniversalTime();
-        if (queryDate.Date != date.Date)
-        {
-            queryDate = queryDate.AddDays(1).Date;
-        }
-        else
-        {
-            queryDate = queryDate.Date;
-        }
         try
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             var dbContext = new AppDbContext(optionsBuilder.Options);
-            var result = dbContext.Meals.SingleOrDefault(b => b.MealType == mealType && b.Date.Date == queryDate);
+
+            DateTime startUtc = date.Date.ToUniversalTime();
+            DateTime endUtc = date.Date.AddDays(1).ToUniversalTime();
+
+            TimeSpan timeSpan = DateTime.Now - DateTime.UtcNow;
+            var result = dbContext.Meals.SingleOrDefault(b => b.MealType == mealType && b.Date >= startUtc && b.Date < endUtc);
             if (result != null)
             {
                 return result;
