@@ -55,17 +55,20 @@
             PerbaruiPasswordButton = new Button();
             groupBox1 = new GroupBox();
             label10 = new Label();
+            panel1 = new Panel();
+            purposeDeskriptionLab = new Label();
             groupBox1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.ActiveCaption;
-            label1.Location = new Point(48, 0);
+            label1.Location = new Point(55, 0);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(0, 15);
+            label1.Size = new Size(0, 20);
             label1.TabIndex = 0;
             // 
             // label2
@@ -73,9 +76,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ControlLightLight;
-            label2.Location = new Point(33, 34);
+            label2.Location = new Point(38, 45);
             label2.Name = "label2";
-            label2.Size = new Size(171, 37);
+            label2.Size = new Size(213, 46);
             label2.TabIndex = 1;
             label2.Text = "Pengaturan";
             // 
@@ -85,9 +88,9 @@
             label15.BackColor = Color.Transparent;
             label15.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label15.ForeColor = SystemColors.ControlLightLight;
-            label15.Location = new Point(38, 137);
+            label15.Location = new Point(43, 183);
             label15.Name = "label15";
-            label15.Size = new Size(56, 21);
+            label15.Size = new Size(68, 28);
             label15.TabIndex = 24;
             label15.Text = "Nama";
             // 
@@ -97,9 +100,9 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(283, 136);
+            label3.Location = new Point(323, 181);
             label3.Name = "label3";
-            label3.Size = new Size(115, 21);
+            label3.Size = new Size(142, 28);
             label3.TabIndex = 25;
             label3.Text = "Jenis Kelamin";
             // 
@@ -109,19 +112,19 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label4.ForeColor = SystemColors.ControlLightLight;
-            label4.Location = new Point(521, 137);
+            label4.Location = new Point(595, 183);
             label4.Name = "label4";
-            label4.Size = new Size(75, 21);
+            label4.Size = new Size(93, 28);
             label4.TabIndex = 26;
             label4.Text = "Tgl Lahir";
             // 
             // NamaBox
             // 
             NamaBox.Font = new Font("Segoe UI", 14F);
-            NamaBox.Location = new Point(38, 166);
-            NamaBox.Margin = new Padding(2);
+            NamaBox.Location = new Point(43, 221);
+            NamaBox.Margin = new Padding(2, 3, 2, 3);
             NamaBox.Name = "NamaBox";
-            NamaBox.Size = new Size(208, 32);
+            NamaBox.Size = new Size(237, 39);
             NamaBox.TabIndex = 27;
             // 
             // iconDropDownButton1
@@ -137,19 +140,19 @@
             // 
             JKbox.Font = new Font("Segoe UI", 14F);
             JKbox.FormattingEnabled = true;
-            JKbox.Location = new Point(285, 165);
-            JKbox.Margin = new Padding(2);
+            JKbox.Location = new Point(326, 220);
+            JKbox.Margin = new Padding(2, 3, 2, 3);
             JKbox.Name = "JKbox";
-            JKbox.Size = new Size(190, 33);
+            JKbox.Size = new Size(217, 39);
             JKbox.TabIndex = 28;
             // 
             // TGLlahirdates
             // 
             TGLlahirdates.Font = new Font("Segoe UI", 14F);
-            TGLlahirdates.Location = new Point(521, 166);
-            TGLlahirdates.Margin = new Padding(2);
+            TGLlahirdates.Location = new Point(595, 221);
+            TGLlahirdates.Margin = new Padding(2, 3, 2, 3);
             TGLlahirdates.Name = "TGLlahirdates";
-            TGLlahirdates.Size = new Size(211, 32);
+            TGLlahirdates.Size = new Size(241, 39);
             TGLlahirdates.TabIndex = 29;
             // 
             // label5
@@ -158,9 +161,9 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label5.ForeColor = SystemColors.ControlLightLight;
-            label5.Location = new Point(38, 221);
+            label5.Location = new Point(43, 295);
             label5.Name = "label5";
-            label5.Size = new Size(29, 21);
+            label5.Size = new Size(37, 28);
             label5.TabIndex = 30;
             label5.Text = "TB";
             // 
@@ -170,9 +173,9 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(170, 221);
+            label6.Location = new Point(194, 295);
             label6.Name = "label6";
-            label6.Size = new Size(30, 21);
+            label6.Size = new Size(38, 28);
             label6.TabIndex = 31;
             label6.Text = "BB";
             // 
@@ -182,9 +185,9 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label7.ForeColor = SystemColors.ControlLightLight;
-            label7.Location = new Point(296, 221);
+            label7.Location = new Point(338, 295);
             label7.Name = "label7";
-            label7.Size = new Size(139, 21);
+            label7.Size = new Size(175, 28);
             label7.TabIndex = 32;
             label7.Text = "Target Air Harian";
             // 
@@ -194,9 +197,9 @@
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label8.ForeColor = SystemColors.ControlLightLight;
-            label8.Location = new Point(33, 303);
+            label8.Location = new Point(38, 404);
             label8.Name = "label8";
-            label8.Size = new Size(136, 21);
+            label8.Size = new Size(171, 28);
             label8.TabIndex = 33;
             label8.Text = "Tingkat Aktifitas";
             // 
@@ -206,9 +209,9 @@
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label9.ForeColor = SystemColors.ControlLightLight;
-            label9.Location = new Point(245, 303);
+            label9.Location = new Point(280, 404);
             label9.Name = "label9";
-            label9.Size = new Size(114, 21);
+            label9.Size = new Size(142, 28);
             label9.TabIndex = 34;
             label9.Text = "Target Tujuan";
             // 
@@ -216,47 +219,48 @@
             // 
             TingkatAktivitasbox.Font = new Font("Segoe UI", 14F);
             TingkatAktivitasbox.FormattingEnabled = true;
-            TingkatAktivitasbox.Location = new Point(33, 333);
-            TingkatAktivitasbox.Margin = new Padding(2);
+            TingkatAktivitasbox.Location = new Point(38, 444);
+            TingkatAktivitasbox.Margin = new Padding(2, 3, 2, 3);
             TingkatAktivitasbox.Name = "TingkatAktivitasbox";
-            TingkatAktivitasbox.Size = new Size(182, 33);
+            TingkatAktivitasbox.Size = new Size(207, 39);
             TingkatAktivitasbox.TabIndex = 37;
             // 
             // TargetTujuanbox
             // 
             TargetTujuanbox.Font = new Font("Segoe UI", 14F);
             TargetTujuanbox.FormattingEnabled = true;
-            TargetTujuanbox.Location = new Point(245, 333);
-            TargetTujuanbox.Margin = new Padding(2);
+            TargetTujuanbox.Location = new Point(280, 444);
+            TargetTujuanbox.Margin = new Padding(2, 3, 2, 3);
             TargetTujuanbox.Name = "TargetTujuanbox";
-            TargetTujuanbox.Size = new Size(192, 33);
+            TargetTujuanbox.Size = new Size(219, 39);
             TargetTujuanbox.TabIndex = 38;
+            TargetTujuanbox.SelectedValueChanged += purposeChanged;
             // 
             // TBbox
             // 
             TBbox.Font = new Font("Segoe UI", 14F);
-            TBbox.Location = new Point(38, 248);
-            TBbox.Margin = new Padding(2);
+            TBbox.Location = new Point(43, 331);
+            TBbox.Margin = new Padding(2, 3, 2, 3);
             TBbox.Name = "TBbox";
-            TBbox.Size = new Size(100, 32);
+            TBbox.Size = new Size(114, 39);
             TBbox.TabIndex = 39;
             // 
             // BBbox
             // 
             BBbox.Font = new Font("Segoe UI", 14F);
-            BBbox.Location = new Point(170, 248);
-            BBbox.Margin = new Padding(2);
+            BBbox.Location = new Point(194, 331);
+            BBbox.Margin = new Padding(2, 3, 2, 3);
             BBbox.Name = "BBbox";
-            BBbox.Size = new Size(94, 32);
+            BBbox.Size = new Size(107, 39);
             BBbox.TabIndex = 40;
             // 
             // TargetAirbox
             // 
             TargetAirbox.Font = new Font("Segoe UI", 14F);
-            TargetAirbox.Location = new Point(295, 248);
-            TargetAirbox.Margin = new Padding(2);
+            TargetAirbox.Location = new Point(337, 331);
+            TargetAirbox.Margin = new Padding(2, 3, 2, 3);
             TargetAirbox.Name = "TargetAirbox";
-            TargetAirbox.Size = new Size(180, 32);
+            TargetAirbox.Size = new Size(205, 39);
             TargetAirbox.TabIndex = 41;
             // 
             // label11
@@ -264,10 +268,10 @@
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label11.ForeColor = SystemColors.ButtonHighlight;
-            label11.Location = new Point(16, 43);
+            label11.Location = new Point(18, 57);
             label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
-            label11.Size = new Size(113, 19);
+            label11.Size = new Size(133, 23);
             label11.TabIndex = 42;
             label11.Text = "Password Lama";
             // 
@@ -276,31 +280,31 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label12.ForeColor = SystemColors.ButtonHighlight;
-            label12.Location = new Point(20, 120);
+            label12.Location = new Point(23, 160);
             label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
-            label12.Size = new Size(108, 19);
+            label12.Size = new Size(127, 23);
             label12.TabIndex = 43;
             label12.Text = "Password Baru";
             // 
             // PWlamaBox
             // 
             PWlamaBox.Font = new Font("Segoe UI", 14F);
-            PWlamaBox.Location = new Point(20, 69);
-            PWlamaBox.Margin = new Padding(2);
+            PWlamaBox.Location = new Point(23, 92);
+            PWlamaBox.Margin = new Padding(2, 3, 2, 3);
             PWlamaBox.Name = "PWlamaBox";
             PWlamaBox.PasswordChar = '*';
-            PWlamaBox.Size = new Size(509, 32);
+            PWlamaBox.Size = new Size(581, 39);
             PWlamaBox.TabIndex = 44;
             // 
             // PWbaruBox
             // 
             PWbaruBox.Font = new Font("Segoe UI", 14F);
-            PWbaruBox.Location = new Point(20, 146);
-            PWbaruBox.Margin = new Padding(2);
+            PWbaruBox.Location = new Point(23, 195);
+            PWbaruBox.Margin = new Padding(2, 3, 2, 3);
             PWbaruBox.Name = "PWbaruBox";
             PWbaruBox.PasswordChar = '*';
-            PWbaruBox.Size = new Size(509, 32);
+            PWbaruBox.Size = new Size(581, 39);
             PWbaruBox.TabIndex = 45;
             // 
             // PerbaruiButton
@@ -309,9 +313,10 @@
             PerbaruiButton.FlatStyle = FlatStyle.Flat;
             PerbaruiButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             PerbaruiButton.ForeColor = Color.FromArgb(1, 54, 63);
-            PerbaruiButton.Location = new Point(551, 326);
+            PerbaruiButton.Location = new Point(630, 435);
+            PerbaruiButton.Margin = new Padding(3, 4, 3, 4);
             PerbaruiButton.Name = "PerbaruiButton";
-            PerbaruiButton.Size = new Size(181, 40);
+            PerbaruiButton.Size = new Size(207, 53);
             PerbaruiButton.TabIndex = 47;
             PerbaruiButton.Text = "Perbarui";
             PerbaruiButton.UseVisualStyleBackColor = false;
@@ -323,9 +328,10 @@
             PerbaruiPasswordButton.FlatStyle = FlatStyle.Flat;
             PerbaruiPasswordButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             PerbaruiPasswordButton.ForeColor = Color.FromArgb(1, 54, 63);
-            PerbaruiPasswordButton.Location = new Point(346, 200);
+            PerbaruiPasswordButton.Location = new Point(395, 267);
+            PerbaruiPasswordButton.Margin = new Padding(3, 4, 3, 4);
             PerbaruiPasswordButton.Name = "PerbaruiPasswordButton";
-            PerbaruiPasswordButton.Size = new Size(181, 41);
+            PerbaruiPasswordButton.Size = new Size(207, 55);
             PerbaruiPasswordButton.TabIndex = 48;
             PerbaruiPasswordButton.Text = "Perbarui";
             PerbaruiPasswordButton.UseVisualStyleBackColor = false;
@@ -340,9 +346,11 @@
             groupBox1.Controls.Add(label12);
             groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             groupBox1.ForeColor = SystemColors.ControlLightLight;
-            groupBox1.Location = new Point(33, 406);
+            groupBox1.Location = new Point(38, 541);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(551, 265);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(630, 353);
             groupBox1.TabIndex = 49;
             groupBox1.TabStop = false;
             groupBox1.Text = "Perbarui Password";
@@ -352,17 +360,35 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label10.ForeColor = SystemColors.ControlLightLight;
-            label10.Location = new Point(33, 101);
+            label10.Location = new Point(38, 135);
             label10.Name = "label10";
-            label10.Size = new Size(115, 21);
+            label10.Size = new Size(142, 28);
             label10.TabIndex = 50;
             label10.Text = "Perbarui Data";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(purposeDeskriptionLab);
+            panel1.ForeColor = SystemColors.ActiveCaptionText;
+            panel1.Location = new Point(280, 494);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(219, 44);
+            panel1.TabIndex = 51;
+            // 
+            // purposeDeskriptionLab
+            // 
+            purposeDeskriptionLab.Location = new Point(0, 0);
+            purposeDeskriptionLab.Name = "purposeDeskriptionLab";
+            purposeDeskriptionLab.Size = new Size(219, 44);
+            purposeDeskriptionLab.TabIndex = 0;
+            // 
             // SettingControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(17, 30, 29);
+            Controls.Add(panel1);
             Controls.Add(label10);
             Controls.Add(PerbaruiButton);
             Controls.Add(TargetAirbox);
@@ -384,12 +410,13 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(groupBox1);
-            Margin = new Padding(2);
+            Margin = new Padding(2, 3, 2, 3);
             Name = "SettingControl";
-            Size = new Size(812, 670);
+            Size = new Size(928, 893);
             Load += SettingControl_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -423,5 +450,7 @@
         private Button PerbaruiPasswordButton;
         private GroupBox groupBox1;
         private Label label10;
+        private Panel panel1;
+        private Label purposeDeskriptionLab;
     }
 }

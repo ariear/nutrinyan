@@ -84,7 +84,7 @@ namespace NutriNyan.Views.Dashboard
         private void LoadDataCariMakan()
         {
             // 4 aja, soalnya ku setting 4 juga
-            string[] items = { "Mie ayam", "Bakso Mercon", "Seblak", "Donat spesial lobang"}; // contoh ajah
+            string[] items = {"Ayoyo", "walawe", "Wewok", "Donat spesial lobang"}; // contoh ajah
 
             FlowLayoutPanel cardContainer = new FlowLayoutPanel();
             cardContainer.Dock = DockStyle.Fill;
@@ -137,7 +137,8 @@ namespace NutriNyan.Views.Dashboard
         }
         private async void foodButtonClicked(object sender, EventArgs e)
         {
-            Food? food = Database.MyFoods.GetFoodIfExist(Logic.FoodNameTitleCase(((Button)sender).Name));
+            string foodName = Logic.FoodNameTitleCase(((Button)sender).Name);
+            Food? food = Database.MyFoods.GetFoodIfExist(foodName);
             if (food == null) {
                 Dictionary<string, float>? result = await Api.GetReq(http_string: Api.fatsecretLinkFormat + ((Button)sender).Name);
                 if (result != null && result.Count != 0)
@@ -149,7 +150,7 @@ namespace NutriNyan.Views.Dashboard
                     }
                     this.pfoodNameNSum[0] = Logic.FoodNameTitleCase(((Button)sender).Name);
                     this.pfoodNameNSum[1] = sumDict[((Button)sender).Name];
-                    bool resultAddFood = Database.AddFood(
+                    bool resultAddFood = Database.MyFoods.AddFood(
                         userId: Database.userLogged.Get().Id,
                         foodName: this.pfoodNameNSum[0],
                         karbohidrat: pselectedFood["Karbohidrat"],
@@ -171,7 +172,7 @@ namespace NutriNyan.Views.Dashboard
                 }
                 else
                 {
-                    MessageBox.Show($"Terjadi kesalahan\nResult: {result.Count}", "Information", MessageBoxButtons.OK);
+                    MessageBox.Show($"Terjadi kesalahan\nSaat mencoba mengambil data makanan yang dipilih", "Information", MessageBoxButtons.OK);
                 }
             } else {
                 Unit? unit = Database.units.GetUnitIfExist("1 Porsi" + " " + food.Name);
@@ -202,25 +203,38 @@ namespace NutriNyan.Views.Dashboard
                 List<List<string>>? result = getReq.Result;
                 if (result != null)
                 {
-                    int count = 0;
-                    this.sumDict.Clear();
-                    for (int i = 0; i < result.Count; i++)
-                    {
-                        ((Label)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[0]).Text = Logic.FoodNameTitleCase(result[i][0]);
-                        ((Label)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[1]).Text = result[i][1];
-                        this.sumDict.Add(result[i][0], result[i][1]);
-                        ((Button)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[2]).Name = result[i][0];
-                        ((Panel)this.SearchflowLayoutPanel.Controls[i]).Show();
-                        count++;
-                    }
-                    for (int i = count; i < 4; i++)
-                    {
-                        ((Panel)this.SearchflowLayoutPanel.Controls[i]).Hide();
-                    }
                 }
                 else
                 {
-                    MessageBox.Show($"Terjadi kesalahan", "Information", MessageBoxButtons.OK);
+                    List<Food>? someFood = Database.MyFoods.GetSomeFood(searchTextBox.Text);
+                    if (someFood != null)
+                    {
+                        result = new List<List<string>>();
+                        foreach (Food food in someFood)
+                        {
+                            result.Add([food.Name, food.Summary]);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Terjadi kesalahan", "Information", MessageBoxButtons.OK);
+                        return;
+                    }
+                }
+                int count = 0;
+                this.sumDict.Clear();
+                for (int i = 0; i < result.Count; i++)
+                {
+                    ((Label)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[0]).Text = Logic.FoodNameTitleCase(result[i][0]);
+                    ((Label)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[1]).Text = result[i][1];
+                    this.sumDict.Add(result[i][0], result[i][1]);
+                    ((Button)((Panel)this.SearchflowLayoutPanel.Controls[i]).Controls[2]).Name = result[i][0];
+                    ((Panel)this.SearchflowLayoutPanel.Controls[i]).Show();
+                    count++;
+                }
+                for (int i = count; i < 4; i++)
+                {
+                    ((Panel)this.SearchflowLayoutPanel.Controls[i]).Hide();
                 }
             }
         }

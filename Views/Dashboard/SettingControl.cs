@@ -39,15 +39,15 @@ namespace NutriNyan.Views.Dashboard
             // var _optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             // using (var dbContext = new AppDbContext(_optionsBuilder.Options))
             // {
-                
 
-                // JKbox.DataSource = dbContext.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
-                // JKbox.DisplayMember = "Type";
-                // JKbox.ValueMember = "Id";
 
-                // var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
+            // JKbox.DataSource = dbContext.Genders.Select(b => new { b.Type, b.Id }).ToList(); // Get only Type column of Genders table
+            // JKbox.DisplayMember = "Type";
+            // JKbox.ValueMember = "Id";
 
-            
+            // var purposes = dbContext.Purposes.Select(b => new { b.Title, b.Id }).ToList(); // Get only Title column of Purposes table
+
+
             // }
             JKbox.DataSource = Database.genders; // Get only Type column of Genders table
             JKbox.DisplayMember = "GenderName";
@@ -75,8 +75,8 @@ namespace NutriNyan.Views.Dashboard
             }
             else
             {
-                userUpdate.Tb = Single.Parse(TBbox.Text.Replace(",","."));
-                userUpdate.Bb = Single.Parse(BBbox.Text.Replace(",","."));
+                userUpdate.Tb = Single.Parse(TBbox.Text.Replace(",", "."));
+                userUpdate.Bb = Single.Parse(BBbox.Text.Replace(",", "."));
             }
             userUpdate.Username = NamaBox.Text;
             userUpdate.DateBirth = TGLlahirdates.Value;
@@ -87,19 +87,26 @@ namespace NutriNyan.Views.Dashboard
 
             Database.userLogged.Update(userUpdate);
         }
+        private void purposeChanged(object sender, EventArgs e)
+        {
+            purposeDeskriptionLab.Text = Database.purposes[TargetTujuanbox.SelectedIndex].deskripsi;
+        }
 
         private void PerbaruiPasswordButton_Click(object sender, EventArgs e)
         {
             if (PWbaruBox.Text == "" || PWlamaBox.Text == "")
             {
                 MessageBox.Show("Password lama atau Password baru belum diisi", "Informasi");
-            } else if (user.Password != Logic.Get_PWDHash(PWlamaBox.Text))
+            }
+            else if (user.Password != Logic.Get_PWDHash(PWlamaBox.Text))
             {
                 MessageBox.Show("Password lama salah", "Informasi");
-            } else if (!Logic.IsValidPwd(PWbaruBox.Text))
+            }
+            else if (!Logic.IsValidPwd(PWbaruBox.Text))
             {
                 MessageBox.Show("Password baru tidak valid!!", "Informasi");
-            } else
+            }
+            else
             {
                 bool updatePw = Database.userLogged.UpdatePassword(PWbaruBox.Text);
                 if (updatePw)

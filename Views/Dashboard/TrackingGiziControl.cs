@@ -125,7 +125,7 @@ namespace NutriNyan.Views.Dashboard
                     float totalKalori = 0;
                     foreach (MealItem mealItem in meals)
                     {
-                        Food? food = Database.GetFoodIfExist(mealItem.FoodId);
+                        Food? food = Database.MyFoods.GetFoodIfExist(mealItem.FoodId);
                         Unit? unit = Database.units.GetUnitIfExist(mealItem.UnitId);
                         if (food != null && unit != null)
                         {
@@ -138,7 +138,7 @@ namespace NutriNyan.Views.Dashboard
                                                         serat: mealItem.Serat
                                                     );
                             totalKalori += kalori;
-                            dataGridObjects[i].Rows.Add(food.Name, MathF.Round(mealItem.Qty*unit.Weight).ToString() + " gram", mealItem.Lemak,
+                            dataGridObjects[i].Rows.Add(food.Name, MathF.Round(mealItem.Qty * unit.Weight).ToString() + " gram", mealItem.Lemak,
                                                     mealItem.Karbohidrat, mealItem.Protein, mealItem.Serat, mealItem.Gula, kalori
                                                     );
                             nutritionOfTheDay[0] += mealItem.Lemak;         // Lemak
@@ -152,13 +152,13 @@ namespace NutriNyan.Views.Dashboard
                     kaloriLabels[i].Text = ((int)totalKalori).ToString();
                 }
             }
+            KaloriValLab.Text = ((int)totalKaloriADay).ToString() + "/" + KaloriValLab.Text.Split("/")[1];
+            nutritionNeeded(nutritionOfTheDay);
             // int iconButCount = 4;
             // for (int i = 0; i < iconButCount; i++)
             // {
             //     Controls[i].Tag = i.ToString();
             // }
-            KaloriValLab.Text = ((int)totalKaloriADay).ToString() + "/" + KaloriValLab.Text.Split("/")[1];
-            nutritionNeeded(nutritionOfTheDay);
             // List<MealItem> mealsPagi =  Database.MealsOfADay[0].GetRowOfMealItems(trackingDateTimePicker.Value);
             // if (mealsPagi != null)
             // {
@@ -289,21 +289,6 @@ namespace NutriNyan.Views.Dashboard
         {
             if (sarapanGridView != null)
             {
-                // List<DataGridView> dataGridObjects = [sarapanGridView, makanSiangGridView, makanMalamGridView, jajanGridView];
-                // foreach (DataGridView dataGridView in dataGridObjects)
-                // {
-                //     foreach (DataGridViewRow dataGridViewRow in dataGridView.Rows)
-                //     {
-                //         try
-                //         {
-                //             dataGridView.Rows.Remove(dataGridViewRow);
-                //         }
-                //         catch (Exception e)
-                //         {
-                //             MessageBox.Show($"Error in remove: {e}");
-                //         }
-                //     }
-                // }
                 sarapanGridView.Rows.Clear();
                 makanSiangGridView.Rows.Clear();
                 makanMalamGridView.Rows.Clear();

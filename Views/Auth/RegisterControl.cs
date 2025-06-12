@@ -52,8 +52,8 @@ namespace NutriNyan.Views.Auth
                 }
                 else
                 {
-                    tb = Single.Parse(TB_TextBox.Text.Replace(",","."));
-                    bb = Single.Parse(BB_TextBox.Text.Replace(",","."));
+                    tb = Single.Parse(TB_TextBox.Text.Replace(",", "."));
+                    bb = Single.Parse(BB_TextBox.Text.Replace(",", "."));
                 }
                 Database.UserLogged user = new Database.UserLogged(
                     username: Nama_TextBox.Text,
@@ -130,6 +130,7 @@ namespace NutriNyan.Views.Auth
 
         private void RegisterControl_Load(object sender, EventArgs e)
         {
+            panel1.BackColor = Color.White;
             aktivitasBox.DataSource = Enum.GetValues(typeof(ActivityLevel));
             jkBox.DataSource = Database.genders; // Get only Type column of Genders table
             jkBox.DisplayMember = "GenderName";
@@ -181,11 +182,16 @@ namespace NutriNyan.Views.Auth
             {
                 Pwd_TextBox.PasswordChar = '\0';
                 togglePwButton.IconChar = IconChar.EyeSlash;
-            } else
+            }
+            else
             {
                 Pwd_TextBox.PasswordChar = '*';
                 togglePwButton.IconChar = IconChar.Eye;
             }
+        }
+        private void purposeChanged(object sender, EventArgs e)
+        {
+            purposeDeskriptionLab.Text = Database.purposes[targetBox.SelectedIndex].deskripsi;
         }
     }
 }

@@ -95,7 +95,7 @@ public static partial class Database
         public DietRingan()
         {
             this.purposeName = "Diet Ringan";
-            this.deskripsi = "Diet ringan untuk menaikkan berat badan sekitar 0,25kg/minggu.\nJangan lupa untuk berolahraga.";
+            this.deskripsi = "Diet ringan untuk menaikkan berat badan sekitar 0,25kg/minggu.";
             Purpose? purpose = EnsureCreated(CaloriMin: 1_800F, CaloriMAx: 2_500F);
             if (purpose != null)
             {

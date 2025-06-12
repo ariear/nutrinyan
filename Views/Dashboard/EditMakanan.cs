@@ -27,7 +27,7 @@ namespace NutriNyan.Views.Dashboard
         public void EditMakanan_Load(object sender, EventArgs e)
         {
             periode.Text += dateTimeEdit.ToString("dd MMMM yyyy", new CultureInfo("id-ID"));
-            this.food = Database.GetFoodIfExist(mealItem.FoodId);
+            this.food = Database.MyFoods.GetFoodIfExist(mealItem.FoodId);
             FoodNameValLabel.Text = food.Name;
             Unit? unit = Database.units.GetUnitIfExist("1 Porsi "+food.Name);
             if (unit != null && !unitsList.Contains(unit))
