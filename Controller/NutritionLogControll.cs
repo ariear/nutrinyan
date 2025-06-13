@@ -32,9 +32,8 @@ public static partial class Database
                     return null;
                 }
                 DateTime startUtc = date.Date.ToUniversalTime();
-                DateTime endUtc = date.Date.AddDays(1).ToUniversalTime();
+                DateTime endUtc = startUtc.AddDays(1);
 
-                TimeSpan timeSpan = DateTime.Now - DateTime.UtcNow;
                 NutritionLog? result = dbContext.NutritionLogs.SingleOrDefault(nl => nl.Date >= startUtc && nl.Date < endUtc && nl.UserId == userId);
                 if (result == null)
                 {
@@ -77,8 +76,14 @@ public static partial class Database
     public static Dictionary<string, double> GetWeeklyCalories()
     {
         var dailyCalories = new Dictionary<string, double>();
-        var endDate = DateTime.Today;
-        var startDate = endDate.AddDays(-6);
+        DateTime day = DateTime.Now;
+        for (int i = 0; i < 7; i++)
+        {
+            Database.EnsureNutritionLog(day.AddDays(-i), "Unknown");
+        }
+        DateTime startUtc = DateTime.Today.ToUniversalTime();
+        var startDate = startUtc.AddDays(-6);
+        DateTime endUtc = startUtc.AddDays(1);
 
         try
         {
@@ -87,8 +92,9 @@ public static partial class Database
 
             var caloriesData = dbContext.NutritionLogs
                 .Where(n => n.UserId == userLogged.Get().Id &&
-                           n.Date >= TimeZoneInfo.ConvertTimeToUtc(startDate.Date) &&
-                           n.Date <= TimeZoneInfo.ConvertTimeToUtc(endDate.Date.AddDays(1)))
+                        n.Date >= startDate &&
+                        n.Date <= endUtc)
+                        // n.Date >= startUtc && n.Date < endUtc)
                 .Include(n => n.Meals)
                     .ThenInclude(m => m.MealItems)
                 .AsEnumerable()
@@ -101,9 +107,10 @@ public static partial class Database
                 })
                 .ToList();
 
-            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            DateTime dateEnd = endUtc.AddDays(-1);
+            for (DateTime date = startDate; date <= dateEnd; date = date.AddDays(1))
             {
-                var dataForDate = caloriesData.FirstOrDefault(d => d.Date == date.Date);
+                var dataForDate = caloriesData.FirstOrDefault(d => d.Date >= date && d.Date < date.AddDays(1));
                 string dateKey = date.ToString("dddd", new CultureInfo("id-ID"));
 
                 dailyCalories.Add(dateKey, dataForDate?.TotalCalories ?? 0);
@@ -113,7 +120,8 @@ public static partial class Database
         }
         catch (Exception ex)
         {
-            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            DateTime dateEnd = endUtc.AddDays(-1);
+            for (var date = startDate; date <= dateEnd; date = date.AddDays(1))
             {
                 string dateKey = date.ToString("dd/MM", CultureInfo.InvariantCulture);
                 dailyCalories.Add(dateKey, 0);

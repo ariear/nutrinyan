@@ -24,28 +24,40 @@ namespace NutriNyan.Views.Dashboard
 
         private void DashboardControl_Load(object sender, EventArgs e)
         {
-            label1.Text = $"Halo {userLogged.Get().Username}, Selamat Datang!";
+            // try
+            // {
+                label1.Text = $"Halo {userLogged.Get().Username}, Selamat Datang!";
 
-            var dailyCalories = Database.GetWeeklyCalories();
-            chart2.Series["Kalori"].Points.Clear();
+                var dailyCalories = Database.GetWeeklyCalories();
+                chart2.Series["Kalori"].Points.Clear();
 
-            double maxCalories = dailyCalories.Max(d => d.Value);
-            double yAxisMax = Math.Ceiling(maxCalories / 100.0) * 100;
-            chart2.ChartAreas[0].AxisY.Minimum = 0;
-            chart2.ChartAreas[0].AxisY.Maximum = yAxisMax;
+                double maxCalories = dailyCalories.Max(d => d.Value);
+                double yAxisMax = Math.Ceiling(maxCalories / 100.0) * 100;
+                if (yAxisMax == 0)
+                {
+                    yAxisMax = 100;
+                }
+                chart2.ChartAreas[0].AxisY.Minimum = 0;
+                chart2.ChartAreas[0].AxisY.Maximum = yAxisMax;
 
-            foreach (var day in dailyCalories)
-            {
-                var dataPoint = new DataPoint();
-                dataPoint.AxisLabel = day.Key;
-                dataPoint.YValues = new double[] { day.Value };
-                dataPoint.IsValueShownAsLabel = true;
-                dataPoint.LabelBackColor = Color.GreenYellow;
-                dataPoint.Label = $"{day.Value:N0} kcal";
+                foreach (var day in dailyCalories)
+                {
+                    var dataPoint = new DataPoint();
+                    dataPoint.AxisLabel = day.Key;
+                    dataPoint.YValues = new double[] { day.Value };
+                    dataPoint.IsValueShownAsLabel = true;
+                    dataPoint.Label = $"{day.Value:N0} kcal";
+                    dataPoint.LabelBackColor = Color.GreenYellow;
 
-                chart2.Series["Kalori"].Points.Add(dataPoint);
-            }
-            CalNutritionOfTheDay();
+                    chart2.Series["Kalori"].Points.Add(dataPoint);
+                }
+                CalNutritionOfTheDay();
+            // }
+            // catch (Exception E)
+            // {
+            //     MessageBox.Show($"Error {E}\ndailyCalories");
+            // }
+            
         }
         private void CalNutritionOfTheDay()
         {

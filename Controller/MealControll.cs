@@ -46,9 +46,8 @@ public static partial class Database
             var dbContext = new AppDbContext(optionsBuilder.Options);
 
             DateTime startUtc = date.Date.ToUniversalTime();
-            DateTime endUtc = date.Date.AddDays(1).ToUniversalTime();
+            DateTime endUtc = startUtc.AddDays(1);
 
-            TimeSpan timeSpan = DateTime.Now - DateTime.UtcNow;
             var result = dbContext.Meals.SingleOrDefault(b => b.MealType == mealType && b.Date >= startUtc && b.Date < endUtc);
             if (result != null)
             {
