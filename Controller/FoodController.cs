@@ -41,32 +41,40 @@ public static partial class Database
         /// <returns></returns>
         public static bool AddFood(int userId, string foodName, float karbohidrat, float protein, float lemak, float serat, float gula, string summary)
         {
-            try
+            Food? food = GetFoodIfExist(foodName);
+            if (food == null)
             {
-                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-                using (var dbContext = new AppDbContext(optionsBuilder.Options))
+                try
                 {
-                    dbContext.Add(new Food
+                    var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                    using (var dbContext = new AppDbContext(optionsBuilder.Options))
                     {
-                        Name = foodName,
-                        Karbohidrat = karbohidrat,
-                        Protein = protein,
-                        Lemak = lemak,
-                        Serat = serat,
-                        Gula = gula,
-                        Summary = summary,
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow
+                        dbContext.Add(new Food
+                        {
+                            Name = foodName,
+                            Karbohidrat = karbohidrat,
+                            Protein = protein,
+                            Lemak = lemak,
+                            Serat = serat,
+                            Gula = gula,
+                            Summary = summary,
+                            CreatedAt = DateTime.UtcNow,
+                            UpdatedAt = DateTime.UtcNow
+                        }
+                        );
+                        dbContext.SaveChanges();
                     }
-                    );
-                    dbContext.SaveChanges();
+                    return true;
                 }
-                return true;
+                catch (Exception e)
+                {
+                    MessageBox.Show($"There is an error when saving Food\n{e}", "Information", MessageBoxButtons.OK);
+                    return false;
+                }
             }
-            catch (Exception e)
+            else
             {
-                MessageBox.Show($"There is an error when saving Food\n{e}", "Information", MessageBoxButtons.OK);
-                return false;
+                return true;
             }
         }
         /// <summary>
@@ -97,8 +105,28 @@ public static partial class Database
                 DbContextOptionsBuilder<AppDbContext> optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
                 using (AppDbContext dbContext = new AppDbContext(optionsBuilder.Options))
                 {
-                    List<NutriNyan.Models.Food> result = dbContext.Foods.Where(f => EF.Functions.ILike(f.Name , $"%{namePattern}%")).ToList();
+                    List<NutriNyan.Models.Food> result = dbContext.Foods.Where(f => EF.Functions.ILike(f.Name, $"%{namePattern}%")).ToList();
                     return result;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Tidak bisa mengakses Database untuk tabel Gender\n{e}", "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+        public static List<Food>? GetLatestAddedFoods()
+        {
+            try
+            {
+                DbContextOptionsBuilder<AppDbContext> optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                using (AppDbContext dbContext = new AppDbContext(optionsBuilder.Options))
+                {
+                    List<NutriNyan.Models.Food> latestFoods = dbContext.Foods
+                                    .OrderByDescending(f => f.Id)
+                                    .Take(4)
+                                    .ToList();
+                    return latestFoods;
                 }
             }
             catch (Exception e)
