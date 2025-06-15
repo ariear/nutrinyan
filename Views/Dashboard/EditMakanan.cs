@@ -37,9 +37,6 @@ namespace NutriNyan.Views.Dashboard
             else
             {
             }
-            unitSizeComboBox.DataSource = unitsList;
-            unitSizeComboBox.ValueMember = "Weight";
-            unitSizeComboBox.DisplayMember = "UnitType";
             NutritionFill();
         }
         private void UnitChanged(object sender, EventArgs e)
@@ -55,7 +52,6 @@ namespace NutriNyan.Views.Dashboard
         {
             unitSizeComboBox.DataSource = null;
             unitSizeComboBox.Items.Clear();
-            // MessageBox.Show($"Passed\nUnitId: {unit.Id}\nvalue: {Database.units}", "Information", MessageBoxButtons.OK);
             unitSizeComboBox.DataSource = unitsList;
             unitSizeComboBox.ValueMember = "Weight";
             unitSizeComboBox.DisplayMember = "UnitType";
