@@ -64,6 +64,7 @@ public static partial class Database
         {
             GenderName = "Perempuan";
             DbGender = EnsureCreated();
+            DbGenderId = DbGender.Id;
         }
         public override int GetGenderIndex()
         {

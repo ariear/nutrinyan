@@ -129,7 +129,7 @@ namespace NutriNyan.Views.Dashboard
         {
             RefreshFillData((float)unitSizeComboBox.SelectedValue);
         }
-        private void FloatTextBoxhanged(object sender, EventArgs e)
+        private void FloatTextBoxChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
             if (textBox.Text == "")
@@ -197,12 +197,12 @@ namespace NutriNyan.Views.Dashboard
                 bool resultAddMealItem = MealOfADay.AddMealItem(
                     dateOfDay: trackingDateTime,
                     foodId: food.Id,
-                    qty: nutValue[0],//Single.Parse(UnitValueBox.Text), // Need adjustment
-                    karbohidrat: nutValue[1], //Single.Parse(KarbTextBox.Text),
-                    protein: nutValue[2], //Single.Parse(ProtTextBox.Text),
-                    lemak: nutValue[3], //Single.Parse(LemakTextBox.Text),
-                    serat: nutValue[4], //Single.Parse(SeratTextBox.Text),
-                    gula: nutValue[5], //Single.Parse(GulaTextBox.Text),
+                    qty: nutValue[0],
+                    karbohidrat: nutValue[1], 
+                    protein: nutValue[2], 
+                    lemak: nutValue[3], 
+                    serat: nutValue[4], 
+                    gula: nutValue[5], 
                     unitId: unit.Id
                 );
                 if (resultAddMealItem)

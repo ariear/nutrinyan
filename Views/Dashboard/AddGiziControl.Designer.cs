@@ -102,6 +102,7 @@
             foodNameBox.Name = "foodNameBox";
             foodNameBox.Size = new Size(381, 39);
             foodNameBox.TabIndex = 4;
+            foodNameBox.ReadOnly = true;
             // 
             // foodNameLab
             // 
@@ -157,7 +158,7 @@
             UnitValueBox.Size = new Size(197, 39);
             UnitValueBox.TabIndex = 10;
             UnitValueBox.Text = "0";
-            UnitValueBox.TextChanged += FloatTextBoxhanged;
+            UnitValueBox.TextChanged += FloatTextBoxChanged;
             UnitValueBox.TextChanged += UnitValueChanged;
             // 
             // label6
@@ -180,7 +181,7 @@
             LemakTextBox.Size = new Size(273, 39);
             LemakTextBox.TabIndex = 11;
             LemakTextBox.Text = "0";
-            LemakTextBox.TextChanged += FloatTextBoxhanged;
+            LemakTextBox.TextChanged += FloatTextBoxChanged;
             // 
             // label7
             // 
@@ -202,7 +203,7 @@
             ProtTextBox.Size = new Size(273, 39);
             ProtTextBox.TabIndex = 13;
             ProtTextBox.Text = "0";
-            ProtTextBox.TextChanged += FloatTextBoxhanged;
+            ProtTextBox.TextChanged += FloatTextBoxChanged;
             // 
             // label8
             // 
@@ -224,7 +225,7 @@
             KarbTextBox.Size = new Size(273, 39);
             KarbTextBox.TabIndex = 15;
             KarbTextBox.Text = "0";
-            KarbTextBox.TextChanged += FloatTextBoxhanged;
+            KarbTextBox.TextChanged += FloatTextBoxChanged;
             // 
             // label9
             // 
@@ -257,7 +258,7 @@
             GulaTextBox.Size = new Size(273, 39);
             GulaTextBox.TabIndex = 19;
             GulaTextBox.Text = "0";
-            GulaTextBox.TextChanged += FloatTextBoxhanged;
+            GulaTextBox.TextChanged += FloatTextBoxChanged;
             // 
             // label11
             // 
@@ -279,7 +280,7 @@
             SeratTextBox.Size = new Size(273, 39);
             SeratTextBox.TabIndex = 17;
             SeratTextBox.Text = "0";
-            SeratTextBox.TextChanged += FloatTextBoxhanged;
+            SeratTextBox.TextChanged += FloatTextBoxChanged;
             // 
             // SaveFoodButton
             // 

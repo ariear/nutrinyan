@@ -29,8 +29,6 @@ namespace NutriNyan.Views.Dashboard
         {
             LoadDataCariMakan();
         }
-
-        // contoh ajah
         private void LoadDataCariMakan()
         {
             // 4 aja, soalnya ku setting 4 juga
@@ -87,7 +85,7 @@ namespace NutriNyan.Views.Dashboard
                 ((Label)cardContainer.Controls[i].Controls[0]).Text = foods[i].Name;
                 ((Label)cardContainer.Controls[i].Controls[1]).Text = foods[i].Summary;
                 this.sumDict.Add(foods[i].Name, foods[i].Summary);
-                ((Button)cardContainer.Controls[i].Controls[2]).Name = Logic.GetFoodName(foods[i].Name);
+                ((Button)cardContainer.Controls[i].Controls[2]).Name = Logic.GetFoodName(foods[i].Name); // Change button name
                 cardContainer.Controls[i].Show();
             }
             for (int i = foods.Count; i < 4; i++)
@@ -156,7 +154,7 @@ namespace NutriNyan.Views.Dashboard
         }
         private async void searchButtonClicked(object sender, EventArgs e)
         {
-            string foodName = Logic.GetFoodName(searchTextBox.Text);
+            string foodName = Logic.GetFoodName(searchTextBox.Text); // mmie-aya
             if (foodName != null)
             {
                 Task<List<List<string>>?> getReq = Api.GetRecomendation(foodName);

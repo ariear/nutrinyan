@@ -100,7 +100,7 @@ namespace NutriNyan.Views.Dashboard
             {
                 valueUnitBox = Single.Parse(UnitValueBox.Text.Replace(",", "."));
             }
-                float totalWeight = (float)unitSizeComboBox.SelectedValue * valueUnitBox;
+            float totalWeight = (float)unitSizeComboBox.SelectedValue * valueUnitBox;
             float multiply = totalWeight / 100;
             TWPanelLabel.Text = $"{totalWeight} gram";
             LemakTextBox.Text = $"{food.Lemak * multiply}";

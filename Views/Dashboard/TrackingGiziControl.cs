@@ -172,7 +172,7 @@ namespace NutriNyan.Views.Dashboard
             {
                 try
                 {
-                    var result = MessageBox.Show(
+                    MessageBoxResult result = MessageBox.Show(
                         "apakah anda yakin menghapus daftar ini?",
                         "Konfirmasi Hapus",
                         (MessageBoxButton)MessageBoxButtons.YesNo,
@@ -184,9 +184,6 @@ namespace NutriNyan.Views.Dashboard
                         MealItem mealItem = nutDay.GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
                         Database.NutritionLogOfDay.RemoveMealItem(mealItem);
                         RefreshGridView();
-                    }
-                    if (result == MessageBoxResult.No)
-                    {
                     }
                 }
                 catch (Exception E)

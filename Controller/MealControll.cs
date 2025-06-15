@@ -44,11 +44,12 @@ public static partial class Database
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             var dbContext = new AppDbContext(optionsBuilder.Options);
+            User user = userLogged.Get();
 
             DateTime startUtc = date.Date.ToUniversalTime();
             DateTime endUtc = startUtc.AddDays(1);
 
-            var result = dbContext.Meals.SingleOrDefault(b => b.MealType == mealType && b.Date >= startUtc && b.Date < endUtc);
+            var result = dbContext.Meals.Include(l => l.Log).SingleOrDefault(b => b.Log.UserId == user.Id && b.MealType == mealType && b.Date >= startUtc && b.Date < endUtc); //Error
             if (result != null)
             {
                 return result;

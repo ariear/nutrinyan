@@ -146,21 +146,9 @@ public static class Api
         var loadWindow = new NutriNyan.Views.Loading.LoadingWindow();
         loadWindow.StartPosition = FormStartPosition.CenterScreen;
         loadWindow.Show();
-        string initText = loadWindow.Controls[0].Text;
-        int count = 0;
         while (!task.IsCompleted)
         {
             await Task.Delay(100);
-            if (count == 6)
-            {
-                loadWindow.Controls[0].Text = initText;
-                count = 0;
-            }
-            else
-            {
-                loadWindow.Controls[0].Text = loadWindow.Controls[0].Text + ".";
-                count++;
-            }
         }
         loadWindow.Hide();
         loadWindow.Dispose();

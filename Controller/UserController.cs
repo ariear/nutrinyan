@@ -16,7 +16,8 @@ public static partial class Database
             int TargetWater = (int)Calculation.AKG.CalAKG(Logic.GetAge(dateBirth), genderIndex).Last();
             string activLevel = Logic.GetTAktifitasValue(tingkatAktivitas);
             string pwdHashed = Logic.Get_PWDHash(pwd);
-            user = new User
+            MessageBox.Show($"GenderId: {genderId}", "Error", MessageBoxButtons.OK);
+            this.user = new User
             {
                 Username = username,
                 Password = pwdHashed,
@@ -34,7 +35,7 @@ public static partial class Database
                 using (var dbContext = new AppDbContext(optionsBuilder.Options))
                 {
                     dbContext.Add(
-                        user
+                        this.user
                     );
                     dbContext.SaveChanges();
                 }
