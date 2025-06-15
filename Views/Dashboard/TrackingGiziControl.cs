@@ -273,11 +273,22 @@ namespace NutriNyan.Views.Dashboard
             {
                 try
                 {
-                    MessageBox.Show("apakah anda yakin menghapus daftar ini?");
-                    Database.NutritionLogOfDay nutDay = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)];
-                    MealItem mealItem = nutDay.GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
-                    Database.NutritionLogOfDay.RemoveMealItem(mealItem);
-                    RefreshGridView();
+                    var result = MessageBox.Show(
+                        "apakah anda yakin menghapus daftar ini?",
+                        "Konfirmasi Hapus",
+                        (MessageBoxButton)MessageBoxButtons.YesNo,
+                        (MessageBoxImage)MessageBoxIcon.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Database.NutritionLogOfDay nutDay = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)];
+                        MealItem mealItem = nutDay.GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
+                        Database.NutritionLogOfDay.RemoveMealItem(mealItem);
+                        RefreshGridView();
+                    }
+                    if (result == MessageBoxResult.No)
+                    {
+                    }
                 }
                 catch (Exception E)
                 {
