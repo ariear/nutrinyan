@@ -154,107 +154,6 @@ namespace NutriNyan.Views.Dashboard
             }
             KaloriValLab.Text = ((int)totalKaloriADay).ToString() + "/" + KaloriValLab.Text.Split("/")[1];
             nutritionNeeded(nutritionOfTheDay);
-            // int iconButCount = 4;
-            // for (int i = 0; i < iconButCount; i++)
-            // {
-            //     Controls[i].Tag = i.ToString();
-            // }
-            // List<MealItem> mealsPagi =  Database.MealsOfADay[0].GetRowOfMealItems(trackingDateTimePicker.Value);
-            // if (mealsPagi != null)
-            // {
-            //     float totalKalori = 0;
-            //     foreach (MealItem mealItem in mealsPagi)
-            //     {
-            //         Food? food = Database.GetFoodIfExist(mealItem.FoodId);
-            //         Unit? unit = Database.units.GetUnitIfExist(mealItem.UnitId);
-            //         if (food != null && unit != null)
-            //         {
-            //             // Lemak, karbo, protein, serat, gula, kalori
-            //             float kalori = Calculation.Calori.CaloriCal(
-            //                                         protein: mealItem.Protein,
-            //                                         karbo: mealItem.Karbohidrat,
-            //                                         lemak: mealItem.Lemak,
-            //                                         gula: mealItem.Gula,
-            //                                         serat: mealItem.Serat
-            //                                     );
-            //             totalKalori += kalori;
-            //             sarapanGridView.Rows.Add(food.Name, unit.UnitType, mealItem.Lemak, mealItem.Karbohidrat,
-            //                                     mealItem.Protein, mealItem.Serat, mealItem.Gula, kalori
-            //                                     );
-            //         }
-            //     }
-            // }
-            // // sarapanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
-            // // sarapanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
-            // // makanSiangGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
-            // List<MealItem> mealsSiang =  Database.MealsOfADay[1].GetRowOfMealItems(trackingDateTimePicker.Value);
-            // if (mealsSiang != null)
-            // {
-            //     foreach (MealItem mealItem in mealsSiang)
-            //     {
-            //         Food? food = Database.GetFoodIfExist(mealItem.FoodId);
-            //         Unit? unit = Database.units.GetUnitIfExist(mealItem.UnitId);
-            //         if (food != null && unit != null)
-            //         {
-            //             // Lemak, karbo, protein, serat, gula, kalori
-            //             makanSiangGridView.Rows.Add(food.Name, unit.UnitType, mealItem.Lemak, mealItem.Karbohidrat,
-            //                                     mealItem.Protein, mealItem.Serat, mealItem.Gula,
-            //                                     Calculation.Calori.CaloriCal(
-            //                                         protein: mealItem.Protein,
-            //                                         karbo: mealItem.Karbohidrat,
-            //                                         lemak: mealItem.Lemak,
-            //                                         gula: mealItem.Gula,
-            //                                         serat: mealItem.Serat
-            //                                     ));
-            //         }
-            //     }
-            // }
-            // // makanMalamGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
-            // List<MealItem> mealsMalam =  Database.MealsOfADay[2].GetRowOfMealItems(trackingDateTimePicker.Value);
-            // if (mealsMalam != null)
-            // {
-            //     foreach (MealItem mealItem in mealsMalam)
-            //     {
-            //         Food? food = Database.GetFoodIfExist(mealItem.FoodId);
-            //         Unit? unit = Database.units.GetUnitIfExist(mealItem.UnitId);
-            //         if (food != null && unit != null)
-            //         {
-            //             // Lemak, karbo, protein, serat, gula, kalori
-            //             makanMalamGridView.Rows.Add(food.Name, unit.UnitType, mealItem.Lemak, mealItem.Karbohidrat,
-            //                                     mealItem.Protein, mealItem.Serat, mealItem.Gula,
-            //                                     Calculation.Calori.CaloriCal(
-            //                                         protein: mealItem.Protein,
-            //                                         karbo: mealItem.Karbohidrat,
-            //                                         lemak: mealItem.Lemak,
-            //                                         gula: mealItem.Gula,
-            //                                         serat: mealItem.Serat
-            //                                     ));
-            //         }
-            //     }
-            // }
-            // // jajanGridView.Rows.Add("Mie Ayam", "1 Mangkok", "100", "60", "20", "4", "20", "400");
-            // List<MealItem> mealsJajan = Database.MealsOfADay[3].GetRowOfMealItems(trackingDateTimePicker.Value);
-            // if (mealsJajan != null)
-            // {
-            //     foreach (MealItem mealItem in mealsJajan)
-            //     {
-            //         Food? food = Database.GetFoodIfExist(mealItem.FoodId);
-            //         Unit? unit = Database.units.GetUnitIfExist(mealItem.UnitId);
-            //         if (food != null && unit != null)
-            //         {
-            //             // Lemak, karbo, protein, serat, gula, kalori
-            //             jajanGridView.Rows.Add(food.Name, unit.UnitType, mealItem.Lemak, mealItem.Karbohidrat,
-            //                                     mealItem.Protein, mealItem.Serat, mealItem.Gula,
-            //                                     Calculation.Calori.CaloriCal(
-            //                                         protein: mealItem.Protein,
-            //                                         karbo: mealItem.Karbohidrat,
-            //                                         lemak: mealItem.Lemak,
-            //                                         gula: mealItem.Gula,
-            //                                         serat: mealItem.Serat
-            //                                     ));
-            //         }
-            //     }
-            // }
         }
 
         private void DataGridContentClicked(object sender, DataGridViewCellEventArgs e)
@@ -271,18 +170,11 @@ namespace NutriNyan.Views.Dashboard
             }
             else if (e.ColumnIndex == 9 && e.RowIndex >= 0)
             {
-                try
-                {
-                    MessageBox.Show("apakah anda yakin menghapus daftar ini?");
-                    Database.NutritionLogOfDay nutDay = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)];
-                    MealItem mealItem = nutDay.GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
-                    Database.NutritionLogOfDay.RemoveMealItem(mealItem);
-                    RefreshGridView();
-                }
-                catch (Exception E)
-                {
-                    MessageBox.Show($"Error\n{E}");
-                }
+                MessageBox.Show("apakah anda yakin menghapus daftar ini?");
+                Database.NutritionLogOfDay nutDay = Database.MealsOfADay[Int32.Parse((string)senderGrid.Tag)];
+                MealItem mealItem = nutDay.GetRowOfMealItems(trackingDateTimePicker.Value)[e.RowIndex];
+                Database.NutritionLogOfDay.RemoveMealItem(mealItem);
+                RefreshGridView();
             }
         }
         private void RefreshGridView()
@@ -429,7 +321,6 @@ namespace NutriNyan.Views.Dashboard
                     count++;
                 }
             }
-            // groupBox1.Controls[4].Text = MathF.Round(nutritionValADay[4], 2) + "/" + nutriNeed[index[4]].ToString() + " kkal";//kebutuhan kalori
             groupBox1.Controls[5].Text = MathF.Round(nutritionValADay[5], 2) + "/" + "50"; // Kebutuhan gula
         }
     }
