@@ -103,7 +103,7 @@ public static partial class Database
                         result.PurposeId = user.PurposeId;
                         result.TingkatAktivitas = user.TingkatAktivitas;
                         dbContext.SaveChanges();
-
+                        SetUserPurpose(user.PurposeId);
                     }
                     else
                     {
